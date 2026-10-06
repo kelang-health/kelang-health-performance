@@ -1,0 +1,4387 @@
+{
+  "checked_at": "2026-10-06T03:14:03.166Z",
+  "snapshot_generated_at": "2026-10-06T03:12:45.119Z",
+  "years": {
+    "2568": [
+      {
+        "kpi_id": "S_DM_SCREEN_RISK",
+        "name": "คัดกรองเบาหวาน อายุ 35 ปีขึ้นไป",
+        "table": "s_dm_screen_risk",
+        "scope": "AREA",
+        "value": 91.98592337838919,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202511170343",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_HT_SCREEN_RISK",
+        "name": "คัดกรองความดันโลหิตสูง อายุ 35 ปีขึ้นไป",
+        "table": "s_ht_screen_risk",
+        "scope": "AREA",
+        "value": 91.82894418941774,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202511170406",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_DM_CONTROL",
+        "name": "ผู้ป่วยเบาหวานควบคุมน้ำตาลได้ดี",
+        "table": "s_dm_control",
+        "scope": "AREA",
+        "value": 39.48497854077253,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202511170340",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_HT_CONTROL",
+        "name": "ผู้ป่วยความดันโลหิตสูงควบคุมได้ดี",
+        "table": "s_ht_control",
+        "scope": "AREA",
+        "value": 23.566937027248702,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202511170405",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_HT_SCREEN_FOLLOW",
+        "name": "ติดตามยืนยันกลุ่มสงสัยความดันโลหิตสูง",
+        "table": "s_ht_screen_follow",
+        "scope": "AREA",
+        "value": 90.59360730593608,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170406",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_EPI_COMPLETE",
+        "name": "วัคซีนครบตามเกณฑ์ เด็กอายุ 1 ปี",
+        "table": "s_epi_complete",
+        "scope": "AREA",
+        "value": 88.95027624309392,
+        "complete": 7,
+        "expected": 7,
+        "rows": 37,
+        "error": null,
+        "source_date": "202511170348",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_ANC5INSUR",
+        "name": "ฝากครรภ์ครบ 5 ครั้ง",
+        "table": "s_anc5insur",
+        "scope": "AREA",
+        "value": 52.4390243902439,
+        "complete": 7,
+        "expected": 7,
+        "rows": 34,
+        "error": null,
+        "source_date": "202511170309",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_ANC12",
+        "name": "ฝากครรภ์ครั้งแรกภายใน 12 สัปดาห์",
+        "table": "s_kpi_anc12",
+        "scope": "AREA",
+        "value": 62.28571428571429,
+        "complete": 7,
+        "expected": 7,
+        "rows": 35,
+        "error": null,
+        "source_date": "202511170409",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_POSTNATAL",
+        "name": "ดูแลหลังคลอดครบ 3 ครั้ง",
+        "table": "s_postnatal",
+        "scope": "AREA",
+        "value": 64.84848484848484,
+        "complete": 7,
+        "expected": 7,
+        "rows": 34,
+        "error": null,
+        "source_date": "202511170705",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_CHILD",
+        "name": "ทารกแรกเกิดน้ำหนักน้อย",
+        "table": "s_child",
+        "scope": "AREA",
+        "value": 10,
+        "complete": 7,
+        "expected": 7,
+        "rows": 35,
+        "error": null,
+        "source_date": "202511170309",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": [
+          "บ้านกล้วยม่วง"
+        ]
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV1",
+        "name": "คัดกรองพัฒนาการเด็ก",
+        "table": "s_kpi_childdev1",
+        "scope": "AREA",
+        "value": 94.86673247778874,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170411",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV2",
+        "name": "เด็กสงสัยพัฒนาการล่าช้า",
+        "table": "s_kpi_childdev2",
+        "scope": "AREA",
+        "value": 7.284079084287201,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170411",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV3",
+        "name": "ติดตามเด็กสงสัยพัฒนาการล่าช้า",
+        "table": "s_kpi_childdev3",
+        "scope": "AREA",
+        "value": 85.71428571428571,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170411",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_HEIGHT05",
+        "name": "เด็ก 0–5 ปี สูงดีสมส่วน",
+        "table": "s_kpi_height05",
+        "scope": "AREA",
+        "value": 55.956563398275314,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170648",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_FERROUS6_5",
+        "name": "เด็ก 6 เดือน–5 ปีได้รับธาตุเหล็ก",
+        "table": "s_ferrous6_5",
+        "scope": "AREA",
+        "value": 71.1890243902439,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170350",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_FERROUS6_12",
+        "name": "เด็ก 6–12 ปีได้รับธาตุเหล็ก",
+        "table": "s_ferrous6_12",
+        "scope": "AREA",
+        "value": 40.02123142250531,
+        "complete": 6,
+        "expected": 7,
+        "rows": 6,
+        "error": null,
+        "source_date": "202511170349",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [
+          "บ้านโทกหัวช้าง",
+          "บ้านกาด"
+        ]
+      },
+      {
+        "kpi_id": "S_NUTRITION_09",
+        "name": "น้ำหนักตามเกณฑ์อายุเด็ก 0–5 ปี",
+        "table": "s_nutrition_09",
+        "scope": "AREA",
+        "value": 80.71383844708829,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170654",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_NUTRITION_10",
+        "name": "เด็ก 0–5 ปีมีภาวะเตี้ย",
+        "table": "s_nutrition_10",
+        "scope": "AREA",
+        "value": 9.643080776455855,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170654",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_OBESITY05",
+        "name": "เด็กปฐมวัยมีภาวะอ้วน",
+        "table": "s_obesity05",
+        "scope": "AREA",
+        "value": 11.181556195965419,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170654",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_THIN05",
+        "name": "เด็กปฐมวัยมีภาวะผอม",
+        "table": "s_thin05",
+        "scope": "AREA",
+        "value": 7.17579250720461,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170721",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_FOOD",
+        "name": "เด็กอายุต่ำกว่า 6 เดือนกินนมแม่",
+        "table": "s_kpi_food",
+        "scope": "AREA",
+        "value": 26.751592356687897,
+        "complete": 7,
+        "expected": 7,
+        "rows": 35,
+        "error": null,
+        "source_date": "202511170647",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_BREAST_SCREEN",
+        "name": "คัดกรองมะเร็งเต้านม",
+        "table": "s_breast_screen",
+        "scope": "AREA",
+        "value": 81.2956204379562,
+        "complete": 7,
+        "expected": 7,
+        "rows": 40,
+        "error": null,
+        "source_date": "202511170309",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_AGEING",
+        "name": "ประเมินกิจวัตรประจำวันผู้สูงอายุ",
+        "table": "s_ageing",
+        "scope": "AREA",
+        "value": 71.05455027507125,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202511170304",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_AGED9",
+        "name": "คัดกรองผู้สูงอายุ 9 ด้าน",
+        "table": "s_aged9",
+        "scope": "AREA",
+        "value": 74.73321402531981,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202511170246",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_OPD_ALL",
+        "name": "ผู้รับบริการผู้ป่วยนอก (OPD)",
+        "table": "s_opd_all",
+        "scope": "SERVICE",
+        "value": 122030,
+        "complete": 7,
+        "expected": 8,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170654",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "45030",
+            "name": "เขลางค์นคร",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_DENTAL_2",
+        "name": "บริการทันตกรรม",
+        "table": "s_dental_2",
+        "scope": "SERVICE",
+        "value": 10114,
+        "complete": 7,
+        "expected": 8,
+        "rows": 7,
+        "error": null,
+        "source_date": "202511170328",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "45030",
+            "name": "เขลางค์นคร",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": []
+      }
+    ],
+    "2569": [
+      {
+        "kpi_id": "S_DM_SCREEN_RISK",
+        "name": "คัดกรองเบาหวาน อายุ 35 ปีขึ้นไป",
+        "table": "s_dm_screen_risk",
+        "scope": "AREA",
+        "value": 93.1214109926169,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202610051305",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_HT_SCREEN_RISK",
+        "name": "คัดกรองความดันโลหิตสูง อายุ 35 ปีขึ้นไป",
+        "table": "s_ht_screen_risk",
+        "scope": "AREA",
+        "value": 93.35839598997494,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202610051403",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_DM_CONTROL",
+        "name": "ผู้ป่วยเบาหวานควบคุมน้ำตาลได้ดี",
+        "table": "s_dm_control",
+        "scope": "AREA",
+        "value": 32.305727836556,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202610051301",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_HT_CONTROL",
+        "name": "ผู้ป่วยความดันโลหิตสูงควบคุมได้ดี",
+        "table": "s_ht_control",
+        "scope": "AREA",
+        "value": 26.845576940453604,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202610051400",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_HT_SCREEN_FOLLOW",
+        "name": "ติดตามยืนยันกลุ่มสงสัยความดันโลหิตสูง",
+        "table": "s_ht_screen_follow",
+        "scope": "AREA",
+        "value": 83.66637706342311,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051402",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_EPI_COMPLETE",
+        "name": "วัคซีนครบตามเกณฑ์ เด็กอายุ 1 ปี",
+        "table": "s_epi_complete",
+        "scope": "AREA",
+        "value": 89.47368421052632,
+        "complete": 7,
+        "expected": 7,
+        "rows": 35,
+        "error": null,
+        "source_date": "202610051313",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_ANC5INSUR",
+        "name": "ฝากครรภ์ครบ 5 ครั้ง",
+        "table": "s_anc5insur",
+        "scope": "AREA",
+        "value": 73.91304347826086,
+        "complete": 7,
+        "expected": 7,
+        "rows": 31,
+        "error": null,
+        "source_date": "202610051212",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_ANC12",
+        "name": "ฝากครรภ์ครั้งแรกภายใน 12 สัปดาห์",
+        "table": "s_kpi_anc12",
+        "scope": "AREA",
+        "value": 78.33333333333333,
+        "complete": 7,
+        "expected": 7,
+        "rows": 31,
+        "error": null,
+        "source_date": "202610051406",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_POSTNATAL",
+        "name": "ดูแลหลังคลอดครบ 3 ครั้ง",
+        "table": "s_postnatal",
+        "scope": "AREA",
+        "value": 86.82170542635659,
+        "complete": 7,
+        "expected": 7,
+        "rows": 32,
+        "error": null,
+        "source_date": "202610052013",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": [
+          "บ้านศรีหมวดเกล้า"
+        ]
+      },
+      {
+        "kpi_id": "S_CHILD",
+        "name": "ทารกแรกเกิดน้ำหนักน้อย",
+        "table": "s_child",
+        "scope": "AREA",
+        "value": 5.47945205479452,
+        "complete": 7,
+        "expected": 7,
+        "rows": 32,
+        "error": null,
+        "source_date": "202610051213",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": [
+          "บ้านกล้วยแพะ",
+          "บ้านกล้วยม่วง"
+        ]
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV1",
+        "name": "คัดกรองพัฒนาการเด็ก",
+        "table": "s_kpi_childdev1",
+        "scope": "AREA",
+        "value": 85.33190578158458,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051409",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV2",
+        "name": "เด็กสงสัยพัฒนาการล่าช้า",
+        "table": "s_kpi_childdev2",
+        "scope": "AREA",
+        "value": 11.166875784190715,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051409",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV3",
+        "name": "ติดตามเด็กสงสัยพัฒนาการล่าช้า",
+        "table": "s_kpi_childdev3",
+        "scope": "AREA",
+        "value": 88.76404494382022,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051409",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": [
+          "บ้านแม่กืย"
+        ]
+      },
+      {
+        "kpi_id": "S_KPI_HEIGHT05",
+        "name": "เด็ก 0–5 ปี สูงดีสมส่วน",
+        "table": "s_kpi_height05",
+        "scope": "AREA",
+        "value": 58.50249584026622,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051949",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_FERROUS6_5",
+        "name": "เด็ก 6 เดือน–5 ปีได้รับธาตุเหล็ก",
+        "table": "s_ferrous6_5",
+        "scope": "AREA",
+        "value": 87.22316865417376,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051316",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_FERROUS6_12",
+        "name": "เด็ก 6–12 ปีได้รับธาตุเหล็ก",
+        "table": "s_ferrous6_12",
+        "scope": "AREA",
+        "value": 45.8786231884058,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051315",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": [
+          "บ้านกล้วยม่วง",
+          "บ้านแม่กืย"
+        ]
+      },
+      {
+        "kpi_id": "S_NUTRITION_09",
+        "name": "น้ำหนักตามเกณฑ์อายุเด็ก 0–5 ปี",
+        "table": "s_nutrition_09",
+        "scope": "AREA",
+        "value": 80.56572379367721,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610052001",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_NUTRITION_10",
+        "name": "เด็ก 0–5 ปีมีภาวะเตี้ย",
+        "table": "s_nutrition_10",
+        "scope": "AREA",
+        "value": 8.452579034941763,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610052001",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_OBESITY05",
+        "name": "เด็กปฐมวัยมีภาวะอ้วน",
+        "table": "s_obesity05",
+        "scope": "AREA",
+        "value": 10.00633312222926,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610052004",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_THIN05",
+        "name": "เด็กปฐมวัยมีภาวะผอม",
+        "table": "s_thin05",
+        "scope": "AREA",
+        "value": 7.441418619379355,
+        "complete": 7,
+        "expected": 7,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610052035",
+        "monthly": false,
+        "quarterly": true,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_KPI_FOOD",
+        "name": "เด็กอายุต่ำกว่า 6 เดือนกินนมแม่",
+        "table": "s_kpi_food",
+        "scope": "AREA",
+        "value": 36.19631901840491,
+        "complete": 7,
+        "expected": 7,
+        "rows": 35,
+        "error": null,
+        "source_date": "202610051949",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_BREAST_SCREEN",
+        "name": "คัดกรองมะเร็งเต้านม",
+        "table": "s_breast_screen",
+        "scope": "AREA",
+        "value": 77.659958162014,
+        "complete": 7,
+        "expected": 7,
+        "rows": 40,
+        "error": null,
+        "source_date": "202610051212",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_AGEING",
+        "name": "ประเมินกิจวัตรประจำวันผู้สูงอายุ",
+        "table": "s_ageing",
+        "scope": "AREA",
+        "value": 82.47375024763917,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202610051209",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_AGED9",
+        "name": "คัดกรองผู้สูงอายุ 9 ด้าน",
+        "table": "s_aged9",
+        "scope": "AREA",
+        "value": 88.55576834180809,
+        "complete": 7,
+        "expected": 7,
+        "rows": 39,
+        "error": null,
+        "source_date": "202610051041",
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [],
+        "zero_units": []
+      },
+      {
+        "kpi_id": "S_OPD_ALL",
+        "name": "ผู้รับบริการผู้ป่วยนอก (OPD)",
+        "table": "s_opd_all",
+        "scope": "SERVICE",
+        "value": 121891,
+        "complete": 7,
+        "expected": 8,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610052005",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "45030",
+            "name": "เขลางค์นคร",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "partial_live": {
+          "checked_at": "2026-10-06T03:15:40.317Z",
+          "error": null,
+          "rows": 7,
+          "missing_units": [
+            {
+              "code": "45030",
+              "name": "เขลางค์นคร",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ]
+        }
+      },
+      {
+        "kpi_id": "S_DENTAL_2",
+        "name": "บริการทันตกรรม",
+        "table": "s_dental_2",
+        "scope": "SERVICE",
+        "value": 11150,
+        "complete": 7,
+        "expected": 8,
+        "rows": 7,
+        "error": null,
+        "source_date": "202610051242",
+        "monthly": true,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "45030",
+            "name": "เขลางค์นคร",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "partial_live": {
+          "checked_at": "2026-10-06T03:15:43.484Z",
+          "error": null,
+          "rows": 7,
+          "missing_units": [
+            {
+              "code": "45030",
+              "name": "เขลางค์นคร",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ]
+        }
+      }
+    ],
+    "2570": [
+      {
+        "kpi_id": "S_DM_SCREEN_RISK",
+        "name": "คัดกรองเบาหวาน อายุ 35 ปีขึ้นไป",
+        "table": "s_dm_screen_risk",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_DM_SCREEN_RISK",
+          "name": "คัดกรองเบาหวาน อายุ 35 ปีขึ้นไป",
+          "table": "s_dm_screen_risk",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_HT_SCREEN_RISK",
+        "name": "คัดกรองความดันโลหิตสูง อายุ 35 ปีขึ้นไป",
+        "table": "s_ht_screen_risk",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_HT_SCREEN_RISK",
+          "name": "คัดกรองความดันโลหิตสูง อายุ 35 ปีขึ้นไป",
+          "table": "s_ht_screen_risk",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_DM_CONTROL",
+        "name": "ผู้ป่วยเบาหวานควบคุมน้ำตาลได้ดี",
+        "table": "s_dm_control",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_DM_CONTROL",
+          "name": "ผู้ป่วยเบาหวานควบคุมน้ำตาลได้ดี",
+          "table": "s_dm_control",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_HT_CONTROL",
+        "name": "ผู้ป่วยความดันโลหิตสูงควบคุมได้ดี",
+        "table": "s_ht_control",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_HT_CONTROL",
+          "name": "ผู้ป่วยความดันโลหิตสูงควบคุมได้ดี",
+          "table": "s_ht_control",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_HT_SCREEN_FOLLOW",
+        "name": "ติดตามยืนยันกลุ่มสงสัยความดันโลหิตสูง",
+        "table": "s_ht_screen_follow",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_HT_SCREEN_FOLLOW",
+          "name": "ติดตามยืนยันกลุ่มสงสัยความดันโลหิตสูง",
+          "table": "s_ht_screen_follow",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_EPI_COMPLETE",
+        "name": "วัคซีนครบตามเกณฑ์ เด็กอายุ 1 ปี",
+        "table": "s_epi_complete",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_EPI_COMPLETE",
+          "name": "วัคซีนครบตามเกณฑ์ เด็กอายุ 1 ปี",
+          "table": "s_epi_complete",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_ANC5INSUR",
+        "name": "ฝากครรภ์ครบ 5 ครั้ง",
+        "table": "s_anc5insur",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_ANC5INSUR",
+          "name": "ฝากครรภ์ครบ 5 ครั้ง",
+          "table": "s_anc5insur",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_KPI_ANC12",
+        "name": "ฝากครรภ์ครั้งแรกภายใน 12 สัปดาห์",
+        "table": "s_kpi_anc12",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_KPI_ANC12",
+          "name": "ฝากครรภ์ครั้งแรกภายใน 12 สัปดาห์",
+          "table": "s_kpi_anc12",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_POSTNATAL",
+        "name": "ดูแลหลังคลอดครบ 3 ครั้ง",
+        "table": "s_postnatal",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_POSTNATAL",
+          "name": "ดูแลหลังคลอดครบ 3 ครั้ง",
+          "table": "s_postnatal",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_CHILD",
+        "name": "ทารกแรกเกิดน้ำหนักน้อย",
+        "table": "s_child",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_CHILD",
+          "name": "ทารกแรกเกิดน้ำหนักน้อย",
+          "table": "s_child",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV1",
+        "name": "คัดกรองพัฒนาการเด็ก",
+        "table": "s_kpi_childdev1",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_KPI_CHILDDEV1",
+          "name": "คัดกรองพัฒนาการเด็ก",
+          "table": "s_kpi_childdev1",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV2",
+        "name": "เด็กสงสัยพัฒนาการล่าช้า",
+        "table": "s_kpi_childdev2",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_KPI_CHILDDEV2",
+          "name": "เด็กสงสัยพัฒนาการล่าช้า",
+          "table": "s_kpi_childdev2",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_KPI_CHILDDEV3",
+        "name": "ติดตามเด็กสงสัยพัฒนาการล่าช้า",
+        "table": "s_kpi_childdev3",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_KPI_CHILDDEV3",
+          "name": "ติดตามเด็กสงสัยพัฒนาการล่าช้า",
+          "table": "s_kpi_childdev3",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_KPI_HEIGHT05",
+        "name": "เด็ก 0–5 ปี สูงดีสมส่วน",
+        "table": "s_kpi_height05",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_KPI_HEIGHT05",
+          "name": "เด็ก 0–5 ปี สูงดีสมส่วน",
+          "table": "s_kpi_height05",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_FERROUS6_5",
+        "name": "เด็ก 6 เดือน–5 ปีได้รับธาตุเหล็ก",
+        "table": "s_ferrous6_5",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_FERROUS6_5",
+          "name": "เด็ก 6 เดือน–5 ปีได้รับธาตุเหล็ก",
+          "table": "s_ferrous6_5",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_FERROUS6_12",
+        "name": "เด็ก 6–12 ปีได้รับธาตุเหล็ก",
+        "table": "s_ferrous6_12",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_FERROUS6_12",
+          "name": "เด็ก 6–12 ปีได้รับธาตุเหล็ก",
+          "table": "s_ferrous6_12",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_NUTRITION_09",
+        "name": "น้ำหนักตามเกณฑ์อายุเด็ก 0–5 ปี",
+        "table": "s_nutrition_09",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_NUTRITION_09",
+          "name": "น้ำหนักตามเกณฑ์อายุเด็ก 0–5 ปี",
+          "table": "s_nutrition_09",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_NUTRITION_10",
+        "name": "เด็ก 0–5 ปีมีภาวะเตี้ย",
+        "table": "s_nutrition_10",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_NUTRITION_10",
+          "name": "เด็ก 0–5 ปีมีภาวะเตี้ย",
+          "table": "s_nutrition_10",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_OBESITY05",
+        "name": "เด็กปฐมวัยมีภาวะอ้วน",
+        "table": "s_obesity05",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_OBESITY05",
+          "name": "เด็กปฐมวัยมีภาวะอ้วน",
+          "table": "s_obesity05",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_THIN05",
+        "name": "เด็กปฐมวัยมีภาวะผอม",
+        "table": "s_thin05",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_THIN05",
+          "name": "เด็กปฐมวัยมีภาวะผอม",
+          "table": "s_thin05",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_KPI_FOOD",
+        "name": "เด็กอายุต่ำกว่า 6 เดือนกินนมแม่",
+        "table": "s_kpi_food",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_KPI_FOOD",
+          "name": "เด็กอายุต่ำกว่า 6 เดือนกินนมแม่",
+          "table": "s_kpi_food",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_BREAST_SCREEN",
+        "name": "คัดกรองมะเร็งเต้านม",
+        "table": "s_breast_screen",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_BREAST_SCREEN",
+          "name": "คัดกรองมะเร็งเต้านม",
+          "table": "s_breast_screen",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_AGEING",
+        "name": "ประเมินกิจวัตรประจำวันผู้สูงอายุ",
+        "table": "s_ageing",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_AGEING",
+          "name": "ประเมินกิจวัตรประจำวันผู้สูงอายุ",
+          "table": "s_ageing",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_AGED9",
+        "name": "คัดกรองผู้สูงอายุ 9 ด้าน",
+        "table": "s_aged9",
+        "scope": "AREA",
+        "value": null,
+        "complete": 0,
+        "expected": 7,
+        "rows": 0,
+        "error": "ThrottlerException: Too Many Requests",
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_AGED9",
+          "name": "คัดกรองผู้สูงอายุ 9 ด้าน",
+          "table": "s_aged9",
+          "scope": "AREA",
+          "value": null,
+          "complete": 0,
+          "expected": 7,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_OPD_ALL",
+        "name": "ผู้รับบริการผู้ป่วยนอก (OPD)",
+        "table": "s_opd_all",
+        "scope": "SERVICE",
+        "value": null,
+        "complete": 0,
+        "expected": 8,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "45030",
+            "name": "เขลางค์นคร",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_OPD_ALL",
+          "name": "ผู้รับบริการผู้ป่วยนอก (OPD)",
+          "table": "s_opd_all",
+          "scope": "SERVICE",
+          "value": null,
+          "complete": 0,
+          "expected": 8,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "45030",
+              "name": "เขลางค์นคร",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      },
+      {
+        "kpi_id": "S_DENTAL_2",
+        "name": "บริการทันตกรรม",
+        "table": "s_dental_2",
+        "scope": "SERVICE",
+        "value": null,
+        "complete": 0,
+        "expected": 8,
+        "rows": 0,
+        "error": null,
+        "source_date": null,
+        "monthly": false,
+        "quarterly": false,
+        "missing_units": [
+          {
+            "code": "06116",
+            "name": "บ้านโทกหัวช้าง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06117",
+            "name": "บ้านฟ่อน",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06118",
+            "name": "บ้านศรีหมวดเกล้า",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06119",
+            "name": "บ้านกล้วยแพะ",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06120",
+            "name": "บ้านกล้วยม่วง",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06121",
+            "name": "บ้านกาด",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "06122",
+            "name": "บ้านแม่กืย",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          },
+          {
+            "code": "45030",
+            "name": "เขลางค์นคร",
+            "rows": 0,
+            "numerator": null,
+            "denominator": null
+          }
+        ],
+        "zero_units": [],
+        "live": {
+          "kpi_id": "S_DENTAL_2",
+          "name": "บริการทันตกรรม",
+          "table": "s_dental_2",
+          "scope": "SERVICE",
+          "value": null,
+          "complete": 0,
+          "expected": 8,
+          "rows": 0,
+          "error": null,
+          "source_date": null,
+          "monthly": false,
+          "quarterly": false,
+          "missing_units": [
+            {
+              "code": "06116",
+              "name": "บ้านโทกหัวช้าง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06117",
+              "name": "บ้านฟ่อน",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06118",
+              "name": "บ้านศรีหมวดเกล้า",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06119",
+              "name": "บ้านกล้วยแพะ",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06120",
+              "name": "บ้านกล้วยม่วง",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06121",
+              "name": "บ้านกาด",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "06122",
+              "name": "บ้านแม่กืย",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            },
+            {
+              "code": "45030",
+              "name": "เขลางค์นคร",
+              "rows": 0,
+              "numerator": null,
+              "denominator": null
+            }
+          ],
+          "zero_units": []
+        }
+      }
+    ]
+  }
+}
