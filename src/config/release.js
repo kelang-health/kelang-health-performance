@@ -1,4 +1,5 @@
-export const release={version:'1.1',history:[
+export const release={version:'1.2',history:[
+ {version:'1.2',date:'6 ตุลาคม 2569',description:'ตรวจ HDC API เพิ่มปุ่มดึง API สดเฉพาะ KPI แจ้งผลการเชื่อมต่อและแยกชุดข้อมูลรายปีกับรายเดือน ลดความถี่ sync และรักษาชุดข้อมูลล่าสุดที่เผยแพร่'},
  {version:'1.1',date:'6 ตุลาคม 2569',description:'ใช้ตราเทศบาลเมืองเขลางค์นคร เพิ่มเครดิตผู้พัฒนาและประวัติเวอร์ชันในเมนูจัดการข้อมูล'},
  {version:'1.0',date:'6 ตุลาคม 2569',description:'ระบบ Hospital Profile และ HDC พร้อมตัวเลขบนกราฟ ปรับขนาดตัวอักษร และโหมดถนอมสายตา'}
 ]};

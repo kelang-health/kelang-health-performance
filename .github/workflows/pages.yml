@@ -25,7 +25,9 @@ jobs:
           node-version: '22'
       - name: Test KPI rules
         run: npm test
-      - name: Refresh public aggregate HDC snapshot
+      - name: Load latest HDC snapshot and refresh on scheduled runs
+        env:
+          HDC_SKIP_REFRESH: ${{ github.event_name == 'push' && '1' || '0' }}
         run: node scripts/sync-hdc.mjs
       - name: Build static site
         run: npm run build

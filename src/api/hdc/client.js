@@ -5,9 +5,9 @@ const memory=new Map();const inflight=new Map();let snapshotPromise;
 function cached(key){if(memory.has(key))return memory.get(key);try{return JSON.parse(localStorage.getItem(key)??'null');}catch{return null;}}
 function remember(key,value){memory.set(key,value);try{localStorage.setItem(key,JSON.stringify(value));}catch{}}
 export function clearCache(){memory.clear();try{Object.keys(localStorage).filter(k=>k.startsWith('khp-hdc-')).forEach(k=>localStorage.removeItem(k));}catch{}}
-export async function fetchHdc(kpi,year,facilities,force=false){
- if(typeof window!=='undefined'&&runtime.hdcMode==='snapshot'){
-  try{snapshotPromise??=request(new URL('../../../data/hdc-snapshot.json',import.meta.url),{cache:'no-store'});const snapshot=await snapshotPromise;const dataset=snapshot.datasets?.[`${kpi.table}|${year}`];if(!dataset)return {rows:[],year:+year,table:kpi.table,error:'ยังไม่มีชุดข้อมูล HDC ปีที่เลือก',source_date:null,fetched_at:null};return {...dataset,from_cache:true,delivery:'scheduled_snapshot'};}
+export async function fetchHdc(kpi,year,facilities,force=false,live=false){
+ if(typeof window!=='undefined'&&runtime.hdcMode==='snapshot'&&!live){
+  try{snapshotPromise??=request(new URL('../../../data/hdc-snapshot.json',import.meta.url),{cache:'no-store'});const snapshot=await snapshotPromise;const dataset=snapshot.datasets?.[`${kpi.table}|${year}`];const recent=cached(`khp-hdc-v1-${kpi.table}-${year}`);if(recent&&!recent.error&&(!dataset||Date.parse(recent.fetched_at)>Date.parse(dataset.fetched_at)))return {...recent,from_cache:true,delivery:'live_api_cache'};if(!dataset)return {rows:[],year:+year,table:kpi.table,error:'ยังไม่มีชุดข้อมูล HDC ปีที่เลือก',source_date:null,fetched_at:null};return {...dataset,from_cache:true,delivery:'scheduled_snapshot'};}
   catch(error){return {rows:[],year:+year,table:kpi.table,error:'อ่านชุดข้อมูล HDC ล่าสุดไม่สำเร็จ: '+error.message,source_date:null,fetched_at:null};}
  }
  const key=`khp-hdc-v1-${kpi.table}-${year}`;
@@ -34,10 +34,10 @@ export async function fetchHdc(kpi,year,facilities,force=false){
 }
 export async function fetchGroup(kpis,year,facilities,force=false){
  if(typeof window!=='undefined'&&runtime.hdcMode==='snapshot'&&force)snapshotPromise=undefined;
- const results=[];const batchSize=typeof window==='undefined'?2:4;
+ const results=[];const batchSize=typeof window==='undefined'?1:4;
  for(let i=0;i<kpis.length;i+=batchSize){
   const group=await Promise.allSettled(kpis.slice(i,i+batchSize).map(k=>fetchHdc(k,year,facilities,force)));group.forEach((r,j)=>results.push([kpis[i+j].kpi_id,r.status==='fulfilled'?r.value:{rows:[],error:r.reason.message}]));
-  if(typeof window==='undefined'&&kpis.length>4&&i+batchSize<kpis.length)await new Promise(resolve=>setTimeout(resolve,1000));
+  if(typeof window==='undefined'&&kpis.length>4&&i+batchSize<kpis.length)await new Promise(resolve=>setTimeout(resolve,3000));
  }
  return Object.fromEntries(results);
 }
