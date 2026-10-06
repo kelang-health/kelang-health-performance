@@ -97,6 +97,8 @@ Admin/Staff เพิ่ม แก้ ลบข้อมูลและกรอ
 
 Branch ส่งมอบคือ `main`; เอกสารที่เปลี่ยนอย่างเดียวไม่เรียก deploy ซ้ำ ส่วนการเปลี่ยน application และการรันตามเวลายังคง test/sync/build/deploy ตาม workflow
 
+ตรวจไฟล์ snapshot ที่เผยแพร่จริง: HTTP 200, 78 datasets, generated_at `2026-10-06T02:43:32.391Z` การ refresh ใน GitHub runner ถูกต้นทางจำกัดด้วย HTTP 429 จำนวน 46 datasets จึงใช้ข้อมูลจริงที่ดึงสำเร็จก่อนหน้านี้พร้อม stale/error และวันต้นทางเดิม อีก 32 datasets refresh สำเร็จ การเผยแพร่สำเร็จไม่ได้หมายถึงข้อมูลทุก dataset สดทั้งหมด หน้า Quality แสดงข้อผิดพลาดนี้ และรอบตามเวลาจะพยายามใหม่
+
 ## Architecture และ endpoints
 
 HDC MOPH → payload/report mappings จาก HDC App → GitHub Actions scheduled public aggregate snapshot → Static web
