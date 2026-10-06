@@ -1,0 +1,608 @@
+[
+  {
+    "table": "s_kancha_visit",
+    "title": "ผู้ป่วยทั้งหมดที่ได้รับการรักษาด้วยยากัญชาทางการแพทย์แผนปัจจุบัน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/af55086b69a60b4f8814baf6f9501760?subcatalogId=2908c586a168578a2c4aee3ab13963c9",
+    "integrated": false
+  },
+  {
+    "table": "s_opioid",
+    "title": "ร้อยละการบรรเทาอาการปวดและจัดการอาการต่างๆด้วย Strong Opioid ในผู้ป่วยประคับประคองอย่างมีคุณภาพ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/28e3ca2ae78a73a2b3d37a7d16f02d7d?subcatalogId=b08560518ca0ebcaf2016dab69fb38b5",
+    "integrated": false
+  },
+  {
+    "table": "s_paliative_kancha1",
+    "title": "ร้อยละของจำนวนผู้ป่วยที่มีการวินิจฉัยระยะประคับประคอง (Palliative care) ที่ได้รับการรักษาด้วยยากัญชาทางการแพทย์",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/1c34690d32569e7aff5b6512bac53b00?subcatalogId=2908c586a168578a2c4aee3ab13963c9",
+    "integrated": false
+  },
+  {
+    "table": "s_ca_kancha1",
+    "title": "ร้อยละของจำนวนผู้ป่วยมะเร็งที่ได้รับการรักษาด้วยยากัญชาทางการแพทย์",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/049fad3d7504ff9dabe4598f0b19683a?subcatalogId=2908c586a168578a2c4aee3ab13963c9",
+    "integrated": false
+  },
+  {
+    "table": "s_palliative_com",
+    "title": "ร้อยละของผู้ป่วยประคับประคองที่ได้รับการดูแลต่อเนื่องที่บ้าน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/8eb4ec8a40c080aadfdbb895be74e771?subcatalogId=b08560518ca0ebcaf2016dab69fb38b5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental15",
+    "title": "OHSP จำนวนคนไข้ (ครั้ง) เฉลี่ย ต่อทันตบุคลากรต่อปี ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/d585aa059fa2c91549854e9ed76412aa?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental11",
+    "title": "OHSP ร้อยละ visit ตรวจฟันอย่างเดียว ต่อ visit ทั้งหมด",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/53f0ff606ac8a9c99409f9ad0918dff1?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental49",
+    "title": "OHSP ร้อยละ visit ตรวจฟันอย่างเดียวโดยทันตบุคลากร ต่อ visit ทั้งหมด ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/4c3d9eebfc5ead04511f945f9025c518?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental40",
+    "title": "OHSP ร้อยละของผู้สูงอายุ ที่มีฟันแท้ใช้งานได้ไม่น้อยกว่า 20 ซี่",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/0317b7abf99b89c45555e97e19c4cb21?subcatalogId=bebf866fceaef84c4078965eaf619565",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental13",
+    "title": "OHSP ร้อยละจำนวนรายบริการทันตกรรมพื้นฐานต่อบริการทั้งหมด",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/9f3ca952aa7e77eb7e790c418a5ccb9c?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental14",
+    "title": "OHSP ร้อยละจำนวนรายบริการทันตกรรมเฉพาะทางต่อบริการทั้งหมด",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/c533163ee460b95c16a63c1db970a387?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental12",
+    "title": "OHSP ร้อยละจำนวนรายบริการส่งเสริมป้องกันต่อบริการทั้งหมด",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/1a26b9eb98385cdece32f6a7bcce1e2c?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental3",
+    "title": "OHSP อัตรา (ร้อยละ) การการใช้บริการ P&P เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/bafe62ee021cc53306415b0fa0a2c049?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental10",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการ P&P ในกลุ่มผู้สูงอายุ เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/0282aaa7ea31ae081a80990adbd8ca1e?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental6",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการ P&P ในกลุ่มหญิงตั้งครรภ์ เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/1a888956dda87264ae6fd1e290d17d68?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental7",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการ P&P ในกลุ่มเด็กอายุ 0-2 ปี เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/261d0c53638bf4c6cf2af32b677f6c35?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental8",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการ P&P ในกลุ่มเด็กอายุ 3-5 ปี เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/743694135b213c08d3916bf14503aa70?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental9",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการ P&P ในกลุ่มเด็กอายุ 6-12 ปี เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/51b65857707cb843a0a2a97b5310a373?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental4",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการทันตกรรมพื้นฐาน เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/defb23a746850f247916f086644af5c0?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental1",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการทันตกรรมรวมทุกสิทธิ เฉพาะเขตรับผิดชอบ (คน)  (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/99ccd1e29a5cdb81256fb3fa587698ef?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental2",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการทันตกรรมสิทธิ UC เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/00af52a6f2efcb52b48a2d51433cdaaa?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_dental5",
+    "title": "OHSP อัตรา (ร้อยละ) การใช้บริการทันตกรรมเฉพาะทาง เฉพาะเขตรับผิดชอบ (คน) (ใช้แบบความครอบคลุม)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/6c57c609054cf9a4111c2704fd2bbce1?subcatalogId=db30e434e30565c12fbac44958e338d5",
+    "integrated": false
+  },
+  {
+    "table": "s_dental_1",
+    "title": "ผู้ป่วยนอกที่รับบริการทางทันตกรรม รวมทุกสิทธิ์ (คนต่อสถานบริการ)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/cba4cc41872398d244dde8e2604c1fda?subcatalogId=fc73b811eb6d9206e7e5baf8ad20d7b9",
+    "integrated": false
+  },
+  {
+    "table": "s_dental_2",
+    "title": "ผู้ป่วยนอกที่รับบริการทางทันตกรรม รวมทุกสิทธิ์ (ครั้ง)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/1b7a1fcbcd6cc2abae4c26d17d2b7045?subcatalogId=fc73b811eb6d9206e7e5baf8ad20d7b9",
+    "integrated": true
+  },
+  {
+    "table": "s_dental_70",
+    "title": "ผู้ป่วยนอกที่รับบริการทางทันตกรรม รวมทุกสิทธิ์ (ครั้ง) โดยทันตบุคลากร",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/43b53d1950da4739e9a7f8ee4b0d25d2?subcatalogId=fc73b811eb6d9206e7e5baf8ad20d7b9",
+    "integrated": false
+  },
+  {
+    "table": "s_dental_73",
+    "title": "รายงานผู้ป่วยนอกที่รับบริการทางทันตกรรม (ครั้งต่อคนต่อปี) แยก 4 สิทธิ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/960aa7aeaa407980c00b16f99d47fe80?subcatalogId=fc73b811eb6d9206e7e5baf8ad20d7b9",
+    "integrated": false
+  },
+  {
+    "table": "s_dental_74",
+    "title": "รายงานผู้ป่วยนอกที่รับบริการทางทันตกรรม ในผู้มีอายุ 15-59 ปี  แยกรายสิทธิ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/3d89d7b2e236d60d2e02ad969db4f6ea?subcatalogId=fc73b811eb6d9206e7e5baf8ad20d7b9",
+    "integrated": false
+  },
+  {
+    "table": "s_op_instype_all",
+    "title": "อัตราการใช้บริการผู้ป่วยนอก จำแนกกลุ่มสิทธิ (ครั้งต่อคนต่อปี)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/4b35d96e225bf34a16774b13705250f4?subcatalogId=9d8c311d6336373d40437c4423508cad",
+    "integrated": false
+  },
+  {
+    "table": "s_opd_all",
+    "title": "อัตราการใช้บริการผู้ป่วยนอก ทุกสิทธิ (ครั้งต่อคนต่อปี) รายเดือน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/92a705c26f22754d7462e9f742436b6f?subcatalogId=9d8c311d6336373d40437c4423508cad",
+    "integrated": true
+  },
+  {
+    "table": "s_pop_sex_age",
+    "title": "ประชากรจำแนกเพศ กลุ่มอายุรายปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/710884bc8d16f755073cf194970b064a?subcatalogId=ac4eed1bddb23d6130746d62d2538fd0",
+    "integrated": false
+  },
+  {
+    "table": "s_persontype",
+    "title": "ประชากรแยกตามหน่วยบริการและชนิดการอยู่อาศัย TYPEAREA",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/cb4e5a2990d327d0789a7301e4259b95?subcatalogId=ac4eed1bddb23d6130746d62d2538fd0",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_bmi",
+    "title": "ร้อยละของประชากรวัยทำงานอายุ 30-44 ปี มีค่าดัชนีมวลกายปกติ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/e2d0b1a802a956529b7d1d0f9516313f?subcatalogId=46522b5bd1e06d24a5bd81917257a93c",
+    "integrated": false
+  },
+  {
+    "table": "s_death_diag_sex_age",
+    "title": "สาเหตุการตาย 10 อันดับแรก",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/8881445af732eb166fa2470ba5046956?subcatalogId=491672679818600345dc1833920051b2",
+    "integrated": false
+  },
+  {
+    "table": "s_aged9",
+    "title": "การคัดกรองผู้สูงอายุ 9 ด้าน (Basic/Community Screen STEP1)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/aa86b13e8cb60cae6c3216b7e3e5f151?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": true
+  },
+  {
+    "table": "s_aged9_app",
+    "title": "การคัดกรองผู้สูงอายุ 9 ด้าน จาก API",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/3ed685f555bc1579c821ecc548fc0ee2?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": false
+  },
+  {
+    "table": "s_ageing",
+    "title": "จำนวนผู้สูงอายุในเขตพื้นที่รับผิดชอบ จำแนกตามความสามารถในการทำกิจวัตรประจำวัน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/953a2fc648be8ce76a8115fbb955bb51?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": true
+  },
+  {
+    "table": "s_kpi_ageing",
+    "title": "ร้อยละของ Healthy Ageing",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/bbcb40adb960e0564efba686c316c009?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": false
+  },
+  {
+    "table": "s_ddd2",
+    "title": "ค่า Defined Daily Dose (DDD) ของยาปฏิชีวนะชนิดรับประทานต่อ 1000 OP Visit แยกตามกลุ่มยา (Class)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/63c6046a389a3cd9c69a432cf0ae783b?subcatalogId=03b912ab9ccb4c07280a89bf05e5900e",
+    "integrated": false
+  },
+  {
+    "table": "s_ddd1",
+    "title": "ค่า Defined Daily Dose (DDD) ของยาปฏิชีวนะชนิดรับประทานต่อ 1000 OP Visit แยกตามชื่อสามัญทางยา (Generic name)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/ecb7af2dc881088d964f827317a563f4?subcatalogId=03b912ab9ccb4c07280a89bf05e5900e",
+    "integrated": false
+  },
+  {
+    "table": "s_ddd3",
+    "title": "ค่า Defined Daily Dose (DDD) รวมของยาปฏิชีวนะชนิดรับประทานทุกรายการต่อ 1000 OP Visit",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/d8703771dee4e2f956ca7ba53abaae61?subcatalogId=03b912ab9ccb4c07280a89bf05e5900e",
+    "integrated": false
+  },
+  {
+    "table": "s_rdu_pcu",
+    "title": "ร้อยละของรพ.สต.ที่มีอัตราการใช้ยาปฏิชีวนะในโรค Respiratory Infection และ Acute Diarrhea <= ร้อยละ20 ทั้ง 2 โรค (RUA PCU)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/3328a9e3fe40877c45860265035e2412?subcatalogId=03b912ab9ccb4c07280a89bf05e5900e",
+    "integrated": false
+  },
+  {
+    "table": "s_envocc59",
+    "title": "อัตราป่วยโรคระบบทางเดินหายใจที่ระบุว่าเกิดจากมลพิษสิ่งแวดล้อม Y97",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/9eeb99bcea8aa161d0b32131605553ac?subcatalogId=f16421e617aed29602f9f09d951cce68",
+    "integrated": false
+  },
+  {
+    "table": "s_envocc65",
+    "title": "อัตราป่วยโรคหัวใจขาดเลือดที่ระบุว่าเกิดจากมลพิษสิ่งแวดล้อม Y97",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/90896cde087b4969e5f7216894288515?subcatalogId=f16421e617aed29602f9f09d951cce68",
+    "integrated": false
+  },
+  {
+    "table": "s_envocc62",
+    "title": "อัตราป่วยโรคเรื้อรังของทางเดินหายใจส่วนล่างที่ระบุว่าเกิดจากมลพิษสิ่งแวดล้อม Y97 ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/cd6e8f475b0ab7756404d12dd8bb2aed?subcatalogId=f16421e617aed29602f9f09d951cce68",
+    "integrated": false
+  },
+  {
+    "table": "s_st5_adl",
+    "title": " การคัดกรองความเครียด(ST-5)ในกลุ่มผู้สูงอายุ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/7bd56fb9f20abea2eb72dfca24155e6a?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_st5_chronic",
+    "title": "การคัดกรองความเครียด(ST-5)ในผู้ป่วยโรคเรื้อรัง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/795a4a9ce9dc5906f7a3c866ec363913?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_st5_anc",
+    "title": "การคัดกรองความเครียด(ST-5)ในหญิงตั้งครรภ์ ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/7f4ebb6d63d2e3568f12c20e9a55b27a?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_2q_adl",
+    "title": "การคัดกรองโรคซึมเศร้า (2Q) ในกลุ่มผู้สูงอายุ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/8f104b5d2848b8a05a487205f0287991?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_2q_anc",
+    "title": "การคัดกรองโรคซึมเศร้า (2Q) ในหญิงตั้งครรภ์",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/a1178e45c0788dd30dc9361569b6a5cd?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_2q_adl_plus",
+    "title": "การประเมินการฆ่าตัวตาย (8Q) ในกลุ่มผู้สูงอายุจาก 2Q Plus เสี่ยงต่อการฆ่าตัวตาย",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/eb89da75dadb58d78484b3b54bf58de4?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_8q_chronic",
+    "title": "การประเมินการฆ่าตัวตาย (8Q) ในผู้ป่วยโรคเรื้อรัง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/49e6c2e9fb9ee2deb0639680325cfbcd?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_9q_chronic",
+    "title": "การประเมินโรคซึมเศร้า (9Q) ในผู้ป่วยโรคเรื้อรัง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/46a3841a0ccaca9ac890bd891e30848f?subcatalogId=574437c29aff8d1709da55677abc4b03",
+    "integrated": false
+  },
+  {
+    "table": "s_harm9",
+    "title": "การเข้าถึงบริการและการได้รับความรู้ ความเข้าใจอันตรายที่เกิดจากยาเสพติด เพื่อลดอันตรายในกลุ่มผู้ใช้ยาเสพติด จำแนกกลุ่มหลักรอง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/bb76fda7ca38c8a542bfd9ab99d2ccd7?subcatalogId=06b9ffbd9fa83f29fef3a7e7ba8119d6",
+    "integrated": false
+  },
+  {
+    "table": "s_harm10",
+    "title": "การได้รับบริการด้านการลดอันตรายจากยาเสพติด  จำแนกตามกลุ่มหลักรอง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/7f723739a6efd1f4532ec620ca386a72?subcatalogId=06b9ffbd9fa83f29fef3a7e7ba8119d6",
+    "integrated": false
+  },
+  {
+    "table": "s_alcohol",
+    "title": "ความชุกผู้บริโภคเครื่องดื่มแอลกอฮอล์ในประชากรอายุ 15 - 19 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/68345e9bd757bdbf07d0d7fc71bee68f?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": false
+  },
+  {
+    "table": "s_mental_f20_w",
+    "title": "ผู้ป่วยโรคจิตเภทเข้าถึงบริการ(workload)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/31ad3425df7840afe354735d7d2ba957?subcatalogId=ea11bc4bbf333b78e6f53a26f7ab6c89",
+    "integrated": false
+  },
+  {
+    "table": "s_mental_f3x_w",
+    "title": "ผู้ป่วยโรคซึมเศร้าเข้าถึงบริการ(workload)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/61a59cc4548076dfa9efdc0ecb86f91b?subcatalogId=ea11bc4bbf333b78e6f53a26f7ab6c89",
+    "integrated": false
+  },
+  {
+    "table": "s_mental_f90_w",
+    "title": "ผู้ป่วยโรคสมาธิสั้นเข้าถึงบริการ(workload)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/90ccfbfd92f7d1bdd89d0cfd8b4e46ec?subcatalogId=ea11bc4bbf333b78e6f53a26f7ab6c89",
+    "integrated": false
+  },
+  {
+    "table": "s_mental_f84_w",
+    "title": "ผู้ป่วยโรคออทิสติกเข้าถึงบริการ(workload)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/c3cbb49f45fb12d02ff0eb813e9e6279?subcatalogId=ea11bc4bbf333b78e6f53a26f7ab6c89",
+    "integrated": false
+  },
+  {
+    "table": "s_f20_5y",
+    "title": "ร้อยละของผู้ป่วยจิตเภทที่เข้าถึงบริการสะสมได้รับการดูแลต่อเนื่อง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/ceea5aba6208937d4d44f3141271fc0d?subcatalogId=ea11bc4bbf333b78e6f53a26f7ab6c89",
+    "integrated": false
+  },
+  {
+    "table": "s_f20visit6m",
+    "title": "ร้อยละของผู้ป่วยโรคจิตเภทได้รับการรักษาต่อเนื่องภายใน 6 เดือน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/e8e6d6e5a088228680d4be573d712de0?subcatalogId=ea11bc4bbf333b78e6f53a26f7ab6c89",
+    "integrated": false
+  },
+  {
+    "table": "s_f20visit6mr",
+    "title": "ร้อยละของผู้ป่วยโรคจิตเภทได้รับการรักษาต่อเนื่องภายใน 6 เดือน(Reverse )",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/70404ef102ed96de4e2914e2facb67a2?subcatalogId=ea11bc4bbf333b78e6f53a26f7ab6c89",
+    "integrated": false
+  },
+  {
+    "table": "s_mental_group",
+    "title": "แผนที่แสดงอัตรารับบริการของความผิดปกติทางจิตและพฤติกรรม (F00.xx-F99) รวมกับตั้งใจทำร้ายตนเอง (X60.xx-X84.xx)\n",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/f05b2d263a12eee1c960c4b7baae850c?subcatalogId=22710ed5db1ed6b12aab540a7b0753b3",
+    "integrated": false
+  },
+  {
+    "table": "s_labor_sex_age",
+    "title": "ประชากรต่างด้าว จำแนกเพศ กลุ่มอายุรายปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/71d636a9831a5265111e3216ae8b2d1e?subcatalogId=ac4eed1bddb23d6130746d62d2538fd0",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_height05",
+    "title": "ร้อยละของเด็กอายุ 0 - 5 ปี สูงดีสมส่วน และส่วนสูงเฉลี่ยที่อายุ 5 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/67e41dbb1ce5d844d49f6b7b10e30d01?subcatalogId=46522b5bd1e06d24a5bd81917257a93c",
+    "integrated": true
+  },
+  {
+    "table": "s_kpi_height614",
+    "title": "ร้อยละของเด็กอายุ 6 - 14 ปี สูงดีสมส่วน และส่วนสูงเฉลี่ยที่อายุ 12 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/e28682b2718e6cc82b8dbb3e00f2e28e?subcatalogId=46522b5bd1e06d24a5bd81917257a93c",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_food",
+    "title": "ร้อยละของเด็กแรกเกิด - ต่ำกว่า 6 เดือน กินนมแม่อย่างเดียว",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/4164a7c49fcb2b8c3ccca67dcdf28bd0?subcatalogId=1ed90bc32310b503b7ca9b32af425ae5",
+    "integrated": true
+  },
+  {
+    "table": "s_height1518",
+    "title": "ร้อยละวัยรุ่น 15-18 ปี สูงดีสมส่วน  และส่วนสูงเฉลี่ยที่อายุ 18 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/9b019d9cc12576000e6e84acfb9ad7f0?subcatalogId=46522b5bd1e06d24a5bd81917257a93c",
+    "integrated": false
+  },
+  {
+    "table": "s_kpi_drown",
+    "title": "อัตราการเสียชีวิตจากการจมน้ำของเด็กอายุต่ากว่า 15 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/456bd894231700173a89544c1de3c9bf?subcatalogId=491672679818600345dc1833920051b2",
+    "integrated": false
+  },
+  {
+    "table": "s_thalassemia",
+    "title": "อัตราทารกที่เป็นโรคโลหิตจางธาลัสซีเมียต่อประชากร 1,000 คน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/6f43c3e9d6dc13a7b685e5af88923c4a?subcatalogId=491672679818600345dc1833920051b2",
+    "integrated": false
+  },
+  {
+    "table": "s_ht_screen_pop_age",
+    "title": "การคัดกรองความดันโลหิตสูง ในประชากรไทย จำแนกกลุ่มอายุ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/68e401815a64e624c286d97ef3582aa3?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": false
+  },
+  {
+    "table": "s_dm_screen_pop_age",
+    "title": "การคัดกรองเบาหวานในประชากรไทย จำแนกกลุ่มอายุ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/150edaa99ecbe538378b8150e0776763?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": false
+  },
+  {
+    "table": "s_coronary_death_age",
+    "title": "จำนวนผู้ป่วยตายโรคหัวใจและหลอดเลือด (Cardiovascular disease)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/e2a5a66dd74fa1252fcf786674f05f02?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_ckd_stage_typearea",
+    "title": "จำนวนผู้ป่วยโรคไตเรื้อรังในเขตรับผิดชอบ จำแนกตาม Stage (Coverage)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/5d523ced4c9569123109fa6f4071d35f?subcatalogId=e71a73a77b1474e63b71bccf727009ce",
+    "integrated": false
+  },
+  {
+    "table": "s_ht_screen_risk",
+    "title": "ประชากร 35 ปีขึ้นไปได้รับการคัดกรอง และเสี่ยงต่อโรคความดันโลหิตสูง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/6833128a5d76a6afcae3e4a6af0e718c?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": true
+  },
+  {
+    "table": "s_dm_screen_risk",
+    "title": "ประชากร 35 ปีขึ้นไปได้รับการคัดกรอง และเสี่ยงต่อโรคเบาหวาน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/323a75335033c5976566d99f5ad53b33?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": true
+  },
+  {
+    "table": "s_colon_screen_w",
+    "title": "ผลการคัดกรองมะเร็งลำไส้ใหญ่และลำไส้ตรงด้วยวิธี FIT test  (workload)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/9844395374ca85817d6a4633c46e1381?subcatalogId=59acae7a68f02c8e2c0cb88dfc6df3b3",
+    "integrated": false
+  },
+  {
+    "table": "s_dm_ht_control",
+    "title": "ร้อยละของผู้ป่วยโรคเบาหวานและโรคความดันโลหิตสูงที่ควบคุมได้",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/df9a12ff1c86ab1b29b3e47118bcd535?subcatalogId=cf7d9da207c0f9a7ee6c4fe3f09f67dd",
+    "integrated": false
+  },
+  {
+    "table": "s_ht_control",
+    "title": "ร้อยละผู้ป่วยโรคความดันโลหิตสูงที่ควบคุมความดันโลหิตได้ดี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/2e3813337b6b5377c2f68affe247d5f9?subcatalogId=cf7d9da207c0f9a7ee6c4fe3f09f67dd",
+    "integrated": true
+  },
+  {
+    "table": "s_dm_control",
+    "title": "ร้อยละผู้ป่วยโรคเบาหวานที่ควบคุมระดับน้ำตาลได้ดี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/137a726340e4dfde7bbbc5d8aeee3ac3?subcatalogId=cf7d9da207c0f9a7ee6c4fe3f09f67dd",
+    "integrated": true
+  },
+  {
+    "table": "s_cervix_screen_n66",
+    "title": "อัตราการคัดกรองมะเร็งปากมดลูกในสตรีไทย อายุ 30-60 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/c0cb85481f434d563be6ec98a01cbb92?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": false
+  },
+  {
+    "table": "s_breast_screen",
+    "title": "อัตราการคัดกรองมะเร็งเต้านมในสตรีอายุ 30 – 70 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/308526013808e90ce8f30d66e3b5ad82?subcatalogId=6966b0664b89805a484d7ac96c6edc48",
+    "integrated": true
+  },
+  {
+    "table": "s_copd_pop_age",
+    "title": "อัตราการป่วยด้วยโรคปอดอุดกั้นเรื้อรัง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/33b1c30a4652927ac32fee24e8906170?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_dm_pop_age",
+    "title": "อัตราการป่วยด้วยโรคเบาหวาน ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/cefa42b9223ec4d1969c5ce18d762bdd?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_ht_death_age",
+    "title": "อัตราการป่วยตายด้วยโรคความดันโลหิตสูง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/e46c73b57c9eeb2f07759a9e9bc50fb3?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_copd_death_age",
+    "title": "อัตราการป่วยตายด้วยโรคปอดอุดกั้นเรื้อรัง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/3bcec2a91eb03924f0b2714a85ee5b95?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_dm_death_age",
+    "title": "อัตราการป่วยตายด้วยโรคเบาหวาน",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/589248f2516fbb85d4a4a5605c3ca1c4?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_copd60",
+    "title": "อัตราการเกิดการกำเริบเฉียบพลันในผู้ป่วยโรคปอดอุดกั้นเรื้อรัง(ผู้ป่วยอายุ 40 ปีขึ้นไป)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/2ad3fe5a63502901dfb2a8fc231c27dc?subcatalogId=67473ea582306d345ce1bb44b06ba2e9",
+    "integrated": false
+  },
+  {
+    "table": "s_copd_death15",
+    "title": "อัตราการเกิดการกำเริบเฉียบพลันในผู้ป่วยโรคปอดอุดกั้นเรื้อรังต่อประชากรอายุ 15 ปีขึ้นไป",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/8dc31d2079e509de188a3b0117459379?subcatalogId=67473ea582306d345ce1bb44b06ba2e9",
+    "integrated": false
+  },
+  {
+    "table": "s_ht_pop_age",
+    "title": "อัตราป่วยด้วยโรคความดันโลหิตสูงต่อประชากร",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/6b9af46d0cc1830d3bd34589c1081c68?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_coronary_pop_age",
+    "title": "อัตราป่วยด้วยโรคหัวใจและหลอดเลือดต่อประชากร  (Cardiovascular disease)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/14f43de323e8ba70da1cb724cf64a98c?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_coronary_incidence",
+    "title": "อัตราป่วยรายใหม่ของผู้ป่วยโรคหัวใจและหลอดเลือด  (Cardiovascular disease)",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/f346e9d449b04c07cc80edeefc0cc360?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_ht_incidence",
+    "title": "อัตราป่วยรายใหม่ของโรคความดันโลหิตสูงต่อแสนประชากรในปีงบประมาณ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/29eec762c9591d1f8092da14c7462361?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_copd_incidence",
+    "title": "อัตราป่วยรายใหม่ของโรคปอดอุดกั้นเรื้อรัง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/62cdb786f231afbaaaaaac1d5ff844b0?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_asthma_incidence",
+    "title": "อัตราป่วยรายใหม่ของโรคหืด",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/a7dfd5a2bb045c08129446ca192091bd?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_dm_incidence",
+    "title": "อัตราป่วยรายใหม่ของโรคเบาหวานต่อแสนประชากรในปีงบประมาณ",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/eeeab22e386d32e7f5f5ecefebce0001?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_ca_lung_pop_age",
+    "title": "อัตราป่วยโรคมะเร็งปอดต่อประชากร",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/cc87b3c4d8148e441447a387c3e070af?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_ca_cervix_pop_age",
+    "title": "อัตราป่วยโรคมะเร็งปากมดลูกต่อประชากร",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/f3a9cabcd1b83af2ad8d8db6d9b6735c?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_ca_breast_pop_age",
+    "title": "อัตราป่วยโรคมะเร็งเต้านมต่อประชากร",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/825c7fbfdbde936cf821a9b16dc4189b?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_ihd_incidence",
+    "title": "อัตราผู้ป่วยรายใหม่จากโรคหลอดเลือดหัวใจลดลง",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/672d5ed26be10f6862593da30364201d?subcatalogId=6a1fdf282fd28180eed7d1cfe0155e11",
+    "integrated": false
+  },
+  {
+    "table": "s_epi_complete",
+    "title": "ความครอบคลุมการได้รับวัคซีนครบตามเกณฑ์ในเด็กอายุครบ 1 ปี",
+    "source_url": "https://hdc.moph.go.th/lpg/public/standard-report-detail/28dd2c7955ce926456240b2ff0100bde?subcatalogId=4df360514655f79f13901ef1181ca1c7",
+    "integrated": true
+  }
+]

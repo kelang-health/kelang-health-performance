@@ -1,0 +1,2470 @@
+[
+  {
+    "table": "s_dm_screen_risk",
+    "report_id": "323a75335033c5976566d99f5ad53b33",
+    "aname": "",
+    "bname": "",
+    "rate": "",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "formula": "#{result}/#{target}*100"
+      },
+      {
+        "column": "F5",
+        "formula": "#{normal}/#{result}*100"
+      },
+      {
+        "column": "F7",
+        "formula": "#{risk}/#{result}*100"
+      },
+      {
+        "column": "F9",
+        "formula": "#{high_risk}/#{result}*100"
+      },
+      {
+        "column": "F11",
+        "formula": "#{perror}/#{result}*100"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "normal"
+      },
+      {
+        "column": "risk"
+      },
+      {
+        "column": "high_risk"
+      },
+      {
+        "column": "perror"
+      }
+    ]
+  },
+  {
+    "table": "s_ht_screen_risk",
+    "report_id": "6833128a5d76a6afcae3e4a6af0e718c",
+    "aname": "",
+    "bname": "",
+    "rate": "100",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F5",
+        "is_chart": 1,
+        "formula": "(#{normal}/#{result})*rate"
+      },
+      {
+        "column": "F7",
+        "is_chart": 1,
+        "formula": "(#{risk}/#{result})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 1,
+        "formula": "(#{high_risk}/#{result})*rate"
+      },
+      {
+        "column": "F11",
+        "is_chart": 1,
+        "formula": "(#{ill_1}/#{result})*rate"
+      },
+      {
+        "column": "F13",
+        "is_chart": 1,
+        "formula": "(#{perror}/#{result})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "normal"
+      },
+      {
+        "column": "risk"
+      },
+      {
+        "column": "high_risk"
+      },
+      {
+        "column": "ill_1"
+      },
+      {
+        "column": "perror"
+      }
+    ]
+  },
+  {
+    "table": "s_dm_control",
+    "report_id": "137a726340e4dfde7bbbc5d8aeee3ac3",
+    "aname": "จำนวนผู้ป่วยโรคเบาหวานที่ควบคุมระดับน้ำตาลได้ดี",
+    "bname": "จำนวนผู้ป่วยโรคเบาหวาน",
+    "rate": "100",
+    "charts": [
+      {
+        "target": "40",
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": "40",
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 0,
+        "formula": "(#{hba1c}/#{target})*rate"
+      },
+      {
+        "column": "F5",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{result_ncom}/#{target_ncom})*rate"
+      },
+      {
+        "column": "F13",
+        "is_chart": 0,
+        "formula": "(#{result_com}/#{target_com})*rate"
+      },
+      {
+        "column": "F16",
+        "is_chart": 0,
+        "formula": "(#{hba1c1}/#{target1})*rate"
+      },
+      {
+        "column": "F18",
+        "is_chart": 1,
+        "formula": "(#{result1}/#{target1})*rate"
+      },
+      {
+        "column": "F22",
+        "is_chart": 0,
+        "formula": "(#{result_ncom1}/#{target_ncom1})*rate"
+      },
+      {
+        "column": "F26",
+        "is_chart": 0,
+        "formula": "(#{result_com1}/#{target_com1})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "hba1c"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "target_ncom"
+      },
+      {
+        "column": "hba1c_ncom"
+      },
+      {
+        "column": "result_ncom"
+      },
+      {
+        "column": "target_com"
+      },
+      {
+        "column": "hba1c_com"
+      },
+      {
+        "column": "result_com"
+      },
+      {
+        "column": "target1"
+      },
+      {
+        "column": "hba1c1"
+      },
+      {
+        "column": "result1"
+      },
+      {
+        "column": "target_ncom1"
+      },
+      {
+        "column": "hba1c_ncom1"
+      },
+      {
+        "column": "result_ncom1"
+      },
+      {
+        "column": "target_com1"
+      },
+      {
+        "column": "hba1c_com1"
+      },
+      {
+        "column": "result_com1"
+      }
+    ]
+  },
+  {
+    "table": "s_ht_control",
+    "report_id": "2e3813337b6b5377c2f68affe247d5f9",
+    "aname": "จำนวนผู้ป่วยโรคความดันโลหิตสูงที่ควบคุมความดันโลหิตได้ดี",
+    "bname": "จำนวนผู้ป่วยโรคความดันโลหิตสูง",
+    "rate": "100",
+    "charts": [
+      {
+        "target": "60",
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": "60",
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F6",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F8",
+        "is_chart": 0,
+        "formula": "(#{result_bp2}/#{target})*rate"
+      },
+      {
+        "column": "F15",
+        "is_chart": 1,
+        "formula": "(#{result_f}/#{target_f})*rate"
+      },
+      {
+        "column": "F17",
+        "is_chart": 0,
+        "formula": "(#{result_bp2_f}/#{target_f})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "no_bp"
+      },
+      {
+        "column": "bp1"
+      },
+      {
+        "column": "bp2"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "result_bp2"
+      },
+      {
+        "column": "target_f"
+      },
+      {
+        "column": "visit2"
+      },
+      {
+        "column": "no_bp_f"
+      },
+      {
+        "column": "bp1_f"
+      },
+      {
+        "column": "bp2_f"
+      },
+      {
+        "column": "result_f"
+      },
+      {
+        "column": "result_bp2_f"
+      }
+    ]
+  },
+  {
+    "table": "s_ht_screen_follow",
+    "report_id": "b57439ff27302ade8c38d1dd189644a4",
+    "aname": "หมายถึง จำนวนประชากรใน B ที่ได้รับการตรวจติดตามยืนยันวินิจฉัยโดยทำ HBPM หรือ OBPM ภายใน 1 - 90 วัน ก่อนสิ้นปีงบประมาณ (ไม่นับซ้ำ)",
+    "bname": "จำนวนประชากรอายุ 35 ปี ขึ้นไป ในเขตรับผิดชอบที่ยังไม่ได้รับการ วินิจฉัยว่าเป็นโรคความดันโลหิตสูง ได้รับการคัดกรองโรคความดันโลหิตสูงและเป็น กลุ่มสงสัยป่วยโรคความดันโลหิตสูง (สะสมตั้งแต่วันที่ 1 ตุลาคม - 30 มิถุนายน)",
+    "rate": "100",
+    "charts": [
+      {
+        "target": "80",
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F1",
+        "formula": "(#{result_13}/#{target_13})*rate"
+      },
+      {
+        "column": "F2",
+        "formula": "(#{r_home_bp_13}/#{target_13})*rate"
+      },
+      {
+        "column": "F3",
+        "formula": "(#{r_hosp_bp_13}/#{target_13})*rate"
+      },
+      {
+        "column": "F4",
+        "formula": "(#{non_follow90_13}/#{target_13})*rate"
+      },
+      {
+        "column": "F5",
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F6",
+        "formula": "(#{r1}/#{target})*rate"
+      },
+      {
+        "column": "F7",
+        "formula": "(#{r2}/#{target})*rate"
+      },
+      {
+        "column": "F8",
+        "formula": "(#{r_q1}/#{t_q1})*rate"
+      },
+      {
+        "column": "F9",
+        "formula": "(#{r_q2}/#{t_q2})*rate"
+      },
+      {
+        "column": "F10",
+        "formula": "(#{r_q3}/#{t_q3})*rate"
+      },
+      {
+        "column": "F11",
+        "formula": "(#{r_q4}/#{t_q4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target_13"
+      },
+      {
+        "column": "result_13"
+      },
+      {
+        "column": "r_home_bp_13"
+      },
+      {
+        "column": "r_hosp_bp_13"
+      },
+      {
+        "column": "non_follow90_13"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "r1"
+      },
+      {
+        "column": "r2"
+      },
+      {
+        "column": "t_q1"
+      },
+      {
+        "column": "r_q1"
+      },
+      {
+        "column": "r1_q1"
+      },
+      {
+        "column": "r2_q1"
+      },
+      {
+        "column": "t_q2"
+      },
+      {
+        "column": "r_q2"
+      },
+      {
+        "column": "r1_q2"
+      },
+      {
+        "column": "r2_q2"
+      },
+      {
+        "column": "t_q3"
+      },
+      {
+        "column": "r_q3"
+      },
+      {
+        "column": "r1_q3"
+      },
+      {
+        "column": "r2_q3"
+      },
+      {
+        "column": "t_q4"
+      },
+      {
+        "column": "r_q4"
+      },
+      {
+        "column": "r1_q4"
+      },
+      {
+        "column": "r2_q4"
+      },
+      {
+        "column": "over90"
+      }
+    ]
+  },
+  {
+    "table": "s_epi_complete",
+    "report_id": "28dd2c7955ce926456240b2ff0100bde",
+    "aname": "จำนวนเด็กอายุครบ 1 ปี ในงวดที่รายงานที่ได้รับวัคซีนแต่ละชนิดครบตามเกณฑ์ ได้แก่ BCG 1 ครั้ง HBV 3 ครั้ง (HBV แรกเกิด, HBV 2 เดือน และ HBV 6 เดือน) DTP 3 ครั้ง Hib 3 ครั้ง IPV 2 ครั้ง OPV 1 ครั้ง MMR 1 ครั้ง Rota (ครบถ้วนตามเกณฑ์)",
+    "bname": "จำนวนเด็กอายุครบ 1 ปี ที่อาศัยอยู่จริงในพื้นที่รับผิดชอบทั้งหมด ในงวดที่รายงาน จากแฟ้ม Person ตามมาตรฐานโครงสร้าง 43 แฟ้ม (สถานะบุคคล Type area = 1 และ 3)",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 90,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": 90,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": 90,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": 90,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": 90,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F15",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_anc5insur",
+    "report_id": "6db04792c4d6dab8961290cb85dc8a20",
+    "aname": "จำนวนหญิงตาม B ที่ฝากครรภ์คุณภาพ ครบ 5  ครั้งตามเกณฑ์ (ฐานข้อมูล 43 แฟ้ม) ANC",
+    "bname": "จำนวนหญิงไทยในเขตรับผิดชอบ สิ้นสุดการตั้งครรภ์ด้วยการคลอดทั้งหมด (ฐานข้อมูล 43 แฟ้ม) LABOR (BTYPE ไม่เท่ากับ 6)\r\n",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 60,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F15",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_kpi_anc12",
+    "report_id": "1c1b8e24aff59258a806f122e264031e",
+    "aname": "จำนวนหญิงตาม B ที่ฝากครรภ์ครั้งแรกเมื่ออายุครรภ์ <= 12 สัปดาห์ (ข้อมูลจากสมุดสีชมพูบันทึกลงใน 43 แฟ้มๆ ANC)",
+    "bname": "จำนวนหญิงไทยในเขตรับผิดชอบที่สิ้นสุดการตั้งครรภ์ทั้งหมด (ฐานข้อมูล 43 แฟ้ม ๆ LABOR)",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 75,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F15",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_postnatal",
+    "report_id": "f50124b9cbc6636272844273980ca42e",
+    "aname": "จำนวนหญิงตาม B ที่ได้รับการดูแลครบ 3 ครั้งตามเกณฑ์",
+    "bname": "จำนวนหญิงไทยในเขตรับผิดชอบ สิ้นสุดการตั้งครรภ์ด้วยการคลอดครบ 42 วันทั้งหมดในปีงบประมาณ (ฐานข้อมูล 43 แฟ้ม) LABOR (BTYPE ไม่เท่ากับ 6)\r\n",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 75,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F15",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_child",
+    "report_id": "ce4f9fcd9cd41b6cb2f79b2440a6f4cc",
+    "aname": "จำนวนเด็กแรกเกิดน้ำหนักน้อยกว่า 2500 กรัม ในช่วงเวลาที่กำหนด",
+    "bname": "จำนวนเด็กที่คลอดในช่วงเวลาที่กำหนด",
+    "rate": "100",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "formula": "(#{result}/#{target})*100"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "result10"
+      },
+      {
+        "column": "result11"
+      },
+      {
+        "column": "result12"
+      },
+      {
+        "column": "result01"
+      },
+      {
+        "column": "result02"
+      },
+      {
+        "column": "result03"
+      },
+      {
+        "column": "result04"
+      },
+      {
+        "column": "result05"
+      },
+      {
+        "column": "result06"
+      },
+      {
+        "column": "result07"
+      },
+      {
+        "column": "result08"
+      },
+      {
+        "column": "result09"
+      }
+    ]
+  },
+  {
+    "table": "s_kpi_childdev1",
+    "report_id": "7afc5cd38a8cc47af037cbd3613f268b",
+    "aname": "เด็กไทยอายุ 9, 18, 30, 42 และ 60 เดือน ทุกคนที่อยู่อาศัยในพื้นที่รับผิดชอบที่ได้รับการตรวจคัดกรองพัฒนาการจริง",
+    "bname": "เด็กไทยอายุ 9, 18, 30, 42 และ 60 เดือน ทุกคนที่อยู่อาศัยในพื้นที่รับผิดชอบ",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 90,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 1,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 1,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 1,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_kpi_childdev2",
+    "report_id": "684e99dc7538c8b1a97f19f91a100f08",
+    "aname": "เด็กไทยอายุ 9, 18, 30, 42 และ 60 เดือน มีพัฒนาการสงสัยครั้งแรกและส่งต่อทันที(1B261+1B262)",
+    "bname": "เด็กไทยอายุ 9, 18, 30, 42 และ 60 เดือน ทุกคนที่อยู่อาศัยในพื้นที่รับผิดชอบที่ได้รับการตรวจคัดกรองพัฒนาการจริง",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 20,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 1,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 1,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 1,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_kpi_childdev3",
+    "report_id": "442ce7230a27324442ae3e049041c519",
+    "aname": "เด็กไทยอายุ 9, 18, 30, 42 และ 60 เดือน มีพัฒนาการสงสัยครั้งแรก(1B261) ได้รับการติดตามภายใน 30 วัน",
+    "bname": "เด็กไทยอายุ 9, 18, 30, 42 และ 60 เดือน มีพัฒนาการสงสัยครั้งแรก(1B261)",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 90,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 1,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 1,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 1,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_kpi_height05",
+    "report_id": "67e41dbb1ce5d844d49f6b7b10e30d01",
+    "aname": "",
+    "bname": "",
+    "rate": "100",
+    "charts": [
+      {
+        "target": "90.00",
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": "72.00",
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": "",
+        "type": "less_than_target_is_red"
+      },
+      {
+        "target": "",
+        "type": "less_than_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 0,
+        "formula": "(#{targetq1}/#{totalq1})*rate"
+      },
+      {
+        "column": "F5",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F8",
+        "is_chart": 0,
+        "formula": "(#{a2q1}/#{b2q1})"
+      },
+      {
+        "column": "F11",
+        "is_chart": 0,
+        "formula": "(#{a3q1}/#{b3q1})"
+      },
+      {
+        "column": "F14",
+        "is_chart": 0,
+        "formula": "(#{targetq2}/#{totalq2})*rate"
+      },
+      {
+        "column": "F16",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F19",
+        "is_chart": 0,
+        "formula": "(#{a2q2}/#{b2q2})"
+      },
+      {
+        "column": "F22",
+        "is_chart": 0,
+        "formula": "(#{a3q2}/#{b3q2})"
+      },
+      {
+        "column": "F25",
+        "is_chart": 0,
+        "formula": "(#{targetq3}/#{totalq3})*rate"
+      },
+      {
+        "column": "F27",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F30",
+        "is_chart": 0,
+        "formula": "(#{a2q3}/#{b2q3})"
+      },
+      {
+        "column": "F33",
+        "is_chart": 0,
+        "formula": "(#{a3q3}/#{b3q3})"
+      },
+      {
+        "column": "F36",
+        "is_chart": 0,
+        "formula": "(#{targetq4}/#{totalq4})*rate"
+      },
+      {
+        "column": "F38",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      },
+      {
+        "column": "F41",
+        "is_chart": 0,
+        "formula": "(#{a2q4}/#{b2q4})"
+      },
+      {
+        "column": "F44",
+        "is_chart": 0,
+        "formula": "(#{a3q4}/#{b3q4})"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "totalq1"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "b2q1"
+      },
+      {
+        "column": "a2q1"
+      },
+      {
+        "column": "b3q1"
+      },
+      {
+        "column": "a3q1"
+      },
+      {
+        "column": "totalq2"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "b2q2"
+      },
+      {
+        "column": "a2q2"
+      },
+      {
+        "column": "b3q2"
+      },
+      {
+        "column": "a3q2"
+      },
+      {
+        "column": "totalq3"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "b2q3"
+      },
+      {
+        "column": "a2q3"
+      },
+      {
+        "column": "b3q3"
+      },
+      {
+        "column": "a3q3"
+      },
+      {
+        "column": "totalq4"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      },
+      {
+        "column": "b2q4"
+      },
+      {
+        "column": "a2q4"
+      },
+      {
+        "column": "b3q4"
+      },
+      {
+        "column": "a3q4"
+      }
+    ]
+  },
+  {
+    "table": "s_ferrous6_5",
+    "report_id": "1fe1b6263a1db45127a7841704e0ca77",
+    "aname": "จำนวนเด็กอายุ6เดือน-5ปีทั้งหมดที่มารับบริการคลินิกภูมิคุ้มกัน ได้รับยาน้ำเสริมธาตุเหล็ก",
+    "bname": "จำนวนเด็กอายุ6เดือน-5ปีทั้งหมดที่มารับบริการคลินิกภูมิคุ้มกัน",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 80,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result_n}/#{target_n})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{resultq1_n}/#{targetq1_n})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{resultq2_n}/#{targetq2_n})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 0,
+        "formula": "(#{resultq3_n}/#{targetq3_n})*rate"
+      },
+      {
+        "column": "F15",
+        "is_chart": 0,
+        "formula": "(#{resultq4_n}/#{targetq4_n})*rate"
+      },
+      {
+        "column": "F18",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F21",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F24",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F27",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F30",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target_n"
+      },
+      {
+        "column": "result_n"
+      },
+      {
+        "column": "targetq1_n"
+      },
+      {
+        "column": "resultq1_n"
+      },
+      {
+        "column": "targetq2_n"
+      },
+      {
+        "column": "resultq2_n"
+      },
+      {
+        "column": "targetq3_n"
+      },
+      {
+        "column": "resultq3_n"
+      },
+      {
+        "column": "targetq4_n"
+      },
+      {
+        "column": "resultq4_n"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_ferrous6_12",
+    "report_id": "99a9ae5b11353e27cbe21d898020c3a8",
+    "aname": "จำนวนเด็กอายุ 6-12 ปีที่ชั่งน้ำหนักวัดส่วนสูงในแฟ้ม Nutrition  ได้รับยาเม็ดเสริมธาตุเหล็ก",
+    "bname": "จำนวนเด็กอายุ 6-12 ปีทั้งหมด ที่ชั่งน้ำหนักวัดส่วนสูงในแฟ้ม Nutrition",
+    "rate": "100",
+    "charts": [
+      {
+        "target": "53",
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": "53",
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result1}/#{target1})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 1,
+        "formula": "(#{result2}/#{target2})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target1"
+      },
+      {
+        "column": "result1"
+      },
+      {
+        "column": "target2"
+      },
+      {
+        "column": "result2"
+      }
+    ]
+  },
+  {
+    "table": "s_nutrition_09",
+    "report_id": "02db515d852ee58f845b58cb90b037cf",
+    "aname": "",
+    "bname": "",
+    "rate": "100",
+    "charts": [
+      {
+        "target": "",
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 0,
+        "formula": "(#{target1_q1}/#{target_q1})*rate"
+      },
+      {
+        "column": "F5",
+        "is_chart": 0,
+        "formula": "(#{result1_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F7",
+        "is_chart": 0,
+        "formula": "(#{result2_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 1,
+        "formula": "(#{result3_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F11",
+        "is_chart": 0,
+        "formula": "(#{result4_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F13",
+        "is_chart": 0,
+        "formula": "(#{result5_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F16",
+        "is_chart": 0,
+        "formula": "(#{target1_q2}/#{target_q2})*rate"
+      },
+      {
+        "column": "F18",
+        "is_chart": 0,
+        "formula": "(#{result1_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F20",
+        "is_chart": 0,
+        "formula": "(#{result2_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F22",
+        "is_chart": 1,
+        "formula": "(#{result3_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F24",
+        "is_chart": 0,
+        "formula": "(#{result4_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F26",
+        "is_chart": 0,
+        "formula": "(#{result5_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F29",
+        "is_chart": 0,
+        "formula": "(#{target1_q3}/#{target_q3})*rate"
+      },
+      {
+        "column": "F31",
+        "is_chart": 0,
+        "formula": "(#{result1_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F33",
+        "is_chart": 0,
+        "formula": "(#{result2_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F35",
+        "is_chart": 1,
+        "formula": "(#{result3_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F37",
+        "is_chart": 0,
+        "formula": "(#{result4_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F39",
+        "is_chart": 0,
+        "formula": "(#{result5_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F42",
+        "is_chart": 0,
+        "formula": "(#{target1_q4}/#{target_q4})*rate"
+      },
+      {
+        "column": "F44",
+        "is_chart": 0,
+        "formula": "(#{result1_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F46",
+        "is_chart": 0,
+        "formula": "(#{result2_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F48",
+        "is_chart": 1,
+        "formula": "(#{result3_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F50",
+        "is_chart": 0,
+        "formula": "(#{result4_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F52",
+        "is_chart": 0,
+        "formula": "(#{result5_q4}/#{target1_q4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target_q1"
+      },
+      {
+        "column": "target1_q1"
+      },
+      {
+        "column": "result1_q1"
+      },
+      {
+        "column": "result2_q1"
+      },
+      {
+        "column": "result3_q1"
+      },
+      {
+        "column": "result4_q1"
+      },
+      {
+        "column": "result5_q1"
+      },
+      {
+        "column": "target_q2"
+      },
+      {
+        "column": "target1_q2"
+      },
+      {
+        "column": "result1_q2"
+      },
+      {
+        "column": "result2_q2"
+      },
+      {
+        "column": "result3_q2"
+      },
+      {
+        "column": "result4_q2"
+      },
+      {
+        "column": "result5_q2"
+      },
+      {
+        "column": "target_q3"
+      },
+      {
+        "column": "target1_q3"
+      },
+      {
+        "column": "result1_q3"
+      },
+      {
+        "column": "result2_q3"
+      },
+      {
+        "column": "result3_q3"
+      },
+      {
+        "column": "result4_q3"
+      },
+      {
+        "column": "result5_q3"
+      },
+      {
+        "column": "target_q4"
+      },
+      {
+        "column": "target1_q4"
+      },
+      {
+        "column": "result1_q4"
+      },
+      {
+        "column": "result2_q4"
+      },
+      {
+        "column": "result3_q4"
+      },
+      {
+        "column": "result4_q4"
+      },
+      {
+        "column": "result5_q4"
+      }
+    ]
+  },
+  {
+    "table": "s_nutrition_10",
+    "report_id": "7190b07ced690add4560887aa2bff5ac",
+    "aname": "",
+    "bname": "",
+    "rate": "100",
+    "charts": [
+      {
+        "target": "8.5",
+        "type": "greater_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 0,
+        "formula": "(#{target1_q1}/#{target_q1})*rate"
+      },
+      {
+        "column": "F5",
+        "is_chart": 0,
+        "formula": "(#{result1_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F7",
+        "is_chart": 0,
+        "formula": "(#{result2_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 1,
+        "formula": "(#{result3_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F11",
+        "is_chart": 0,
+        "formula": "(#{result4_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F13",
+        "is_chart": 0,
+        "formula": "(#{result5_q1}/#{target1_q1})*rate"
+      },
+      {
+        "column": "F16",
+        "is_chart": 0,
+        "formula": "(#{target1_q2}/#{target_q2})*rate"
+      },
+      {
+        "column": "F18",
+        "is_chart": 0,
+        "formula": "(#{result1_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F20",
+        "is_chart": 0,
+        "formula": "(#{result2_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F22",
+        "is_chart": 1,
+        "formula": "(#{result3_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F24",
+        "is_chart": 0,
+        "formula": "(#{result4_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F26",
+        "is_chart": 0,
+        "formula": "(#{result5_q2}/#{target1_q2})*rate"
+      },
+      {
+        "column": "F29",
+        "is_chart": 0,
+        "formula": "(#{target1_q3}/#{target_q3})*rate"
+      },
+      {
+        "column": "F31",
+        "is_chart": 0,
+        "formula": "(#{result1_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F33",
+        "is_chart": 0,
+        "formula": "(#{result2_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F35",
+        "is_chart": 1,
+        "formula": "(#{result3_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F37",
+        "is_chart": 0,
+        "formula": "(#{result4_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F39",
+        "is_chart": 0,
+        "formula": "(#{result5_q3}/#{target1_q3})*rate"
+      },
+      {
+        "column": "F42",
+        "is_chart": 0,
+        "formula": "(#{target1_q4}/#{target_q4})*rate"
+      },
+      {
+        "column": "F44",
+        "is_chart": 0,
+        "formula": "(#{result1_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F46",
+        "is_chart": 0,
+        "formula": "(#{result2_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F48",
+        "is_chart": 1,
+        "formula": "(#{result3_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F50",
+        "is_chart": 0,
+        "formula": "(#{result4_q4}/#{target1_q4})*rate"
+      },
+      {
+        "column": "F52",
+        "is_chart": 0,
+        "formula": "(#{result5_q4}/#{target1_q4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target_q1"
+      },
+      {
+        "column": "target1_q1"
+      },
+      {
+        "column": "result1_q1"
+      },
+      {
+        "column": "result2_q1"
+      },
+      {
+        "column": "result3_q1"
+      },
+      {
+        "column": "result4_q1"
+      },
+      {
+        "column": "result5_q1"
+      },
+      {
+        "column": "target_q2"
+      },
+      {
+        "column": "target1_q2"
+      },
+      {
+        "column": "result1_q2"
+      },
+      {
+        "column": "result2_q2"
+      },
+      {
+        "column": "result3_q2"
+      },
+      {
+        "column": "result4_q2"
+      },
+      {
+        "column": "result5_q2"
+      },
+      {
+        "column": "target_q3"
+      },
+      {
+        "column": "target1_q3"
+      },
+      {
+        "column": "result1_q3"
+      },
+      {
+        "column": "result2_q3"
+      },
+      {
+        "column": "result3_q3"
+      },
+      {
+        "column": "result4_q3"
+      },
+      {
+        "column": "result5_q3"
+      },
+      {
+        "column": "target_q4"
+      },
+      {
+        "column": "target1_q4"
+      },
+      {
+        "column": "result1_q4"
+      },
+      {
+        "column": "result2_q4"
+      },
+      {
+        "column": "result3_q4"
+      },
+      {
+        "column": "result4_q4"
+      },
+      {
+        "column": "result5_q4"
+      }
+    ]
+  },
+  {
+    "table": "s_obesity05",
+    "report_id": "d448e02a391064fe1ae015c7f8d3b26c",
+    "aname": "จำนวนเด็กแรกเกิด - 5 ปี ที่มีภาวะอ้วน",
+    "bname": "จำนวนเด็กแรกเกิด - 5 ปี ชั่งน้ำหนักและวัดส่วนสูงทั้งหมด",
+    "rate": "100",
+    "charts": [],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_thin05",
+    "report_id": "4067e70ea9a7b37cb6ecc32ec3bd686b",
+    "aname": "จำนวนเด็กแรกเกิด - 5 ปี ที่มีภาวะผอม",
+    "bname": "จำนวนเด็กแรกเกิด - 5 ปี ชั่งน้ำหนักและวัดส่วนสูงทั้งหมด",
+    "rate": "100",
+    "charts": [],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 0,
+        "formula": "(#{resultq1}/#{targetq1})*rate"
+      },
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{resultq2}/#{targetq2})*rate"
+      },
+      {
+        "column": "F9",
+        "is_chart": 0,
+        "formula": "(#{resultq3}/#{targetq3})*rate"
+      },
+      {
+        "column": "F12",
+        "is_chart": 0,
+        "formula": "(#{resultq4}/#{targetq4})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "targetq1"
+      },
+      {
+        "column": "resultq1"
+      },
+      {
+        "column": "targetq2"
+      },
+      {
+        "column": "resultq2"
+      },
+      {
+        "column": "targetq3"
+      },
+      {
+        "column": "resultq3"
+      },
+      {
+        "column": "targetq4"
+      },
+      {
+        "column": "resultq4"
+      }
+    ]
+  },
+  {
+    "table": "s_kpi_food",
+    "report_id": "4164a7c49fcb2b8c3ccca67dcdf28bd0",
+    "aname": "เด็กอายุครบ 6 เดือน ที่แม่หรือผู้เลี้ยงดู ตอบว่ากินนมแม่อย่างเดียว",
+    "bname": "เด็กอายุครบ 6 เดือนในปีงบประมาณ ที่แม่หรือผู้เลี้ยงดูได้ถูกสอบถามเรื่องการกินนมแม่ ",
+    "rate": "100",
+    "charts": [
+      {
+        "target": 50,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 0,
+        "formula": "(#{target}/#{total})*rate"
+      },
+      {
+        "column": "F5",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "total"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "r1"
+      },
+      {
+        "column": "r2"
+      },
+      {
+        "column": "r3"
+      },
+      {
+        "column": "r4"
+      },
+      {
+        "column": "r5"
+      },
+      {
+        "column": "r6"
+      }
+    ]
+  },
+  {
+    "table": "s_breast_screen",
+    "report_id": "308526013808e90ce8f30d66e3b5ad82",
+    "aname": "จำนวนสตรีไทยอายุ 30  - 70 ปีที่ได้รับการคัดกรอง",
+    "bname": "จำนวนสตรีไทยอายุ 30  - 70 ปี",
+    "rate": "100",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F5",
+        "is_chart": 1,
+        "formula": "(#{result1}/#{target})*rate"
+      },
+      {
+        "column": "F7",
+        "is_chart": 1,
+        "formula": "(#{result2}/#{target})*rate"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "result1"
+      },
+      {
+        "column": "result2"
+      }
+    ]
+  },
+  {
+    "table": "s_ageing",
+    "report_id": "953a2fc648be8ce76a8115fbb955bb51",
+    "aname": "",
+    "bname": "",
+    "rate": "100",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      },
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F6",
+        "is_chart": 0,
+        "formula": "(#{result}/#{target})*rate"
+      },
+      {
+        "column": "F7",
+        "is_chart": 0,
+        "formula": "(#{target}-#{result})"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result1"
+      },
+      {
+        "column": "result2"
+      },
+      {
+        "column": "result3"
+      },
+      {
+        "column": "result"
+      }
+    ]
+  },
+  {
+    "table": "s_aged9",
+    "report_id": "aa86b13e8cb60cae6c3216b7e3e5f151",
+    "aname": "",
+    "bname": "",
+    "rate": "100",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "formula": "(#{result}/#{target})*100"
+      },
+      {
+        "column": "F3",
+        "formula": "(#{result}/#{target})*100"
+      },
+      {
+        "column": "F9",
+        "formula": "(#{result2}/#{target})*100"
+      },
+      {
+        "column": "F14",
+        "formula": "(#{result3}/#{target})*100"
+      },
+      {
+        "column": "F18",
+        "formula": "(#{result4}/#{target})*100"
+      },
+      {
+        "column": "F22",
+        "formula": "(#{result5}/#{target})*100"
+      },
+      {
+        "column": "F26",
+        "formula": "(#{result6}/#{target})*100"
+      },
+      {
+        "column": "F31",
+        "formula": "(#{result7}/#{target})*100"
+      },
+      {
+        "column": "F35",
+        "formula": "(#{result8}/#{target})*100"
+      },
+      {
+        "column": "F39",
+        "formula": "(#{result9}/#{target})*100"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "result1"
+      },
+      {
+        "column": "result1_1"
+      },
+      {
+        "column": "result1_2"
+      },
+      {
+        "column": "result2"
+      },
+      {
+        "column": "result2_1"
+      },
+      {
+        "column": "result2_2"
+      },
+      {
+        "column": "result3"
+      },
+      {
+        "column": "result3_1"
+      },
+      {
+        "column": "result3_2"
+      },
+      {
+        "column": "result4"
+      },
+      {
+        "column": "result4_1"
+      },
+      {
+        "column": "result4_2"
+      },
+      {
+        "column": "result5"
+      },
+      {
+        "column": "result5_1"
+      },
+      {
+        "column": "result5_2"
+      },
+      {
+        "column": "result6"
+      },
+      {
+        "column": "result6_1"
+      },
+      {
+        "column": "result6_2"
+      },
+      {
+        "column": "result6_3"
+      },
+      {
+        "column": "result7"
+      },
+      {
+        "column": "result7_1"
+      },
+      {
+        "column": "result7_2"
+      },
+      {
+        "column": "result8"
+      },
+      {
+        "column": "result8_1"
+      },
+      {
+        "column": "result8_2"
+      },
+      {
+        "column": "result9"
+      },
+      {
+        "column": "result9_1"
+      },
+      {
+        "column": "result9_2"
+      }
+    ]
+  },
+  {
+    "table": "s_opd_all",
+    "report_id": "92a705c26f22754d7462e9f742436b6f",
+    "aname": "จำนวนการใช้บริการผู้ป่วยนอก ทุกสิทธิ (ครั้ง)",
+    "bname": "จำนวนการใช้บริการผู้ป่วยนอก ทุกสิทธิ (คน)",
+    "rate": "100",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [
+      {
+        "column": "F3",
+        "is_chart": 1,
+        "formula": "(#{result}/#{target})"
+      }
+    ],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "target"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "m10"
+      },
+      {
+        "column": "m11"
+      },
+      {
+        "column": "m12"
+      },
+      {
+        "column": "m01"
+      },
+      {
+        "column": "m02"
+      },
+      {
+        "column": "m03"
+      },
+      {
+        "column": "m04"
+      },
+      {
+        "column": "m05"
+      },
+      {
+        "column": "m06"
+      },
+      {
+        "column": "m07"
+      },
+      {
+        "column": "m08"
+      },
+      {
+        "column": "m09"
+      }
+    ]
+  },
+  {
+    "table": "s_dental_2",
+    "report_id": "1b7a1fcbcd6cc2abae4c26d17d2b7045",
+    "aname": "",
+    "bname": "",
+    "rate": "",
+    "charts": [
+      {
+        "target": null,
+        "type": "less_than_equal_target_is_red"
+      }
+    ],
+    "formulas": [],
+    "fields": [
+      {
+        "column": "a_name"
+      },
+      {
+        "column": "result"
+      },
+      {
+        "column": "m10"
+      },
+      {
+        "column": "m11"
+      },
+      {
+        "column": "m12"
+      },
+      {
+        "column": "m01"
+      },
+      {
+        "column": "m02"
+      },
+      {
+        "column": "m03"
+      },
+      {
+        "column": "m04"
+      },
+      {
+        "column": "m05"
+      },
+      {
+        "column": "m06"
+      },
+      {
+        "column": "m07"
+      },
+      {
+        "column": "m08"
+      },
+      {
+        "column": "m09"
+      }
+    ]
+  }
+]

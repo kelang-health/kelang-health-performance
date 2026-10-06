@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="th">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#123e43"><meta name="description" content="ระบบติดตามและเปรียบเทียบผลงานสุขภาพ หน่วยบริการสังกัดเทศบาลเมืองเขลางค์นคร">
+ <title>Kelang Health Performance</title><link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+ <a class="skip" href="#content">ข้ามไปเนื้อหา</a>
+ <aside id="sidebar"><a class="brand" href="#overview"><img src="./assets/mark.svg" width="42" height="42" alt=""><span>KELANG HEALTH<small>PERFORMANCE</small></span></a><div class="nav-label">ศูนย์ข้อมูลผลงานสุขภาพ</div><nav id="navigation" aria-label="เมนูหลัก"></nav><div class="sidebar-footer">เทศบาลเมืองเขลางค์นคร<br><span>ข้อมูลจริง • แหล่งข้อมูลตรวจสอบได้</span></div></aside>
+ <button id="overlay" aria-label="ปิดเมนู" hidden></button>
+ <div class="workspace">
+  <header><div class="header-left"><button id="menu-toggle" class="icon-button" aria-label="เปิดเมนู" aria-expanded="false">☰</button><span class="municipality">เทศบาลเมืองเขลางค์นคร <small>ระบบติดตามและเปรียบเทียบผลงานสุขภาพ</small></span></div><div class="header-actions"><span id="connection" class="badge info">กำลังเชื่อมต่อ</span><button id="auth-button">เข้าสู่ระบบ</button></div></header>
+  <main id="content" tabindex="-1">
+   <div class="page-heading"><div><div class="eyebrow">KELANG HEALTH PERFORMANCE</div><h1 id="page-title">ภาพรวมองค์กร</h1><p id="page-description">ระบบติดตามและเปรียบเทียบผลงานสุขภาพ หน่วยบริการสังกัดเทศบาลเมืองเขลางค์นคร</p></div><button id="refresh" class="primary">↻ รีเฟรชข้อมูล</button></div>
+   <section class="filters" aria-label="ตัวกรองข้อมูล">
+    <label>ปีงบประมาณ<select id="year"><option value="2568">2568</option><option value="2569" selected>2569</option><option value="2570">2570</option></select></label>
+    <label>ช่วงเวลา<select id="period"><option value="all">สะสมปีงบประมาณ</option><option value="q1">ไตรมาส 1 (ต.ค.–ธ.ค.)</option><option value="q2">ไตรมาส 2 (ม.ค.–มี.ค.)</option><option value="q3">ไตรมาส 3 (เม.ย.–มิ.ย.)</option><option value="q4">ไตรมาส 4 (ก.ค.–ก.ย.)</option></select></label>
+    <label>กลุ่มการประเมิน<select id="scope"><option value="all">ทุกกลุ่ม</option><option value="AREA">พื้นที่ 7 หน่วย</option><option value="SERVICE">บริการ 8 หน่วย</option></select></label>
+    <label>หน่วยบริการ<select id="facility"><option value="all">ทุกหน่วยบริการ</option></select></label>
+    <label>กลุ่ม KPI<select id="category"><option value="all">ทุกกลุ่ม KPI</option></select></label>
+   </section>
+   <div id="message" role="status" aria-live="polite"></div><div id="freshness" class="freshness"></div>
+   <div id="view" aria-busy="true"><div class="empty">กำลังโหลดข้อมูลจริงจาก Hospital Profile และ HDC…</div></div>
+   <footer>ข้อมูล KPI: HDC กระทรวงสาธารณสุข • ข้อมูลหน่วยบริการ: Hospital Profile / Supabase<br>ปีงบประมาณ 1 ตุลาคม–30 กันยายน • — ไม่มีข้อมูล • N/A ไม่อยู่ในกลุ่มประเมิน • 0 คือค่าศูนย์จริง</footer>
+  </main>
+ </div>
+ <dialog id="dialog"><div class="dialog-head"><h2 id="dialog-title"></h2><button id="dialog-close" class="icon-button" aria-label="ปิดหน้าต่าง">×</button></div><div id="dialog-body"></div></dialog>
+ <script type="module" src="./src/app.js"></script>
+</body>
+</html>

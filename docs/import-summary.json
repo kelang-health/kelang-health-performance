@@ -1,0 +1,31 @@
+{
+  "counts": {
+    "hp_facilities": 8,
+    "hp_facility_profiles": 8,
+    "hp_population": 8,
+    "hp_staff": 8,
+    "hp_volunteers": 8,
+    "hp_import_records": 304,
+    "hp_budget_monthly": 9,
+    "hp_finance_monthly": 80,
+    "hp_ncd_monthly": 157,
+    "hp_cd_monthly": 44,
+    "hp_settings": 15,
+    "hp_data_quality": 1
+  },
+  "issues": [
+    {
+      "code": "06117",
+      "sourceKey": "legacy-money-85",
+      "type": "duplicate_budget",
+      "detail": "แผนจ่ายเงินซ้ำ ยอดนี้รอตรวจสอบ ไม่รวมยอดที่ยืนยันแล้ว"
+    }
+  ],
+  "originalCounts": {
+    "hospital": 8,
+    "money": 89,
+    "ncd": 157,
+    "cd": 44,
+    "settings": 14
+  }
+}

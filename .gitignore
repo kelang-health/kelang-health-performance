@@ -1,0 +1,10 @@
+backups/
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+data/raw/
+test-results/
+*.log
+config.local.json

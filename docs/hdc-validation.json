@@ -1,0 +1,785 @@
+{
+  "generated_at": "2026-10-06T02:33:41.763Z",
+  "summary": {
+    "s_dm_screen_risk|2568": {
+      "value": 91.98592337838919,
+      "numerator": 23002,
+      "denominator": 25006,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170343"
+    },
+    "s_ht_screen_risk|2568": {
+      "value": 91.82894418941774,
+      "numerator": 19004,
+      "denominator": 20695,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170406"
+    },
+    "s_dm_control|2568": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": "ThrottlerException: Too Many Requests",
+      "source_date": null
+    },
+    "s_ht_control|2568": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": "ThrottlerException: Too Many Requests",
+      "source_date": null
+    },
+    "s_ht_screen_follow|2568": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": "ThrottlerException: Too Many Requests",
+      "source_date": null
+    },
+    "s_epi_complete|2568": {
+      "value": 88.95027624309392,
+      "numerator": 161,
+      "denominator": 181,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170348"
+    },
+    "s_anc5insur|2568": {
+      "value": 52.4390243902439,
+      "numerator": 86,
+      "denominator": 164,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170309"
+    },
+    "s_kpi_anc12|2568": {
+      "value": 62.28571428571429,
+      "numerator": 109,
+      "denominator": 175,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170409"
+    },
+    "s_postnatal|2568": {
+      "value": 64.84848484848484,
+      "numerator": 107,
+      "denominator": 165,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170705"
+    },
+    "s_child|2568": {
+      "value": 10,
+      "numerator": 18,
+      "denominator": 180,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170309"
+    },
+    "s_kpi_childdev1|2568": {
+      "value": 94.86673247778874,
+      "numerator": 961,
+      "denominator": 1013,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170411"
+    },
+    "s_kpi_childdev2|2568": {
+      "value": 7.284079084287201,
+      "numerator": 70,
+      "denominator": 961,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170411"
+    },
+    "s_kpi_childdev3|2568": {
+      "value": 85.71428571428571,
+      "numerator": 60,
+      "denominator": 70,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170411"
+    },
+    "s_kpi_height05|2568": {
+      "value": 55.956563398275314,
+      "numerator": 1752,
+      "denominator": 3131,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170648"
+    },
+    "s_ferrous6_5|2568": {
+      "value": 71.1890243902439,
+      "numerator": 467,
+      "denominator": 656,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170350"
+    },
+    "s_ferrous6_12|2568": {
+      "value": 40.02123142250531,
+      "numerator": 754,
+      "denominator": 1884,
+      "complete": 6,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": "202511170349"
+    },
+    "s_nutrition_09|2568": {
+      "value": 80.71383844708829,
+      "numerator": 2578,
+      "denominator": 3194,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170654"
+    },
+    "s_nutrition_10|2568": {
+      "value": 9.643080776455855,
+      "numerator": 308,
+      "denominator": 3194,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170654"
+    },
+    "s_obesity05|2568": {
+      "value": 11.181556195965419,
+      "numerator": 388,
+      "denominator": 3470,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170654"
+    },
+    "s_thin05|2568": {
+      "value": 7.17579250720461,
+      "numerator": 249,
+      "denominator": 3470,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170721"
+    },
+    "s_kpi_food|2568": {
+      "value": 26.751592356687897,
+      "numerator": 42,
+      "denominator": 157,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170647"
+    },
+    "s_breast_screen|2568": {
+      "value": 81.2956204379562,
+      "numerator": 11583,
+      "denominator": 14248,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170309"
+    },
+    "s_ageing|2568": {
+      "value": 71.05455027507125,
+      "numerator": 10720,
+      "denominator": 15087,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170304"
+    },
+    "s_aged9|2568": {
+      "value": 74.73321402531981,
+      "numerator": 11275,
+      "denominator": 15087,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202511170246"
+    },
+    "s_opd_all|2568": {
+      "value": 122030,
+      "numerator": 122030,
+      "denominator": null,
+      "complete": 7,
+      "expected": 8,
+      "partial": true,
+      "error": null,
+      "source_date": "202511170654"
+    },
+    "s_dental_2|2568": {
+      "value": 10114,
+      "numerator": 10114,
+      "denominator": null,
+      "complete": 7,
+      "expected": 8,
+      "partial": true,
+      "error": null,
+      "source_date": "202511170328"
+    },
+    "s_dm_screen_risk|2569": {
+      "value": 93.1214109926169,
+      "numerator": 22703,
+      "denominator": 24380,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051305"
+    },
+    "s_ht_screen_risk|2569": {
+      "value": 93.35839598997494,
+      "numerator": 18625,
+      "denominator": 19950,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051403"
+    },
+    "s_dm_control|2569": {
+      "value": 32.305727836556,
+      "numerator": 1771,
+      "denominator": 5482,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051301"
+    },
+    "s_ht_control|2569": {
+      "value": 26.845576940453604,
+      "numerator": 2971,
+      "denominator": 11067,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051400"
+    },
+    "s_ht_screen_follow|2569": {
+      "value": 83.66637706342311,
+      "numerator": 963,
+      "denominator": 1151,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051402"
+    },
+    "s_epi_complete|2569": {
+      "value": 89.47368421052632,
+      "numerator": 153,
+      "denominator": 171,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051313"
+    },
+    "s_anc5insur|2569": {
+      "value": 73.91304347826086,
+      "numerator": 85,
+      "denominator": 115,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051212"
+    },
+    "s_kpi_anc12|2569": {
+      "value": 78.33333333333333,
+      "numerator": 94,
+      "denominator": 120,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051406"
+    },
+    "s_postnatal|2569": {
+      "value": 86.82170542635659,
+      "numerator": 112,
+      "denominator": 129,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610052013"
+    },
+    "s_child|2569": {
+      "value": 5.47945205479452,
+      "numerator": 8,
+      "denominator": 146,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051213"
+    },
+    "s_kpi_childdev1|2569": {
+      "value": 85.33190578158458,
+      "numerator": 797,
+      "denominator": 934,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051409"
+    },
+    "s_kpi_childdev2|2569": {
+      "value": 11.166875784190715,
+      "numerator": 89,
+      "denominator": 797,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051409"
+    },
+    "s_kpi_childdev3|2569": {
+      "value": 88.76404494382022,
+      "numerator": 79,
+      "denominator": 89,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051409"
+    },
+    "s_kpi_height05|2569": {
+      "value": 58.50249584026622,
+      "numerator": 1758,
+      "denominator": 3005,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051949"
+    },
+    "s_ferrous6_5|2569": {
+      "value": 87.22316865417376,
+      "numerator": 512,
+      "denominator": 587,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051316"
+    },
+    "s_ferrous6_12|2569": {
+      "value": 45.8786231884058,
+      "numerator": 1013,
+      "denominator": 2208,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051315"
+    },
+    "s_nutrition_09|2569": {
+      "value": 80.56572379367721,
+      "numerator": 2421,
+      "denominator": 3005,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610052001"
+    },
+    "s_nutrition_10|2569": {
+      "value": 8.452579034941763,
+      "numerator": 254,
+      "denominator": 3005,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610052001"
+    },
+    "s_obesity05|2569": {
+      "value": 10.00633312222926,
+      "numerator": 316,
+      "denominator": 3158,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610052004"
+    },
+    "s_thin05|2569": {
+      "value": 7.441418619379355,
+      "numerator": 235,
+      "denominator": 3158,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610052035"
+    },
+    "s_kpi_food|2569": {
+      "value": 36.19631901840491,
+      "numerator": 59,
+      "denominator": 163,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051949"
+    },
+    "s_breast_screen|2569": {
+      "value": 77.659958162014,
+      "numerator": 10766,
+      "denominator": 13863,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051212"
+    },
+    "s_ageing|2569": {
+      "value": 82.47375024763917,
+      "numerator": 12489,
+      "denominator": 15143,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051209"
+    },
+    "s_aged9|2569": {
+      "value": 88.55576834180809,
+      "numerator": 13410,
+      "denominator": 15143,
+      "complete": 7,
+      "expected": 7,
+      "partial": false,
+      "error": null,
+      "source_date": "202610051041"
+    },
+    "s_opd_all|2569": {
+      "value": 121891,
+      "numerator": 121891,
+      "denominator": null,
+      "complete": 7,
+      "expected": 8,
+      "partial": true,
+      "error": null,
+      "source_date": "202610052005"
+    },
+    "s_dental_2|2569": {
+      "value": 11150,
+      "numerator": 11150,
+      "denominator": null,
+      "complete": 7,
+      "expected": 8,
+      "partial": true,
+      "error": null,
+      "source_date": "202610051242"
+    },
+    "s_dm_screen_risk|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_ht_screen_risk|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_dm_control|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_ht_control|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_ht_screen_follow|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_epi_complete|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_anc5insur|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_kpi_anc12|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_postnatal|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_child|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_kpi_childdev1|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_kpi_childdev2|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_kpi_childdev3|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_kpi_height05|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_ferrous6_5|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_ferrous6_12|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_nutrition_09|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_nutrition_10|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_obesity05|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_thin05|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_kpi_food|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_breast_screen|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_ageing|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_aged9|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 7,
+      "partial": true,
+      "error": "ThrottlerException: Too Many Requests",
+      "source_date": null
+    },
+    "s_opd_all|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 8,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    },
+    "s_dental_2|2570": {
+      "value": null,
+      "numerator": null,
+      "denominator": null,
+      "complete": 0,
+      "expected": 8,
+      "partial": true,
+      "error": null,
+      "source_date": null
+    }
+  }
+}

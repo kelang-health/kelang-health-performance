@@ -1,0 +1,74 @@
+[
+  {
+    "facility_code": "06116",
+    "facility_name": "ศบส.บ้านโทกหัวช้าง",
+    "short_name": "บ้านโทกหัวช้าง",
+    "area_unit": true,
+    "service_unit": true,
+    "active": true,
+    "display_order": 1
+  },
+  {
+    "facility_code": "06117",
+    "facility_name": "ศบส.บ้านฟ่อน",
+    "short_name": "บ้านฟ่อน",
+    "area_unit": true,
+    "service_unit": true,
+    "active": true,
+    "display_order": 2
+  },
+  {
+    "facility_code": "06118",
+    "facility_name": "ศบส.บ้านศรีหมวดเกล้า",
+    "short_name": "บ้านศรีหมวดเกล้า",
+    "area_unit": true,
+    "service_unit": true,
+    "active": true,
+    "display_order": 3
+  },
+  {
+    "facility_code": "06119",
+    "facility_name": "ศบส.บ้านกล้วยแพะ",
+    "short_name": "บ้านกล้วยแพะ",
+    "area_unit": true,
+    "service_unit": true,
+    "active": true,
+    "display_order": 4
+  },
+  {
+    "facility_code": "06120",
+    "facility_name": "ศบส.บ้านกล้วยม่วง",
+    "short_name": "บ้านกล้วยม่วง",
+    "area_unit": true,
+    "service_unit": true,
+    "active": true,
+    "display_order": 5
+  },
+  {
+    "facility_code": "06121",
+    "facility_name": "ศบส.บ้านกาด",
+    "short_name": "บ้านกาด",
+    "area_unit": true,
+    "service_unit": true,
+    "active": true,
+    "display_order": 6
+  },
+  {
+    "facility_code": "06122",
+    "facility_name": "ศบส.บ้านแม่กืย",
+    "short_name": "บ้านแม่กืย",
+    "area_unit": true,
+    "service_unit": true,
+    "active": true,
+    "display_order": 7
+  },
+  {
+    "facility_code": "45030",
+    "facility_name": "ศบส.เขลางค์นคร",
+    "short_name": "เขลางค์นคร",
+    "area_unit": false,
+    "service_unit": true,
+    "active": true,
+    "display_order": 8
+  }
+]
