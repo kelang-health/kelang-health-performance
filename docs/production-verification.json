@@ -1,0 +1,154 @@
+{
+  "url": "https://kelang-health.github.io/kelang-health-performance",
+  "results": [
+    {
+      "check": "load",
+      "population": "หน่วยบริการทั้งหมด\n8\nรวมผลงานบริการครบ 8 แห่ง\nหน่วยพื้นที่รับผิดชอบ\n7\nประชากรพื้นที่ • ไม่รวมรหัส 45030\nKPI ผ่านเกณฑ์\n6 / 15\nนับเฉพาะข้อมูลครบและมีเกณฑ์ยืนยัน\nKPI ต้องเร่ง\n9\nรวมใกล้เป้าและต่ำกว่าเป้า\nOPD รวม\n121,891\nมีข้อมูล 7/8 หน่วย\nประชากรพื้นที่\n51,561\nข้อมูลพื้นฐานปีงบประมาณที่เลือก\nหลังคาเรือน",
+      "source": "ข้อมูล HDC ถึงวันที่: 05/10/2569 20:35\nอัปเดตระบบล่าสุด: 6/10/2569 09:44:13\nHospital Profile ต้นทาง: ไม่ระบุวันที่\nข้อมูลล่าสุดที่มี • มี API ขัดข้อง"
+    },
+    {
+      "check": "area",
+      "title": "ผลงานพื้นที่ 7 หน่วย",
+      "overflow": false
+    },
+    {
+      "check": "service",
+      "title": "ผลงานบริการ 8 หน่วย",
+      "overflow": false
+    },
+    {
+      "check": "heatmap",
+      "title": "KPI Heatmap",
+      "overflow": false
+    },
+    {
+      "check": "trend",
+      "title": "แนวโน้ม",
+      "overflow": false
+    },
+    {
+      "check": "compare",
+      "title": "เปรียบเทียบหน่วยบริการ",
+      "overflow": false
+    },
+    {
+      "check": "profile",
+      "title": "ข้อมูลหน่วยบริการ",
+      "overflow": false
+    },
+    {
+      "check": "finance",
+      "title": "งบประมาณและการเงิน",
+      "overflow": false
+    },
+    {
+      "check": "ncd",
+      "title": "โรคเรื้อรัง (NCD)",
+      "overflow": false
+    },
+    {
+      "check": "cd",
+      "title": "โรคติดต่อ",
+      "overflow": false
+    },
+    {
+      "check": "quality",
+      "title": "คุณภาพข้อมูล",
+      "overflow": false
+    },
+    {
+      "check": "manage",
+      "title": "จัดการข้อมูล",
+      "overflow": false
+    },
+    {
+      "check": "heatmap detail",
+      "open": true
+    },
+    {
+      "check": "finance drilldown",
+      "open": true
+    },
+    {
+      "check": "mobile overview",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile area",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile service",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile heatmap",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile trend",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile compare",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile profile",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile finance",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile ncd",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile cd",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile quality",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile manage",
+      "overflow": false,
+      "offenders": []
+    },
+    {
+      "check": "mobile drawer",
+      "expanded": "true"
+    },
+    {
+      "check": "AREA facility filter",
+      "count": 7
+    },
+    {
+      "check": "SERVICE facility filter",
+      "count": 8
+    },
+    {
+      "check": "hash route reload",
+      "title": "ผลงานบริการ 8 หน่วย"
+    },
+    {
+      "check": "public login form",
+      "email": true
+    }
+  ],
+  "errors": []
+}

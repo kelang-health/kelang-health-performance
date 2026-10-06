@@ -85,11 +85,17 @@ Admin/Staff เพิ่ม แก้ ลบข้อมูลและกรอ
 - ตรวจ Advisor ก่อน/หลัง: ไม่มี Security finding ใหม่บน hp_*; warning เดิม leaked-password protection disabled และ INFO no-policy ในตารางระบบอื่นยังอยู่
 - แก้ multiple-permissive-policy warnings ที่เกิดบน hp_* โดยแยก INSERT/UPDATE/DELETE; เพิ่ม FK indexes และลด index ซ้ำกับ UNIQUE
 
+ตรวจ Advisor รอบสุดท้ายหลังแก้ policies: ไม่พบ Security findings บน hp_* และไม่มี multiple-permissive-policy warning แล้ว เหลือ INFO unused index ของตารางใหม่ 9 รายการ ซึ่งควรประเมินหลังมี traffic จริงก่อนลบ index ที่รองรับ foreign key/การค้นหา ดู [คำอธิบาย unused index](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index) ส่วน warning Auth เดิมดู [leaked password protection](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection)
+
 ข้อจำกัดของการตรวจ: ทดสอบสิทธิ์ database จริงและ RPC จริงแบบ rollback แต่ไม่ได้เข้าสู่ระบบเบราว์เซอร์ด้วยรหัสผ่านของผู้ใช้งานจริง เพราะไม่ได้รับรหัสผ่าน ทดสอบฟอร์ม login และเส้นทาง Public แล้ว
 
-## Phase 7 — Production: กำลังตรวจ deployment ครั้งแรก
+## Phase 7 — Production: เผยแพร่และตรวจผ่าน
 
-ตั้ง GitHub Pages source เป็น GitHub Actions, workflow test/build/sync/deploy, schedule 06:00 น. ประเทศไทยทุกวัน ต้องตรวจ run สำเร็จและ production browser ก่อนยืนยันขั้นนี้
+ตั้ง GitHub Pages source เป็น GitHub Actions, workflow test/build/sync/deploy, schedule 06:00 น. ประเทศไทยทุกวัน การเผยแพร่ commit `a8aa8d4` สำเร็จใน [Actions run 37405513062](https://github.com/kelang-health/kelang-health-performance/actions/runs/37405513062) และเปิด Production URL ได้จริง
+
+ตรวจผ่าน URL จริงครบ 31 จุด บนเดสก์ท็อป 1440 px และมือถือ 390 px: 12 หน้าหลัก, modal/drilldown, drawer, AREA 7/SERVICE 8, login form และ refresh hash route ไม่พบ JavaScript console error หรือ document horizontal overflow ผลตรวจอยู่ใน docs/production-verification.json
+
+Branch ส่งมอบคือ `main`; เอกสารที่เปลี่ยนอย่างเดียวไม่เรียก deploy ซ้ำ ส่วนการเปลี่ยน application และการรันตามเวลายังคง test/sync/build/deploy ตาม workflow
 
 ## Architecture และ endpoints
 
