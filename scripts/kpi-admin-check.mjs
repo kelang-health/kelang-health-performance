@@ -20,12 +20,12 @@ try{
   }
   await route.fulfill({status:method==='POST'?201:200,contentType:'application/json',body:JSON.stringify(rows)});
  });
- await page.goto(url+'/#kpi-admin');await page.waitForSelector('[data-publish-kpi]');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);
+ await page.goto(url+'/#kpi-admin');await page.waitForSelector('[data-publish-kpi]');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);await page.selectOption('#year','2569');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);
  assert.equal(await page.locator('[data-publish-kpi]').count(),26);
  await page.locator('[data-publish-kpi="S_DM_CONTROL"]').uncheck();await page.waitForFunction(()=>document.querySelector('#view').textContent.includes('บันทึกการแสดงผลแล้ว'));
  assert.equal(settings.find(s=>s.setting_key==='kpi_publication:2569:S_DM_CONTROL').value.mode,'hide');
  await page.goto(url+'/#overview');assert.equal(await page.locator('.kpi-card[data-kpi="S_DM_CONTROL"]').count(),0);
- await page.reload();await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);assert.equal(await page.locator('.kpi-card[data-kpi="S_DM_CONTROL"]').count(),0);
+ await page.reload();await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);await page.selectOption('#year','2569');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);assert.equal(await page.locator('.kpi-card[data-kpi="S_DM_CONTROL"]').count(),0);
  await page.goto(url+'/#kpi-admin');await page.locator('[data-publish-kpi="S_DM_CONTROL"]').check();await page.waitForFunction(()=>document.querySelector('#view').textContent.includes('บันทึกการแสดงผลแล้ว'));
  await page.goto(url+'/#overview');assert.equal(await page.locator('.kpi-card[data-kpi="S_DM_CONTROL"]').count(),1);
  await page.goto(url+'/#kpi-admin');
@@ -36,7 +36,7 @@ try{
  assert.equal(settings.find(s=>s.setting_key==='kpi_publication:2569:S_AGED9').value.last_check.available_units,7);
  assert.equal(settings.find(s=>s.setting_key==='kpi_publication:2569:S_AGED9').value.mode,'auto');
  await page.selectOption('#year','2570');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);assert.equal(await page.locator('.kpi-card').count(),0);
- await page.goto(url+'/#area');assert.match(await page.locator('#view').innerText(),/ยังไม่มี KPI ที่พร้อมแสดง/);
+ await page.goto(url+'/#area');assert.match(await page.locator('#view').innerText(),/อยู่ระหว่างรอข้อมูลปีงบประมาณ 2570/);
  const publicPage=await browser.newPage();await publicPage.goto(url+'/#kpi-admin');await publicPage.waitForSelector('#manage-login');assert.equal(await publicPage.locator('[data-publish-kpi]').count(),0);
  console.log('Admin UI fixtures passed: 26 toggles, hide/show persists and changes public cards, year-specific empty state, public has no edit controls.');
 }finally{await browser.close();}

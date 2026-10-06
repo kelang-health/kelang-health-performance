@@ -15,13 +15,13 @@
   <main id="content" tabindex="-1">
    <div class="page-heading"><div><div class="eyebrow">KELANG HEALTH PERFORMANCE</div><h1 id="page-title">ภาพรวมองค์กร</h1><p id="page-description">ระบบติดตามและเปรียบเทียบผลงานสุขภาพ หน่วยบริการสังกัดเทศบาลเมืองเขลางค์นคร</p></div><button id="refresh" class="primary">↻ รีเฟรชข้อมูล</button></div>
    <section class="filters" aria-label="ตัวกรองข้อมูล">
-    <label>ปีงบประมาณ<select id="year"><option value="2568">2568</option><option value="2569" selected>2569</option><option value="2570">2570</option></select></label>
+    <label>ปีงบประมาณ<select id="year"><option value="2568" selected>2568</option><option value="2569">2569</option><option value="2570">2570</option></select></label>
     <label>ช่วงเวลา<select id="period"><option value="all">สะสมปีงบประมาณ</option><option value="q1">ไตรมาส 1 (ต.ค.–ธ.ค.)</option><option value="q2">ไตรมาส 2 (ม.ค.–มี.ค.)</option><option value="q3">ไตรมาส 3 (เม.ย.–มิ.ย.)</option><option value="q4">ไตรมาส 4 (ก.ค.–ก.ย.)</option></select></label>
     <label>กลุ่มการประเมิน<select id="scope"><option value="all">ทุกกลุ่ม</option><option value="AREA">พื้นที่ 7 หน่วย</option><option value="SERVICE">บริการ 8 หน่วย</option></select></label>
     <label>หน่วยบริการ<select id="facility"><option value="all">ทุกหน่วยบริการ</option></select></label>
     <label>กลุ่ม KPI<select id="category"><option value="all">ทุกกลุ่ม KPI</option></select></label>
    </section>
-   <div id="message" role="status" aria-live="polite"></div><div id="freshness" class="freshness"></div>
+   <p class="subtle">ขณะนี้ตั้งค่าเริ่มต้นแสดงปีงบประมาณ 2568 • ปีงบประมาณ 2570 อยู่ระหว่างรอข้อมูลหน่วยบริการ คาดว่าจะเริ่มประมวลผลช่วง 15–20 พฤศจิกายน 2569 ตามข้อมูลที่ผู้ดูแลแจ้ง</p><div id="message" role="status" aria-live="polite"></div><div id="freshness" class="freshness"></div>
    <div id="view" aria-busy="true"><div class="empty">กำลังโหลดข้อมูลจริงจาก Hospital Profile และ HDC…</div></div>
    <footer><div id="developer-credit"></div>ข้อมูล KPI: HDC กระทรวงสาธารณสุข • ข้อมูลหน่วยบริการ: Hospital Profile / Supabase<br>ปีงบประมาณ 1 ตุลาคม–30 กันยายน • — ไม่มีข้อมูล • N/A ไม่อยู่ในกลุ่มประเมิน • 0 คือค่าศูนย์จริง</footer>
   </main>

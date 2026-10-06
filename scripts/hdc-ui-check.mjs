@@ -6,7 +6,7 @@ const {chromium}=require('C:/Users/acer/.cache/codex-runtimes/codex-primary-runt
 const browser=await chromium.launch({headless:true,channel:'msedge'});
 try{
  const page=await browser.newPage();const url=process.env.TEST_URL??'http://127.0.0.1:4173';
- await page.goto(url+'/#area');await page.waitForSelector('#kpi-selector');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);
+ await page.goto(url+'/#area');await page.waitForSelector('#kpi-selector');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);await page.selectOption('#year','2569');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);
  await page.selectOption('#kpi-selector','S_AGED9');
  const rows=JSON.parse(fs.readFileSync('data/hdc-snapshot.json')).datasets['s_aged9|2569'].rows;
  let count=0,fail=false;
@@ -18,6 +18,6 @@ try{
  assert.match(await page.locator('#view').innerText(),/88\.6/);
  fail=true;await page.click('[data-live-hdc]');await page.waitForFunction(()=>document.querySelector('#message').textContent.includes('API สดไม่สำเร็จ'));
  assert.equal(count,2);assert.match(await page.locator('#message').innerText(),/429/);assert.match(await page.locator('#view').innerText(),/88\.6/);
- await page.reload();await page.waitForSelector('#kpi-selector');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);await page.selectOption('#kpi-selector','S_AGED9');assert.match(await page.locator('#view').innerText(),/88\.6/);
+ await page.reload();await page.waitForSelector('#kpi-selector');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);await page.selectOption('#year','2569');await page.waitForFunction(()=>!document.querySelector('#refresh').disabled);await page.selectOption('#kpi-selector','S_AGED9');assert.match(await page.locator('#view').innerText(),/88\.6/);
  console.log('HDC UI passed: one selected API request, HTTP201 data, HTTP429 fallback, and reload retains real data.');
 }finally{await browser.close();}
