@@ -1,3 +1,4 @@
+import {diseaseSummary,filterDisease} from './disease-summary.js';
 import {rateToggle} from './rate-toggle.js';
 import {number,sum,percent,ncdSummary,periodMatches,escapeHtml as e} from '../utils/core.js';
 import {columnChart} from './charts.js';
@@ -13,8 +14,8 @@ export function ncdModel({rows,population,units,year,period,rate}){
  const convert=(v,p)=>rate?percent(v,p,100000):v;
  const diseases=[...new Set(summary.map(r=>r.disease))].map(disease=>{
   const records=summary.filter(r=>r.disease===disease);
-  const complete=records.length===eligible.length;
-  const aggregate=key=>rate&&!complete?null:convert(sum(records.map(r=>r[key])),denominator);
+  
+  const aggregate=key=>convert(sum(records.map(r=>r[key])),denominator);
   return {disease,old:aggregate('old'),new:aggregate('new'),total:aggregate('total'),count:sum(records.map(r=>r.total))};
  }).sort((a,b)=>(b.count??-1)-(a.count??-1));
  const unitRows=units.map(f=>({facility:f,values:diseases.map(d=>{const r=summary.find(r=>r.facility_code===f.facility_code&&r.disease===d.disease);return rate&&!f.area_unit?'N/A':convert(r?.total??null,pop(f.facility_code));})}));
@@ -28,10 +29,10 @@ function donut(items){
  return '<svg class="ncd-donut" viewBox="0 0 360 360" role="img" aria-label="สัดส่วนจำนวนตามประเภทโรค"><title>สัดส่วนจำนวนตามประเภทโรค</title>'+arcs+'</svg><div class="legend">'+items.map((r,i)=>'<span><i style="background:'+colors[i%colors.length]+'"></i>'+e(r.disease)+' '+fmt(r.count)+(r.count!==null?' ('+fmt(r.count/total*100,1)+'%)':'')+'</span>').join('')+'</div>';
 }
 export function ncdView(context){
- const m=ncdModel(context),{panel,table}=context,unit=context.rate?'ต่อ 100,000 คน':'ราย',digits=context.rate?2:0;
+ const all=ncdModel(context),m=filterDisease(all,context.selectedDisease),{panel,table}=context,unit=context.rate?'ต่อ 100,000 คน':'ราย',digits=context.rate?2:0;
  const controls='<div class="controls">'+rateToggle(context.rate)+'<button data-export="ncd">ส่งออก CSV</button></div>';
  const comparison=columnChart([{label:'ผู้ป่วยเดิม (รายเก่า) · '+unit,color:colors[0],values:m.diseases.map(d=>d.old)},{label:'ผู้ป่วยรายใหม่ · '+unit,color:colors[1],values:m.diseases.map(d=>d.new)}],m.diseases.map(d=>d.disease));
  const values=m.unitRows.map(r=>['<button class="table-link" data-ncd-unit="'+e(r.facility.facility_code)+'">'+e(r.facility.short_name)+'</button>',...r.values.map(v=>typeof v==='string'?v:fmt(v,digits)),r.values.some(v=>v==='N/A')?'N/A':r.values.some(v=>v===null)?'—':fmt(sum(r.values),digits)]);
  values.push(['<strong>รวมหน่วยที่เลือก</strong>',...m.diseases.map(d=>'<strong>'+fmt(d.total,digits)+'</strong>'),m.diseases.some(d=>d.total===null)?'—':fmt(sum(m.diseases.map(d=>d.total)),digits)]);
- return controls+(context.rate?'<p class="notice">อัตรา = จำนวนตามข้อมูลโรค ÷ ประชากรพื้นที่ปีเดียวกัน × 100,000 ใช้เฉพาะหน่วยที่มีพื้นที่รับผิดชอบ หากข้อมูลโรคหรือประชากรไม่ครบ จะแสดง —; หน่วยไม่มีพื้นที่แสดง N/A</p>':'')+'<div class="ncd-chart-grid">'+panel('เปรียบเทียบผู้ป่วยเดิมและผู้ป่วยรายใหม่ (เรียงจำนวนรวมมากไปน้อย)',comparison,'หน่วย: '+unit)+panel('สัดส่วนจำแนกตามประเภทโรค',donut(m.diseases),'สัดส่วนคำนวณจากจำนวนรายตามข้อมูลโรค')+'</div>'+panel('แจกแจงผู้ป่วยโรคเรื้อรังรายหน่วยบริการ',table(['หน่วยบริการ',...m.diseases.map(d=>d.disease),'รวมทุกโรค'+(context.rate?' (ต่อแสน)':'')],values),'รายเก่าใช้ค่าสูงสุดในปี + รายใหม่รวมตามช่วงที่เลือก; ผลรวมข้ามโรคอาจนับคนเดียวหลายโรค ไม่ใช่จำนวนบุคคลไม่ซ้ำ ข้อมูลขาดแสดง — และค่าศูนย์จริงแสดง 0; คลิกชื่อหน่วยเพื่อกรองกราฟ');
+ return controls+diseaseSummary(all.diseases,context.rate,context.selectedDisease)+(context.rate?'<p class="notice">อัตรา = จำนวนตามข้อมูลโรค ÷ ประชากรพื้นที่ปีเดียวกัน × 100,000 ใช้เฉพาะหน่วยที่มีพื้นที่รับผิดชอบ คำนวณจากข้อมูลโรคที่ได้รับเทียบประชากรพื้นที่ทั้งหมดที่เลือก หากไม่มีข้อมูลโรคหรือฐานประชากร จะแสดง —; รายการที่ขาดไม่ถือเป็นศูนย์ และยังไม่ยืนยันว่ารายงานครบทุกหน่วย; หน่วยไม่มีพื้นที่แสดง N/A</p>':'')+'<div class="ncd-chart-grid">'+panel('เปรียบเทียบผู้ป่วยเดิมและผู้ป่วยรายใหม่ (เรียงจำนวนรวมมากไปน้อย)',comparison,'หน่วย: '+unit)+panel('สัดส่วนจำแนกตามประเภทโรค',donut(m.diseases),'สัดส่วนคำนวณจากจำนวนรายตามข้อมูลโรค')+'</div>'+panel('แจกแจงผู้ป่วยโรคเรื้อรังรายหน่วยบริการ',table(['หน่วยบริการ',...m.diseases.map(d=>d.disease),'รวมทุกโรค'+(context.rate?' (ต่อแสน)':'')],values),'รายเก่าใช้ค่าสูงสุดในปี + รายใหม่รวมตามช่วงที่เลือก; ผลรวมข้ามโรคอาจนับคนเดียวหลายโรค ไม่ใช่จำนวนบุคคลไม่ซ้ำ ข้อมูลขาดแสดง — และค่าศูนย์จริงแสดง 0; คลิกชื่อหน่วยเพื่อกรองกราฟ');
 }
