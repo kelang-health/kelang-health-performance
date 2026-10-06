@@ -23,9 +23,9 @@ try{
   for(const route of ['overview','area','service','trend','compare','finance','ncd','cd']){
    await page.goto(url+'/#'+route);await page.waitForSelector('#view .panel');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${route} overflow ${width}`);
-   for(const svg of await page.locator('svg.chart').all())assert.equal(await svg.locator('.chart-value').count(),await svg.locator('circle').count(),`${route} all points labeled`);
+   for(const svg of await page.locator('svg.chart').all())assert.equal(await svg.locator('.chart-value').count(),await svg.locator('[data-chart-point]').count(),`${route} all points labeled`);
   }
  }
  await page.screenshot({path:'test-results/display-mobile.png',fullPage:false});
- console.log('Display checks passed: 150% font, eye mode, persistence, 16 route/viewport checks, every line point labeled.');
+ console.log('Display checks passed: 150% font, eye mode, persistence, 16 route/viewport checks, every bar labeled.');
 }finally{await browser.close();}

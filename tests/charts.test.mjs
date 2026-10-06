@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {columnChart} from '../src/charts/charts.js';
+test('Bar charts label real zero, skip missing months and include the target in the scale',()=>{const html=columnChart([{label:'ผล',values:[0,null,20]}],['ต.ค.','พ.ย.','ธ.ค.'],80);assert.equal((html.match(/data-chart-point/g)??[]).length,2);assert.equal((html.match(/class="chart-value"/g)??[]).length,2);assert.match(html,/chart-target/);assert.match(html,/เป้าหมาย 80/);assert.doesNotMatch(html,/NaN/);assert.doesNotMatch(html,/polyline/);});
+test('Empty source does not fabricate bars or target results',()=>{assert.match(columnChart([{label:'ผล',values:[null,null]}],['ต.ค.','พ.ย.'],80),/ไม่มีผลงาน/);});
