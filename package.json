@@ -1,1 +1,12 @@
-{"name":"kelang-health-performance","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","build":"node scripts/build.mjs","sync:hdc":"php scripts/sync_hdc.php","dev":"node scripts/serve.mjs"}}
+{
+  "name": "kelang-health-performance",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "sync:hdc": "php scripts/sync_hdc.php",
+    "dev": "node scripts/serve.mjs"
+  }
+}

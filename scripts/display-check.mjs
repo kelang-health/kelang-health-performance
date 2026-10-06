@@ -7,6 +7,12 @@ try{
  const page=await browser.newPage({viewport:{width:1440,height:1000}});
  const url=process.env.TEST_URL??'http://127.0.0.1:4173';
  await page.goto(url);await page.waitForSelector('.kpi-card');
+ assert.equal(await page.locator('.brand img').evaluate(img=>img.complete&&img.naturalWidth>0),true,'municipal emblem loaded');
+ assert.match(await page.locator('#developer-credit').innerText(),/© 2026 Hospital Profile Ver\.1\.1 \| Design & Developed by Apiwat Meethong/);
+ await page.goto(url+'/#manage');await page.waitForSelector('#manage-login');
+ assert.match(await page.locator('#view').innerText(),/เวอร์ชันและประวัติการปรับปรุง/);
+ assert.match(await page.locator('#view').innerText(),/1\.1/);
+ await page.goto(url+'/#overview');await page.waitForSelector('.kpi-card');
  await page.selectOption('#font-size','150');await page.click('#eye-mode');
  assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).fontSize),'21px');
  await page.reload();await page.waitForSelector('.kpi-card');
