@@ -1,3 +1,4 @@
+import {rateToggle} from './rate-toggle.js';
 import {number,sum,percent,ncdSummary,periodMatches,escapeHtml as e} from '../utils/core.js';
 import {columnChart} from './charts.js';
 const fmt=(v,d=0)=>v===null?'—':v.toLocaleString('th-TH',{maximumFractionDigits:d});
@@ -28,7 +29,7 @@ function donut(items){
 }
 export function ncdView(context){
  const m=ncdModel(context),{panel,table}=context,unit=context.rate?'ต่อ 100,000 คน':'ราย',digits=context.rate?2:0;
- const controls='<div class="controls"><label>รูปแบบแสดงผล<select id="rate-mode"><option value="count" '+(!context.rate?'selected':'')+'>จำนวนผู้ป่วย (ราย)</option><option value="rate" '+(context.rate?'selected':'')+'>อัตราป่วยต่อ 100,000 คน</option></select></label><button data-export="ncd">ส่งออก CSV</button></div>';
+ const controls='<div class="controls">'+rateToggle(context.rate)+'<button data-export="ncd">ส่งออก CSV</button></div>';
  const comparison=columnChart([{label:'ผู้ป่วยเดิม (รายเก่า) · '+unit,color:colors[0],values:m.diseases.map(d=>d.old)},{label:'ผู้ป่วยรายใหม่ · '+unit,color:colors[1],values:m.diseases.map(d=>d.new)}],m.diseases.map(d=>d.disease));
  const values=m.unitRows.map(r=>['<button class="table-link" data-ncd-unit="'+e(r.facility.facility_code)+'">'+e(r.facility.short_name)+'</button>',...r.values.map(v=>typeof v==='string'?v:fmt(v,digits)),r.values.some(v=>v==='N/A')?'N/A':r.values.some(v=>v===null)?'—':fmt(sum(r.values),digits)]);
  values.push(['<strong>รวมหน่วยที่เลือก</strong>',...m.diseases.map(d=>'<strong>'+fmt(d.total,digits)+'</strong>'),m.diseases.some(d=>d.total===null)?'—':fmt(sum(m.diseases.map(d=>d.total)),digits)]);

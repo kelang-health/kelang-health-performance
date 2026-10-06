@@ -1,3 +1,4 @@
+import {rateToggle} from './rate-toggle.js';
 import {number,sum,percent,periodMatches,fiscalMonths,monthNames,escapeHtml as e} from '../utils/core.js';
 import {columnChart} from './charts.js';
 const colors=['#cc1260','#ff8300','#328b39','#187bd9','#85209e','#009cac'];
@@ -25,7 +26,7 @@ export function diseaseLines(datasets,labels){
 }
 export function cdView(context){
  const {panel,table}=context,m=cdModel(context),unit=context.rate?'ต่อ 100,000 คน':'ราย',labels=m.months.map(month=>monthNames[fiscalMonths.indexOf(month)]);
- const controls='<div class="controls"><label>รูปแบบแสดงผล<select id="rate-mode"><option value="count" '+(!context.rate?'selected':'')+'>จำนวนผู้ป่วย (ราย)</option><option value="rate" '+(context.rate?'selected':'')+'>อัตราป่วยต่อ 100,000 คน</option></select></label><button data-export="cd">ส่งออก CSV</button></div>';
+ const controls='<div class="controls">'+rateToggle(context.rate)+'<button data-export="cd">ส่งออก CSV</button></div>';
  const rows=m.unitRows.map(r=>[e(r.facility.short_name),...r.values.map(v=>typeof v==='string'?v:fmt(v))]);rows.push(['<strong>รวมหน่วยที่เลือก</strong>',...m.diseases.map(d=>'<strong>'+fmt(d.total)+'</strong>')]);
  return controls+panel('แนวโน้มการเกิดโรคติดต่อรายเดือน (การเฝ้าระวังทางระบาดวิทยา)',diseaseLines(m.diseases.map(d=>({label:d.disease,values:d.values})),labels),'หน่วย: '+unit+' • ข้อมูลเดือนที่ขาดจะเว้นช่วงเส้น ไม่แทนด้วย 0')+panel(context.rate?'อัตราป่วยสะสมแยกตามโรค':'จำนวนผู้ป่วยสะสมแยกตามโรค',columnChart([{label:unit,color:'#ffa88e',values:m.diseases.map(d=>d.total)}],m.diseases.map(d=>d.disease)),'เรียงตามจำนวนผู้ป่วยมากไปน้อย • สะสมเฉพาะช่วงเวลาที่เลือก')+panel('ข้อมูลโรคติดต่อรายหน่วยบริการ',table(['หน่วยบริการ',...m.diseases.map(d=>d.disease)],rows),'อัตรา = จำนวนตามข้อมูลโรค ÷ ประชากรพื้นที่ปีเดียวกัน × 100,000 ใช้เฉพาะหน่วยมีพื้นที่รับผิดชอบ ข้อมูลหรือประชากรขาดแสดง —; หน่วยไม่มีพื้นที่แสดง N/A; จำนวนเป็นรายตามโรค ไม่ใช่บุคคลไม่ซ้ำ')+panel('รายละเอียดแนวโน้มรายเดือน',table(['โรค',...labels],m.diseases.map(d=>[e(d.disease),...d.values.map(fmt)])));
 }
