@@ -1,0 +1,18 @@
+create table public.hp_unit_public_info(facility_code text primary key references public.hp_facilities(facility_code),address text not null default '' check(length(address)<=1000),phone text not null default '' check(length(phone)<=100),opening_hours text not null default '' check(length(opening_hours)<=1000),directions_url text not null default '' check(directions_url='' or directions_url ~ '^https://'),services jsonb not null default '[]' check(jsonb_typeof(services)='array' and jsonb_array_length(services)<=20 and octet_length(services::text)<=20000),published boolean not null default false,reviewed_by uuid references auth.users(id),reviewed_at timestamptz,updated_at timestamptz not null default now());
+alter table public.hp_unit_public_info enable row level security;
+grant select on public.hp_unit_public_info to anon,authenticated;
+grant insert,update on public.hp_unit_public_info to authenticated;
+create function hp_private.unit_info_visible(code text,is_published boolean) returns boolean language sql stable security definer set search_path='' as $$ select is_published or hp_private.can_edit(code); $$;
+revoke all on function hp_private.unit_info_visible(text,boolean) from public;
+grant execute on function hp_private.unit_info_visible(text,boolean) to anon,authenticated;
+create policy hp_unit_info_read on public.hp_unit_public_info for select to anon,authenticated using(hp_private.unit_info_visible(facility_code,published));
+create policy hp_unit_info_insert on public.hp_unit_public_info for insert to authenticated with check(hp_private.can_edit(facility_code));
+create policy hp_unit_info_update on public.hp_unit_public_info for update to authenticated using(hp_private.can_edit(facility_code)) with check(hp_private.can_edit(facility_code));
+create function hp_private.review_unit_info() returns trigger language plpgsql security definer set search_path='' as $$ begin if TG_OP='UPDATE' and NEW.facility_code<>OLD.facility_code then raise exception 'Cannot move unit information' using errcode='42501'; end if; if NEW.published then if not hp_private.is_admin() then raise exception 'Only ADMIN may publish' using errcode='42501';end if;NEW.reviewed_by=auth.uid();NEW.reviewed_at=now();else NEW.reviewed_by=null;NEW.reviewed_at=null;end if;return NEW;end $$;
+revoke all on function hp_private.review_unit_info() from public,anon,authenticated;
+create trigger hp_unit_info_review before insert or update on public.hp_unit_public_info for each row execute function hp_private.review_unit_info();
+create trigger hp_unit_info_audit before insert or update on public.hp_unit_public_info for each row execute function hp_private.audit_change();
+create function hp_private.valid_unit_services(value jsonb) returns boolean language plpgsql immutable security invoker set search_path='' as $$ declare item jsonb;begin if jsonb_typeof(value)<>'array' then return false;end if;for item in select jsonb_array_elements(value) loop if jsonb_typeof(item)<>'object' or jsonb_typeof(item->'name') is distinct from 'string' or length(item->>'name') not between 1 and 200 then return false;end if;if item ? 'schedule' and (jsonb_typeof(item->'schedule')<>'string' or length(item->>'schedule')>1000) then return false;end if;if item ? 'preparation' and (jsonb_typeof(item->'preparation')<>'string' or length(item->>'preparation')>1000) then return false;end if;end loop;return true;end $$;
+revoke all on function hp_private.valid_unit_services(jsonb) from public,anon;
+grant execute on function hp_private.valid_unit_services(jsonb) to authenticated;
+alter table public.hp_unit_public_info add constraint hp_unit_services_shape check(hp_private.valid_unit_services(services));
