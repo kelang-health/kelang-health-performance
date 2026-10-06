@@ -1,0 +1,8 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {cdModel,diseaseLines} from '../src/charts/cd.js';
+const units=[{facility_code:'A',area_unit:true},{facility_code:'B',area_unit:true},{facility_code:'C',area_unit:false}];
+const population=[{facility_code:'A',fiscal_year:2569,population:1000},{facility_code:'B',fiscal_year:2569,population:3000}];
+const row=(code,month,n,disease='TB')=>({facility_code:code,fiscal_year:2569,period:'2025-'+month+'-01',case_count:n,disease});
+const rows=[row('A','10',5),row('B','10',3),row('A','12',0),row('B','12',0),row('C','10',90),row('A','10',20,'Flu')];
+test('CD monthly trend preserves absent gaps and true zeros and sorts cumulative disease counts',()=>{const m=cdModel({rows,population,units:units.slice(0,2),year:2569,period:'q1',rate:false});assert.deepEqual(m.months,[10,11,12]);assert.equal(m.diseases[0].disease,'Flu');assert.deepEqual(m.diseases[1].values,[8,null,0]);assert.equal(m.diseases[1].total,8);const svg=diseaseLines([{label:'TB',values:[8,null,0]}],['Oct','Nov','Dec']);assert.equal((svg.match(/data-line-point/g)??[]).length,2);assert.equal((svg.match(/data-line-segment/g)??[]).length,0);});
+test('CD weighted rates exclude non-area units and reject incomplete denominators/source units',()=>{const c={rows,population,units,year:2569,period:'q1',rate:true};const m=cdModel(c),tb=m.diseases.find(d=>d.disease==='TB');assert.equal(tb.total,200);assert.deepEqual(tb.values,[200,null,0]);assert.equal(m.diseases.find(d=>d.disease==='Flu').total,null);assert.equal(m.unitRows[2].values[0],'N/A');assert.equal(cdModel({...c,population:population.slice(0,1)}).diseases.find(d=>d.disease==='TB').total,null);});
