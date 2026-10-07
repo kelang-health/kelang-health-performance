@@ -22,11 +22,13 @@ test('staff login returns to staff portal after authentication',()=>{
   assert.ok(source.includes("function openLogin(returnRoute='manage')"));
   assert.ok(source.includes("if(b.id==='staff-login'){openLogin('staff');return;}"));
   assert.ok(source.includes("const destination=state.loginReturnRoute||'manage'"));
-  assert.ok(source.includes('state.route=destination;location.hash=destination;state.loginReturnRoute=null'));
+  assert.ok(source.includes("if(destination==='staff')await loadStaffDocuments()"));
 });
 
-test('staff portal reserves compensation and leave services without exposing forms yet',()=>{
-  assert.ok(source.includes('แบบคำขอรับเงินค่าตอบแทนประจำปี'));
-  assert.ok(source.includes('ใบขอรับเงินเบี้ยเลี้ยงเหมาจ่ายรายเดือน'));
-  assert.ok(source.includes('พื้นที่สำหรับยื่นใบลา ตรวจสถานะ และดูประวัติการลาในอนาคต'));
+test('staff portal loads and manages data-backed documents',()=>{
+  assert.ok(source.includes("rest('hp_staff_documents'"));
+  assert.ok(source.includes("data-staff-new"));
+  assert.ok(source.includes("data-staff-print"));
+  assert.ok(source.includes("data-staff-purge"));
+  assert.ok(source.includes("documentPayload(form"));
 });
