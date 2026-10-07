@@ -10,11 +10,15 @@
 - SQL ตรวจซ้ำ: supabase/tests/personnel_policy_visibility.sql
 - Tests 74/74, build ผ่าน, RLS เอกสาร 12 กรณีผ่านและ rollback
 
-## ยังเหลือ
-Leaked Password Protection Disabled: connector ที่เชื่อมมี SQL/DDL/advisors แต่ไม่มี Auth configuration endpoint และแท็บ Dashboard ยังไม่ได้ Login
-ต้อง Login Supabase Dashboard เพื่อตรวจแผนและเปิดใช้ใน Attack Protection/Password Security ฟังก์ชันนี้รองรับ Pro ขึ้นไป ไม่อัปเกรดแผนหรือเพิ่มค่าใช้จ่ายเอง
+## Auth เสร็จแล้ว
+ผู้ดูแลเข้าสู่ Dashboard แล้ว พบแผน PRO เปิด Prevent use of leaked passwords ใน Email provider และบันทึกสำเร็จ ตรวจหน้า Attack Protection แสดง ENABLED
+ไม่เปลี่ยนรหัสผ่าน บัญชี วิธี Login ข้อกำหนดความยาวรหัส หรือ Email confirmation
+คำเตือน Auth Leaked Password Protection Disabled หายจาก Advisors แล้ว
+Security และ Performance ไม่เหลือระดับ WARN/ERROR; เหลือ INFO ของ index/ตารางระบบอื่น
+การตั้ง/เปลี่ยนรหัสใหม่จะปฏิเสธรหัสที่เคยรั่วไหล การตรวจนี้ใช้ร่วมทุกแอปที่ใช้ Supabase Auth ของโครงการนี้
 https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection
-ไม่ใช่เหตุผลที่จะปิด RLS หรือลดความปลอดภัยเพื่อซ่อนคำเตือน และไม่ได้ยืนยันว่าบัญชีบุคลากรทุกบัญชี Login สำเร็จด้วยรหัสจริง เพราะไม่ได้รับรหัสผู้ใช้จริงมาทดสอบ
+ภาพยืนยันเก็บเฉพาะเครื่อง artifacts/advisors/leaked-password-protection-enabled.png ไม่เผยแพร่ใน GitHub Pages
+Deploy เว็บ 1.28: GitHub Actions run 37610049451 success
 
 ## INFO ที่คงไว้
 Unused index ไม่ใช่คำเตือนที่ทำให้ Login ล้มเหลว จึงไม่ลบ index ที่ใช้รองรับ ownership/FK
