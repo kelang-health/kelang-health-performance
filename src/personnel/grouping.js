@@ -1,4 +1,4 @@
-const professionOrder=[/^พยาบาล/,/^นักวิชาการ/,/^ผู้ช่วยเจ้าพนักงานธุรการ/,/^เจ้าหน้าที่สำรวจข้อมูล/,/^พนักงานบริการทั่วไป/];
+const professionOrder=[/^พยาบาล/,/^นักวิชาการ/,/^เจ้าพนักงานสาธารณสุข/,/^ผู้ช่วยเจ้าพนักงานธุรการ/,/^เจ้าหน้าที่สำรวจข้อมูล/,/^พนักงานบริการทั่วไป/];
 const rank=title=>{const i=professionOrder.findIndex(pattern=>pattern.test(title));return i<0?professionOrder.length:i;};
 export function personnelGroups(rows){
  const civil=p=>/^ข้าราชการ(?:\s|$)/.test(String(p.employment_type??'').trim());
