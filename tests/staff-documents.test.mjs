@@ -20,7 +20,7 @@ test('imports five legacy template capabilities but enables only the first two i
 
 test('annual form excludes citizen id and birth date inputs',()=>{
   const html=renderDocumentForm('chor11_annual',{person,facility,fiscalYear:2569});
-  assert.match(html,/แบบ/);
+  assert.match(html,/id="staff-document-form"/);
   assert.doesNotMatch(html,/citizen_id|birth_date|date_of_birth|วันเกิด|เลขบัตรประชาชน/i);
   assert.match(html,/เลขใบอนุญาต/);
   assert.match(html,/ที่อยู่ติดต่อ/);
