@@ -121,7 +121,7 @@ function currentStaffIdentity(){
 }
 async function loadStaffDocuments(){
  if(!currentSession()||mustChangePassword()){state.staffDocuments=[];return;}
- const uid=currentSession().user.id;state.staffDocumentsLoading=true;try{state.staffDocuments=await rest('hp_staff_documents','select=*&owner_user_id=eq.'+encodeURIComponent(uid)+'&order=updated_at.desc');}finally{state.staffDocumentsLoading=false;if(state.route==='staff')render();}
+ const uid=currentSession().user.id;state.staffDocumentsError='';state.staffDocumentsLoading=true;try{const rows=await rest('hp_staff_documents','select=*&owner_user_id=eq.'+encodeURIComponent(uid)+'&order=updated_at.desc');if(currentSession()?.user?.id===uid)state.staffDocuments=rows;}catch(error){if(currentSession()?.user?.id===uid){state.staffDocuments=[];state.staffDocumentsError='โหลดเอกสารไม่สำเร็จ: '+error.message;}}finally{state.staffDocumentsLoading=false;if(state.route==='staff')render();}
 }
 function staffPortal(){
  if(!currentSession())return panel('สำหรับเจ้าหน้าที่','<p>พื้นที่บริการภายในสำหรับเจ้าหน้าที่เทศบาลเมืองเขลางค์นคร</p><p class="subtle">ยังไม่แสดงรายชื่อบุคลากร เอกสาร หรือข้อมูลส่วนตัวก่อนเข้าสู่ระบบ</p><button id="staff-login" class="primary">เข้าสู่ระบบ</button>','ต้องเข้าสู่ระบบก่อนเข้าถึงบริการและข้อมูลภายใน');
@@ -135,12 +135,12 @@ function openStaffDocumentForm(code,id=''){
  const {person,facility}=currentStaffIdentity();if(!person)throw new Error('บัญชีนี้ยังไม่ได้ผูกกับทะเบียนบุคลากร');
  let record=id?state.staffDocuments.find(d=>d.id===id):null;
  if(!record&&code==='chor11_annual')record=state.staffDocuments.find(d=>d.form_code==='chor11_annual'&&+d.fiscal_year===+state.year)??null;
- openDialog(template.title,renderDocumentForm(code,{record,person,facility,fiscalYear:state.year}));
+ openDialog(template.title,renderDocumentForm(code,{record,person,facility,fiscalYear:record?.fiscal_year??state.year}));
 }
 async function printStaffDocument(id){
  const record=state.staffDocuments.find(d=>d.id===id);if(!record)throw new Error('ไม่พบเอกสาร');
  const popup=window.open('','_blank');if(!popup)throw new Error('เบราว์เซอร์ปิดกั้นหน้าต่างพิมพ์ กรุณาอนุญาต pop-up สำหรับเว็บไซต์นี้');
- popup.opener=null;popup.document.open();popup.document.write(printableDocument(record));popup.document.close();popup.document.getElementById('print-button')?.addEventListener('click',()=>popup.print());
+ popup.opener=null;popup.document.open();popup.document.write(printableDocument(record,currentStaffIdentity()));popup.document.close();popup.document.getElementById('print-button')?.addEventListener('click',async()=>{await popup.document.fonts.ready;popup.print();});
  const printedAt=new Date().toISOString();await rest('hp_staff_documents','id=eq.'+encodeURIComponent(id),'PATCH',{printed_at:printedAt,updated_at:printedAt});
  record.printed_at=printedAt;record.updated_at=printedAt;render();
 }
@@ -179,7 +179,7 @@ document.addEventListener('click',async event=>{const b=event.target.closest('bu
  if(b.dataset.staffNew){openStaffDocumentForm(b.dataset.staffNew);return;}
  if(b.dataset.staffEdit){const row=state.staffDocuments.find(d=>d.id===b.dataset.staffEdit);if(!row)throw new Error('ไม่พบเอกสาร');openStaffDocumentForm(row.form_code,row.id);return;}
  if(b.dataset.staffPrint){await printStaffDocument(b.dataset.staffPrint);return;}
- if(b.dataset.staffPurge){if(!confirm('ล้างข้อมูลแบบคำขอประจำปีของคุณออกจากระบบหรือไม่? การดำเนินการนี้ย้อนกลับไม่ได้ แต่สามารถกรอกใหม่ภายหลังได้'))return;await rest('hp_staff_documents','id=eq.'+encodeURIComponent(b.dataset.staffPurge),'DELETE');await loadStaffDocuments();return;}
+ if(b.dataset.staffPurge){const row=state.staffDocuments.find(d=>d.id===b.dataset.staffPurge);if(!row||row.form_code!=='chor11_annual'||row.owner_user_id!==currentSession()?.user?.id)throw new Error('ล้างได้เฉพาะคำขอประจำปีของตนเอง');if(!confirm('ล้างข้อมูลแบบคำขอประจำปีของคุณออกจากระบบหรือไม่? การดำเนินการนี้ย้อนกลับไม่ได้ แต่สามารถกรอกใหม่ภายหลังได้'))return;await rest('hp_staff_documents','id=eq.'+encodeURIComponent(b.dataset.staffPurge),'DELETE');await loadStaffDocuments();return;}
  if(b.id==='load-hp-accounts'){state.hpAccounts=(await accountApi({action:'list'})).accounts;render();return;}
  if(b.dataset.resetAccount){if(!admin())throw new Error('เฉพาะ ADMIN เท่านั้น');openDialog('ตั้งรหัสผ่านชั่วคราวใหม่','<form id="reset-account-form" data-user-id="'+e(b.dataset.resetAccount)+'"><p>หลังตั้งรหัสชั่วคราว ผู้ใช้จะถูกบังคับให้เปลี่ยนรหัสผ่านเมื่อเข้าสู่ระบบครั้งถัดไป</p><label>รหัสผ่านชั่วคราว<input name="password" type="password" required minlength="12" maxlength="128" autocomplete="new-password"></label><div class="form-error" id="account-reset-error"></div><button type="submit" class="primary">บันทึกรหัสผ่านใหม่</button></form>');return;}
  if(b.id==='stop-kpi-check'){state.stopKpi=true;state.kpiAdminNotice='กำลังหยุดหลังคำขอปัจจุบัน';render();return;}
@@ -211,6 +211,9 @@ document.addEventListener('submit',async event=>{const form=event.target;if(!['l
    let existing=payload.record_id?state.staffDocuments.find(d=>d.id===payload.record_id):null;
    if(!existing&&payload.form_code==='chor11_annual')existing=state.staffDocuments.find(d=>d.form_code==='chor11_annual'&&+d.fiscal_year===+payload.fiscal_year);
    if(!existing&&payload.form_code==='chor11_monthly')existing=state.staffDocuments.find(d=>d.form_code==='chor11_monthly'&&d.period_month===payload.period_month);
+   if(!payload.record_id&&existing&&payload.form_code==='chor11_monthly')throw new Error('มีใบขอรับเงินเดือนนี้แล้ว กรุณาแก้ไขจากรายการเดิม');
+   if(payload.record_id&&!existing)throw new Error('ไม่พบเอกสารที่ต้องการแก้ไข');
+   if(existing&&(existing.owner_user_id!==userId||existing.personnel_id!==person.id||existing.form_code!==payload.form_code))throw new Error('ไม่สามารถเปลี่ยนเจ้าของหรือประเภทเอกสาร');
    await rest('hp_staff_documents',existing?'id=eq.'+encodeURIComponent(existing.id):'',existing?'PATCH':'POST',row);
    $('dialog').close();await loadStaffDocuments();return;
  }

@@ -8,3 +8,4 @@ data/raw/
 test-results/
 *.log
 config.local.json
+artifacts/
