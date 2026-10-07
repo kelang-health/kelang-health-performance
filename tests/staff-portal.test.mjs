@@ -14,8 +14,8 @@ test('staff menu is placed before data management',()=>{
 test('staff portal is visible but gated by login',()=>{
   assert.match(source,/function staffPortal()/);
   assert.match(source,/if(!currentSession())return panel('สำหรับเจ้าหน้าที่'/);
-  assert.match(source,/id="staff-login"/);
-  assert.match(source,/ยังไม่แสดงรายชื่อบุคลากร เอกสาร หรือข้อมูลส่วนตัวก่อนเข้าสู่ระบบ/);
+  assert.ok(source.includes('id="staff-login"'));
+  assert.ok(source.includes('ยังไม่แสดงรายชื่อบุคลากร เอกสาร หรือข้อมูลส่วนตัวก่อนเข้าสู่ระบบ'));
 });
 
 test('staff login returns to staff portal after authentication',()=>{
