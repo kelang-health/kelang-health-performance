@@ -8,7 +8,7 @@ import {publicationKey,publicationSetting,dataStatus,shouldPublish} from './util
 import {release,credit} from './config/release.js';
 import {runtime} from './config/runtime.js';
 import {request} from './api/request.js';
-import {loadProfile,rest,readAll,login,logout,currentSession,refreshSession} from './api/supabase/client.js';
+import {loadProfile,rest,readAll,login,logout,currentSession,refreshSession,onSession} from './api/supabase/client.js';
 import {fetchGroup,fetchHdc} from './api/hdc/client.js';
 import {number,sum,fiscalYear,fiscalMonths,monthNames,eligible,percent,kpiStatus,rank,facilityResults,organization,periodMatches,ncdSummary,formatSourceDate,escapeHtml as e} from './utils/core.js';
 import {bars,columnChart} from './charts/charts.js';
@@ -19,6 +19,7 @@ $('developer-credit').textContent=credit;
 const routes=[['overview','◫','ภาพรวมองค์กร'],['units','▤','หน่วยบริการ'],['area','◎','ผลงานพื้นที่ 7 หน่วย'],['service','✚','ผลงานบริการ 8 หน่วย'],['personnel','♧','บุคลากร'],['heatmap','▦','KPI Heatmap'],['trend','↗','แนวโน้ม'],['compare','⇄','เปรียบเทียบหน่วยบริการ'],['profile','▤','ข้อมูลหน่วยบริการ'],['finance','฿','งบประมาณและการเงิน'],['ncd','♡','โรคเรื้อรัง (NCD)'],['cd','◉','โรคติดต่อ'],['quality','✓','คุณภาพข้อมูล'],['staff','♙','สำหรับเจ้าหน้าที่'],['manage','⚙','จัดการข้อมูล'],['kpi-admin','☑','จัดการ KPI (ADMIN)']];
 const state={year:2569,period:'all',scope:'all',facility:'all',category:'all',route:'overview',kpi:null,facilities:[],kpis:[],inventory:[],profile:{tables:{},errors:[]},hdc:{},previous:{},permissions:[],selected:new Set(),rateMode:false,manageTable:'hp_finance_monthly',search:'',loading:true,generation:0,loginReturnRoute:null,staffDocuments:[],staffDocumentsLoading:false};
 const tableLabels={hp_finance_monthly:'เบิกจ่ายรายเดือน',hp_budget_monthly:'แผนงบประมาณ',hp_ncd_monthly:'ข้อมูล NCD',hp_cd_monthly:'โรคติดต่อ',hp_service_stats:'สถิติบริการอื่น',hp_staff:'บุคลากรแยกวิชาชีพ',hp_settings:'ตัวเลือกและการตั้งค่า',hp_data_quality:'รายการตรวจสอบคุณภาพ'};
+onSession(value=>{if(!value){state.permissions=[];state.personnelLinks=[];state.staffDocuments=[];state.staffDocumentsError='';state.profile.tables.hp_personnel=[];if(state.facilities.length)render();}});
 function data(table){return state.profile.tables[table]??[];}
 function facilities(){return state.facilities.filter(f=>f.active&&(state.scope!=='AREA'||f.area_unit)&&(state.facility==='all'||f.facility_code===state.facility));}
 function published(k){if(state.profile.errors.some(r=>r.table==='hp_settings'))return false;return shouldPublish(publicationSetting(data('hp_settings'),k.kpi_id,state.year),dataStatus(state.hdc[k.kpi_id],recordSet(k)));}
@@ -126,6 +127,7 @@ async function loadStaffDocuments(){
 function staffPortal(){
  if(!currentSession())return panel('สำหรับเจ้าหน้าที่','<p>พื้นที่บริการภายในสำหรับเจ้าหน้าที่เทศบาลเมืองเขลางค์นคร</p><p class="subtle">ยังไม่แสดงรายชื่อบุคลากร เอกสาร หรือข้อมูลส่วนตัวก่อนเข้าสู่ระบบ</p><button id="staff-login" class="primary">เข้าสู่ระบบ</button>','ต้องเข้าสู่ระบบก่อนเข้าถึงบริการและข้อมูลภายใน');
  if(mustChangePassword())return panel('สำหรับเจ้าหน้าที่','<p>กรุณาเปลี่ยนรหัสผ่านส่วนตัวก่อนใช้งานบริการภายใน</p>');
+ if(state.staffDocumentsError)return '<div class="notice error" role="alert">'+e(state.staffDocumentsError)+' <button id="staff-retry">ลองโหลดอีกครั้ง</button></div>';
  if(state.staffDocumentsLoading)return '<div class="notice">กำลังโหลดเอกสารของฉัน…</div>';
  const {person,facility}=currentStaffIdentity();
  return renderStaffWorkspace({documents:state.staffDocuments,person,facility,fiscalYear:state.year});
@@ -152,7 +154,7 @@ function render(){const primary=primaryYear(data('hp_settings'));const status=$(
  const errors=state.profile.errors;$('message').innerHTML=errors.length?`<div class="notice error">Hospital Profile เชื่อมต่อไม่ครบ: ${errors.map(r=>e(r.table+' '+r.error)).join(' • ')} ข้อมูลบางส่วนอาจไม่ปรากฏ</div>`:state.loading?'<div class="notice">กำลังอ่านข้อมูล HDC ของปีที่เลือกและช่วงเดียวกันปีก่อน… ข้อมูลหน่วยบริการพร้อมใช้งานแล้ว</div>':state.hdcNotice?'<div class="notice" role="status">'+e(state.hdcNotice)+'</div>':responses.some(r=>r.error)?'<div class="notice">HDC บางรายการอ่าน API ล่าสุดไม่สำเร็จ แสดงชุดข้อมูลจริงล่าสุดที่มี • ดูรายละเอียดที่เมนูคุณภาพข้อมูล หรือเลือก KPI แล้วกดดึง API สด</div>':'';
 }
 async function load(force=false){const generation=++state.generation;state.loading=true;state.hdcNotice='';render();try{const profile=await loadProfile();if(generation!==state.generation)return;state.profile=profile;if(!state.primaryYearApplied&&!state.yearChosen){state.year=initialYear(data('hp_settings'));$('year').value=String(state.year);state.primaryYearApplied=true;}if(data('hp_facilities').length)state.facilities=data('hp_facilities').sort((a,b)=>a.display_order-b.display_order);await loadPermissions();render();const hdc=await fetchGroup(state.kpis,state.year,state.facilities,force);if(generation!==state.generation)return;state.hdc=hdc;render();const previous=await fetchGroup(state.kpis,state.year-1,state.facilities,force);if(generation!==state.generation)return;state.previous=previous;}catch(error){if(generation===state.generation)$('message').innerHTML=`<div class="notice error">${e(error.message)}</div>`;}finally{if(generation===state.generation){state.loading=false;render();}}}
-async function loadPermissions(){await refreshSession();const allowed=!!currentSession()&&!mustChangePassword();state.permissions=allowed?await readAll('hp_user_facilities'):[];state.personnelLinks=allowed?await readAll('hp_personnel_accounts'):[];}
+async function loadPermissions(){state.permissions=[];state.personnelLinks=[];try{await refreshSession();const uid=currentSession()?.user?.id;if(!uid||mustChangePassword())return;const [permissions,links]=await Promise.all([readAll('hp_user_facilities'),readAll('hp_personnel_accounts')]);if(currentSession()?.user?.id===uid){state.permissions=permissions;state.personnelLinks=links;}}catch(error){state.profile.errors.push({table:'สิทธิ์ผู้ใช้',error:error.message});}}
 function navigate(){state.disease='';const selected=parseUnitHash(location.hash,state.facilities);const route=location.hash.slice(1).split('?')[0];state.manageSection=new URLSearchParams(location.hash.split('?')[1]??'').get('section')??'home';state.unitCode=selected?.code??null;state.unitTab=selected?.tab??'home';state.route=selected?'units':routes.some(r=>r[0]===route)?route:'overview';state.scope=state.route==='area'?'AREA':state.route==='service'?'SERVICE':'all';state.facility=selected?.code??(state.route==='units'?'all':state.facility);state.category='all';$('category').value='all';updateFilters();render();if(state.route==='staff'&&currentSession()&&!mustChangePassword())void loadStaffDocuments();closeSidebar(false);}
 function unitPortal(){return unitsView({units:()=>state.facilities,code:()=>state.unitCode,tab:()=>state.unitTab,rows:()=>data('hp_unit_public_info'),admin,canEdit,reload:reloadProfile,resources:profile,performance:()=>kpis().length?performance():panel('ผลงานของหน่วย','<div class="empty">ยังไม่มี KPI ที่พร้อมแสดงสำหรับหน่วย ปี และช่วงเวลาที่เลือก</div>'),team:code=>panel('บุคลากรของหน่วย',unitPersonnel({rows:()=>data('hp_personnel').filter(p=>p.facility_code===code&&p.active&&p.published),links:()=>[],permissions:()=>[],facilities:()=>state.facilities.filter(f=>f.facility_code===code),facility:()=>code,render,reload:reloadProfile,dialog:openDialog,closeDialog:()=>$('dialog').close()}))});}
 
@@ -176,6 +178,7 @@ function exportData(name){const mapping={finance:'hp_finance_monthly',ncd:'hp_nc
 async function reloadProfile(){state.profile=await loadProfile();await loadPermissions();render();}
 document.addEventListener('click',async event=>{const b=event.target.closest('button');if(!b)return;try{
  if(b.id==='staff-login'){openLogin('staff');return;}
+ if(b.id==='staff-retry'){await loadStaffDocuments();return;}
  if(b.dataset.staffNew){openStaffDocumentForm(b.dataset.staffNew);return;}
  if(b.dataset.staffEdit){const row=state.staffDocuments.find(d=>d.id===b.dataset.staffEdit);if(!row)throw new Error('ไม่พบเอกสาร');openStaffDocumentForm(row.form_code,row.id);return;}
  if(b.dataset.staffPrint){await printStaffDocument(b.dataset.staffPrint);return;}

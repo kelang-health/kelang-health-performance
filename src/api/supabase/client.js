@@ -5,9 +5,27 @@ const sessionListeners=[];
 function save(value){session=value;if(typeof sessionStorage!=='undefined'){if(value)sessionStorage.setItem('khp-session',JSON.stringify(value));else sessionStorage.removeItem('khp-session');}sessionListeners.forEach(fn=>fn(value));}
 export function currentSession(){return session;}
 export function onSession(fn){sessionListeners.push(fn);}
-export async function refreshSession(){if(!session)return null;if(session.expires_at>Date.now()/1000+60)return session;try{const s=await request(`${runtime.supabaseUrl}/auth/v1/token?grant_type=refresh_token`,{method:'POST',headers:{apikey:runtime.supabaseKey,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:session.refresh_token})});save({...s,expires_at:Date.now()/1000+s.expires_in});return session;}catch{save(null);return null;}}
+let refreshJob=null;
+export async function refreshSession(){
+ if(!session)return null;
+ if(session.expires_at>Date.now()/1000+60)return session;
+ const original=session;
+ if(refreshJob?.original===original)return refreshJob.promise;
+ const job={original,promise:null};
+ job.promise=(async()=>{try{
+  const s=await request(`${runtime.supabaseUrl}/auth/v1/token?grant_type=refresh_token`,{method:'POST',headers:{apikey:runtime.supabaseKey,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:original.refresh_token})});
+  if(session===original)save({...s,expires_at:Date.now()/1000+s.expires_in});
+  return session;
+ }catch(error){
+  if(session!==original)return session;
+  if([400,401,403].includes(error.status)){save(null);return null;}
+  if(original.expires_at>Date.now()/1000)return original;
+  throw error;
+ }finally{if(refreshJob===job)refreshJob=null;}})();
+ refreshJob=job;return job.promise;
+}
 export async function login(email,password){const s=await request(`${runtime.supabaseUrl}/auth/v1/token?grant_type=password`,{method:'POST',headers:{apikey:runtime.supabaseKey,'Content-Type':'application/json'},body:JSON.stringify({email,password})});save({...s,expires_at:Date.now()/1000+s.expires_in});return s;}
-export async function logout(){await refreshSession();if(session)try{await request(`${runtime.supabaseUrl}/auth/v1/logout`,{method:'POST',headers:{apikey:runtime.supabaseKey,Authorization:`Bearer ${session.access_token}`}});}finally{save(null);}else save(null);}
-export async function rest(table,query='',method='GET',body){if(!/^hp_[a-z_]+$/.test(table))throw new Error('ไม่อนุญาตให้เข้าถึงตารางนี้');await refreshSession();return request(`${runtime.supabaseUrl}/rest/v1/${table}${query?'?'+query:''}`,{method,headers:{apikey:runtime.supabaseKey,...(session?{Authorization:`Bearer ${session.access_token}`}:{ }),'Content-Type':'application/json',Prefer:'return=representation'},...(body!==undefined?{body:JSON.stringify(body)}:{})},method==='GET'?1:0);}
+export async function logout(){const original=session;save(null);if(original)await request(`${runtime.supabaseUrl}/auth/v1/logout`,{method:'POST',headers:{apikey:runtime.supabaseKey,Authorization:`Bearer ${original.access_token}`}});}
+export async function rest(table,query='',method='GET',body){if(!/^hp_[a-z_]+$/.test(table))throw new Error('ไม่อนุญาตให้เข้าถึงตารางนี้');await refreshSession();if(method!=='GET'&&!session)throw new Error('กรุณาเข้าสู่ระบบก่อนบันทึกข้อมูล');return request(`${runtime.supabaseUrl}/rest/v1/${table}${query?'?'+query:''}`,{method,headers:{apikey:runtime.supabaseKey,...(session?{Authorization:`Bearer ${session.access_token}`}:{ }),'Content-Type':'application/json',Prefer:'return=representation'},...(body!==undefined?{body:JSON.stringify(body)}:{})},method==='GET'?1:0);}
 export async function readAll(table){let rows=[];for(let offset=0;offset<100000;offset+=1000){const page=await rest(table,`select=*&limit=1000&offset=${offset}`);rows.push(...page);if(page.length<1000)return rows;}throw new Error('ข้อมูลเกินขีดจำกัด กรุณาใช้ตัวกรอง');}
 export async function loadProfile(){const names=['hp_facilities','hp_unit_public_info','hp_personnel','hp_facility_profiles','hp_population','hp_staff','hp_volunteers','hp_budget_monthly','hp_finance_monthly','hp_ncd_monthly','hp_cd_monthly','hp_service_stats','hp_settings','hp_data_quality'];const results=await Promise.allSettled(names.map(readAll));return {tables:Object.fromEntries(results.map((r,i)=>[names[i],r.status==='fulfilled'?r.value:[]])),errors:results.flatMap((r,i)=>r.status==='rejected'?[{table:names[i],error:r.reason.message}]:[]),fetched_at:new Date().toISOString()};}
