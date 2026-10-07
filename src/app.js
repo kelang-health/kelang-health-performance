@@ -30,7 +30,7 @@ function profileRows(table){return data(table).filter(r=>(state.facility==='all'
 function stat(label,value,note='',feature=false){return `<div class="stat ${feature?'feature':''}"><div class="stat-label">${e(label)}</div><div class="stat-value ${String(value).length>11?'value-small':''}">${e(value)}</div><small>${e(note)}</small></div>`;}
 function panel(title,content,description='',action=''){return `<section class="panel"><div class="panel-heading"><div><h2>${e(title)}</h2>${description?`<p class="subtle">${e(description)}</p>`:''}</div>${action}</div>${content}</section>`;}
 function table(headers,rows){return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th scope="col">${e(h)}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(c=>`<tr>${c.map(v=>`<td>${v}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${headers.length}" class="empty">ไม่พบข้อมูลในช่วงเวลาที่เลือก</td></tr>`}</tbody></table></div>`;}
-function mustChangePassword(){return currentSession()?.user?.app_metadata?.hp_must_change_password===true;}
+function mustChangePassword(){const meta=currentSession()?.user?.app_metadata;return meta?.hp_only===true&&(meta.hp_must_change_password===true||!meta.hp_password_changed_at);}
 function canEdit(code){return !!currentSession()&&!mustChangePassword()&&state.permissions.some(p=>p.role==='ADMIN'||p.facility_code===code);}
 function admin(){return !!currentSession()&&!mustChangePassword()&&state.permissions.some(p=>p.role==='ADMIN');}
 function currentKpi(){const available=kpis();return available.find(k=>k.kpi_id===state.kpi)??available[0]??state.kpis[0];}
