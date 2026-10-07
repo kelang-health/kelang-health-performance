@@ -22,7 +22,7 @@ export async function handleRequest(req,env,fetcher=fetch){
    if(typeof input.confirm_password!=='string'||input.password!==input.confirm_password)return out(400,{message:'ยืนยันรหัสผ่านใหม่ไม่ตรงกัน'});
    const managed=await call('/auth/v1/admin/users/'+encodeURIComponent(actor.id));
    if(managed.app_metadata?.hp_only!==true)return out(403,{message:'บัญชีนี้ไม่ใช่บัญชีเฉพาะ Hospital Profile'});
-   if(managed.app_metadata?.hp_must_change_password!==true)return out(409,{message:'บัญชีนี้ไม่อยู่ในสถานะบังคับเปลี่ยนรหัสผ่าน'});
+   if(managed.app_metadata?.hp_must_change_password!==true&&managed.app_metadata?.hp_password_changed_at)return out(409,{message:'บัญชีนี้ไม่อยู่ในสถานะบังคับเปลี่ยนรหัสผ่าน'});
    await call('/auth/v1/admin/users/'+encodeURIComponent(actor.id),'PUT',{password:input.password,app_metadata:{...managed.app_metadata,hp_must_change_password:false,hp_password_changed_at:new Date().toISOString()}});
    await audit('UPDATE',actor.id,{action:'change_initial_password',scope:'hospital_profile'});
    return out(200,{message:'เปลี่ยนรหัสผ่านสำเร็จ กรุณาเข้าสู่ระบบด้วยรหัสผ่านใหม่'});
@@ -37,7 +37,7 @@ export async function handleRequest(req,env,fetcher=fetch){
    const links=await call('/rest/v1/hp_personnel_accounts?select=user_id,personnel_id');
    const people=await call('/rest/v1/hp_personnel?select=id,full_name,position_name,facility_code,active');
    const personById=new Map(people.map(p=>[p.id,p]));
-   return out(200,{accounts:accounts.map(u=>{const link=links.find(p=>p.user_id===u.id);return {id:u.id,email:u.email,name:u.user_metadata?.display_name??'',role:u.app_metadata?.hp_account_role??'USER',disabled:!!u.banned_until&&Date.parse(u.banned_until)>Date.now(),must_change_password:u.app_metadata?.hp_must_change_password===true,permissions:assignments.filter(p=>p.user_id===u.id),personnel:link?personById.get(link.personnel_id)??{id:link.personnel_id}:null};})});
+   return out(200,{accounts:accounts.map(u=>{const link=links.find(p=>p.user_id===u.id);return {id:u.id,email:u.email,name:u.user_metadata?.display_name??'',role:u.app_metadata?.hp_account_role??'USER',disabled:!!u.banned_until&&Date.parse(u.banned_until)>Date.now(),must_change_password:u.app_metadata?.hp_must_change_password===true||!u.app_metadata?.hp_password_changed_at,permissions:assignments.filter(p=>p.user_id===u.id),personnel:link?personById.get(link.personnel_id)??{id:link.personnel_id}:null};})});
   }
   if(input.action==='create'){
    validatePassword();if(typeof input.email!=='string'||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email)||typeof input.name!=='string'||!input.name.trim()||input.name.length>100||!['STAFF','ADMIN','USER'].includes(input.role))return out(400,{message:'ตรวจชื่อ อีเมล และสิทธิ์'});
