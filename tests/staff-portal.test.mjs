@@ -12,21 +12,21 @@ test('staff menu is placed before data management',()=>{
 });
 
 test('staff portal is visible but gated by login',()=>{
-  assert.match(source,/function staffPortal()/);
-  assert.match(source,/if(!currentSession())return panel('สำหรับเจ้าหน้าที่'/);
+  assert.ok(source.includes('function staffPortal()'));
+  assert.ok(source.includes("if(!currentSession())return panel('สำหรับเจ้าหน้าที่'"));
   assert.ok(source.includes('id="staff-login"'));
   assert.ok(source.includes('ยังไม่แสดงรายชื่อบุคลากร เอกสาร หรือข้อมูลส่วนตัวก่อนเข้าสู่ระบบ'));
 });
 
 test('staff login returns to staff portal after authentication',()=>{
-  assert.match(source,/function openLogin(returnRoute='manage')/);
-  assert.match(source,/if(b.id==='staff-login'){openLogin('staff');return;}/);
-  assert.match(source,/const destination=state.loginReturnRoute||'manage'/);
-  assert.match(source,/state.route=destination;location.hash=destination;state.loginReturnRoute=null/);
+  assert.ok(source.includes("function openLogin(returnRoute='manage')"));
+  assert.ok(source.includes("if(b.id==='staff-login'){openLogin('staff');return;}"));
+  assert.ok(source.includes("const destination=state.loginReturnRoute||'manage'"));
+  assert.ok(source.includes('state.route=destination;location.hash=destination;state.loginReturnRoute=null'));
 });
 
 test('staff portal reserves compensation and leave services without exposing forms yet',()=>{
-  assert.match(source,/แบบคำขอรับเงินค่าตอบแทนประจำปี/);
-  assert.match(source,/ใบขอรับเงินเบี้ยเลี้ยงเหมาจ่ายรายเดือน/);
-  assert.match(source,/พื้นที่สำหรับยื่นใบลา ตรวจสถานะ และดูประวัติการลาในอนาคต/);
+  assert.ok(source.includes('แบบคำขอรับเงินค่าตอบแทนประจำปี'));
+  assert.ok(source.includes('ใบขอรับเงินเบี้ยเลี้ยงเหมาจ่ายรายเดือน'));
+  assert.ok(source.includes('พื้นที่สำหรับยื่นใบลา ตรวจสถานะ และดูประวัติการลาในอนาคต'));
 });
