@@ -27,8 +27,8 @@ test('staff login returns to staff portal after authentication',()=>{
 
 test('staff portal loads and manages data-backed documents',()=>{
   assert.ok(source.includes("rest('hp_staff_documents'"));
-  assert.ok(source.includes("data-staff-new"));
-  assert.ok(source.includes("data-staff-print"));
-  assert.ok(source.includes("data-staff-purge"));
+  assert.ok(source.includes("b.dataset.staffNew"));
+  assert.ok(source.includes("b.dataset.staffPrint"));
+  assert.ok(source.includes("b.dataset.staffPurge"));
   assert.ok(source.includes("documentPayload(form"));
 });
