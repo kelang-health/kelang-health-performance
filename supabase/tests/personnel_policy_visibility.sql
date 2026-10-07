@@ -1,0 +1,16 @@
+begin;
+create temporary table policy_check_identity as select 'admin' label,user_id from public.hp_user_facilities where role='ADMIN' limit 1;
+insert into policy_check_identity select 'owner',user_id from public.hp_personnel_accounts where user_id not in(select user_id from policy_check_identity) limit 1;
+create temporary table policy_check_result(label text, personnel_digest text, accounts_digest text);
+grant select on policy_check_identity to authenticated;
+grant all on policy_check_result to authenticated;
+set local role authenticated;
+select set_config('request.jwt.claims','{"role":"authenticated"}',true);
+insert into policy_check_result select 'unassigned',md5(coalesce((select string_agg(id::text,',' order by id) from public.hp_personnel),'')),md5(coalesce((select string_agg(personnel_id::text,',' order by personnel_id) from public.hp_personnel_accounts),''));
+select set_config('request.jwt.claims',(select jsonb_build_object('sub',user_id,'role','authenticated')::text from policy_check_identity where label='owner'),true);
+insert into policy_check_result select 'owner',md5(coalesce((select string_agg(id::text,',' order by id) from public.hp_personnel),'')),md5(coalesce((select string_agg(personnel_id::text,',' order by personnel_id) from public.hp_personnel_accounts),''));
+select set_config('request.jwt.claims',(select jsonb_build_object('sub',user_id,'role','authenticated')::text from policy_check_identity where label='admin'),true);
+insert into policy_check_result select 'admin',md5(coalesce((select string_agg(id::text,',' order by id) from public.hp_personnel),'')),md5(coalesce((select string_agg(personnel_id::text,',' order by personnel_id) from public.hp_personnel_accounts),''));
+reset role;
+select jsonb_agg(to_jsonb(r) order by label) as visibility from policy_check_result r;
+rollback;
