@@ -42,7 +42,7 @@ export function renderStaffWorkspace({documents=[],person=null,facility=null,fis
     return '<div class="notice">บัญชีนี้ยังไม่ได้ผูกกับทะเบียนบุคลากร จึงยังไม่สามารถจัดทำเอกสารส่วนบุคคลได้ กรุณาให้ผู้ดูแลระบบผูกบัญชีกับรายชื่อบุคลากรก่อน</div>'+renderTemplateTable();
   }
   const annual=documents.find(d=>d.form_code==='chor11_annual'&&+d.fiscal_year===+fiscalYear);
-  const monthly=documents.filter(d=>d.form_code==='chor11_monthly').sort((a,b)=>(b.period_month??'').localeCompare(a.period_month??''));
+  const monthly=documents.filter(d=>d.form_code==='chor11_monthly'&&+d.fiscal_year===+fiscalYear).sort((a,b)=>(b.period_month??'').localeCompare(a.period_month??''));
   const identity='<div class="notice success"><strong>'+esc(person.full_name)+'</strong> • '+esc(person.position_name||'ไม่ระบุตำแหน่ง')+' • '+esc(facility?.short_name||facility?.facility_name||person.facility_code||'')+'</div>';
   const actions='<div class="grid two-columns">'+
     '<section class="panel"><div class="panel-heading"><div><h2>แบบคำขอประจำปี</h2><p class="subtle">1 คน / 1 ปีงบประมาณ • หลังพิมพ์เลือกเก็บหรือล้างข้อมูลของตนเองได้</p></div>'+badge(annual?'มีข้อมูลแล้ว':'ยังไม่ได้จัดทำ',annual?'pass':'near')+'</div>'+
@@ -121,7 +121,7 @@ export function documentPayload(form,{person,facility}={}){
 }
 
 function printableShell(title,body){
-  return '<!doctype html><html lang="th"><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>@page{size:A4;margin:14mm 16mm}*{box-sizing:border-box}body{margin:0;font-family:"TH Sarabun New","Sarabun","Noto Sans Thai",sans-serif;color:#000;font-size:18pt;line-height:1.45}.toolbar{position:fixed;right:14px;top:10px}.toolbar button{font:14px sans-serif;padding:8px 14px}.sheet{max-width:178mm;margin:auto}.center{text-align:center}.right{text-align:right}.line{border-bottom:1px dotted #444;display:inline-block;min-width:120px;padding:0 4px;text-align:center}.wide{min-width:300px}.section{margin:12px 0}.signature{margin-top:34px;text-align:center;margin-left:50%}table{border-collapse:collapse;width:100%;margin:14px 0;font-size:17pt}th,td{border:1px solid #000;padding:5px 8px;text-align:center}.note{font-size:14pt}@media print{.toolbar{display:none}}</style></head><body><div class="toolbar"><button onclick="window.print()">พิมพ์ / บันทึก PDF</button></div><main class="sheet">'+body+'</main></body></html>';
+  return '<!doctype html><html lang="th"><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>@page{size:A4;margin:14mm 16mm}*{box-sizing:border-box}body{margin:0;font-family:"TH Sarabun New","Sarabun","Noto Sans Thai",sans-serif;color:#000;font-size:18pt;line-height:1.45}.toolbar{position:fixed;right:14px;top:10px}.toolbar button{font:14px sans-serif;padding:8px 14px}.sheet{max-width:178mm;margin:auto}.center{text-align:center}.right{text-align:right}.line{border-bottom:1px dotted #444;display:inline-block;min-width:120px;padding:0 4px;text-align:center}.wide{min-width:300px}.section{margin:12px 0}.signature{margin-top:34px;text-align:center;margin-left:50%}table{border-collapse:collapse;width:100%;margin:14px 0;font-size:17pt}th,td{border:1px solid #000;padding:5px 8px;text-align:center}.note{font-size:14pt}@media print{.toolbar{display:none}}</style></head><body><div class="toolbar"><button id="print-button">พิมพ์ / บันทึก PDF</button></div><main class="sheet">'+body+'</main></body></html>';
 }
 
 export function printableDocument(record){
