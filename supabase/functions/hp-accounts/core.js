@@ -23,21 +23,36 @@ export async function handleRequest(req,env,fetcher=fetch){
    for(let page=1;page<=100;page++){const d=await call('/auth/v1/admin/users?page='+page+'&per_page=100');const users=d.users??[];accounts.push(...users.filter(u=>u.app_metadata?.hp_only===true));if(users.length<100){exhausted=true;break;}}
    if(!exhausted)return out(503,{message:'บัญชีเกินขอบเขตการค้นหา กรุณาติดต่อผู้ดูแล'});
    const assignments=await call('/rest/v1/hp_user_facilities?select=user_id,facility_code,role');
-   return out(200,{accounts:accounts.map(u=>({id:u.id,email:u.email,name:u.user_metadata?.display_name??'',role:u.app_metadata?.hp_account_role??'USER',disabled:!!u.banned_until&&Date.parse(u.banned_until)>Date.now(),permissions:assignments.filter(p=>p.user_id===u.id)}))});
+   const links=await call('/rest/v1/hp_personnel_accounts?select=user_id,personnel_id');
+   const people=await call('/rest/v1/hp_personnel?select=id,full_name,position_name,facility_code,active');
+   const personById=new Map(people.map(p=>[p.id,p]));
+   return out(200,{accounts:accounts.map(u=>{const link=links.find(p=>p.user_id===u.id);return {id:u.id,email:u.email,name:u.user_metadata?.display_name??'',role:u.app_metadata?.hp_account_role??'USER',disabled:!!u.banned_until&&Date.parse(u.banned_until)>Date.now(),permissions:assignments.filter(p=>p.user_id===u.id),personnel:link?personById.get(link.personnel_id)??{id:link.personnel_id}:null};})});
   }
   const validatePassword=()=>{if(typeof input.password!=='string'||input.password.length<12||input.password.length>128)throw Object.assign(new Error('รหัสผ่านต้องยาว 12–128 ตัวอักษร'),{status:400});};
   if(input.action==='create'){
    validatePassword();if(typeof input.email!=='string'||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email)||typeof input.name!=='string'||!input.name.trim()||input.name.length>100||!['STAFF','ADMIN','USER'].includes(input.role))return out(400,{message:'ตรวจชื่อ อีเมล และสิทธิ์'});
+   let personnel=null;
+   if(input.personnel_id!==undefined&&input.personnel_id!==null&&input.personnel_id!==''){
+    if(typeof input.personnel_id!=='string'||!/^[0-9a-f-]{36}$/i.test(input.personnel_id))return out(400,{message:'รหัสเจ้าหน้าที่ไม่ถูกต้อง'});
+    const people=await call('/rest/v1/hp_personnel?select=id,full_name,position_name,facility_code,active&id=eq.'+encodeURIComponent(input.personnel_id));
+    if(people.length!==1||people[0].active!==true)return out(400,{message:'ไม่พบเจ้าหน้าที่ที่ปฏิบัติงานในทะเบียนบุคลากร'});
+    const linked=await call('/rest/v1/hp_personnel_accounts?select=user_id&personnel_id=eq.'+encodeURIComponent(input.personnel_id));
+    if(linked.length)return out(409,{message:'เจ้าหน้าที่รายนี้ผูกกับบัญชีแล้ว'});
+    personnel=people[0];
+   }
    const master=await call('/rest/v1/hp_facilities?select=facility_code&active=eq.true');const allowed=master.map(f=>f.facility_code);
-   const codes=input.role==='ADMIN'?allowed:input.role==='USER'?[]:[...new Set(input.facilities??[])];if(input.role!=='USER'&&!codes.length||codes.some(c=>!allowed.includes(c)))return out(400,{message:'เลือกหน่วยบริการที่ได้รับสิทธิ์อย่างน้อย 1 แห่ง'});
+   const requested=[...new Set(Array.isArray(input.facilities)?input.facilities:[])];
+   if(input.role==='STAFF'&&personnel?.facility_code&&!requested.includes(personnel.facility_code))requested.unshift(personnel.facility_code);
+   const codes=input.role==='ADMIN'?allowed:input.role==='USER'?[]:requested;if(input.role!=='USER'&&!codes.length||codes.some(c=>!allowed.includes(c)))return out(400,{message:'เลือกหน่วยบริการที่ได้รับสิทธิ์อย่างน้อย 1 แห่ง'});
    const user=await call('/auth/v1/admin/users','POST',{email:input.email.trim().toLowerCase(),password:input.password,email_confirm:true,user_metadata:{display_name:input.name.trim()},app_metadata:{hp_only:true,hp_created_by:actor.id,hp_account_role:input.role}});
    try{
     const profiles=await call('/rest/v1/profiles?select=id,active,role&id=eq.'+encodeURIComponent(user.id));
     if(profiles.length!==1||profiles[0].active!==false||profiles[0].role!=='STAFF')throw new Error('บัญชีไม่ได้ถูกจำกัดสิทธิ์ตามที่กำหนด');
     if(codes.length)await call('/rest/v1/hp_user_facilities','POST',codes.map(facility_code=>({user_id:user.id,facility_code,role:input.role})));
-    await audit('INSERT',user.id,{action:'create',scope:'hospital_profile',role:input.role,facilities:codes});
+    if(personnel)await call('/rest/v1/hp_personnel_accounts','POST',{personnel_id:personnel.id,user_id:user.id});
+    await audit('INSERT',user.id,{action:'create',scope:'hospital_profile',role:input.role,facilities:codes,personnel_id:personnel?.id??null});
    }catch(error){await call('/auth/v1/admin/users/'+user.id,'DELETE');throw error;}
-   return out(201,{message:'สร้างบัญชีเฉพาะ Hospital Profile สำเร็จ',user_id:user.id});
+   return out(201,{message:personnel?'สร้างบัญชีและผูกเจ้าหน้าที่สำเร็จ':'สร้างบัญชีเฉพาะ Hospital Profile สำเร็จ',user_id:user.id,personnel_id:personnel?.id??null});
   }
   if(input.action==='reset_password'){
    validatePassword();if(typeof input.user_id!=='string'||!/^[0-9a-f-]{36}$/i.test(input.user_id))return out(400,{message:'รหัสบัญชีไม่ถูกต้อง'});
