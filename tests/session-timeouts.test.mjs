@@ -1,6 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {sessionPolicy,sessionStatus} from '../src/api/supabase/session-policy.js';
 let sequence=0;
+test('logout clears local identity even when Auth rejects an expired token',async t=>{const original=globalThis.fetch;t.after(()=>globalThis.fetch=original);globalThis.fetch=async()=>Response.json({message:'token is expired'},{status:403});const c=await client(session());await c.logout();assert.equal(c.currentSession(),null);});
 async function client(value){const values=new Map(value?[['khp-session',JSON.stringify(value)]]:[]);globalThis.sessionStorage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};return import('../src/api/supabase/client.js?timeout-test='+ ++sequence);}
 const session=()=>({access_token:'test-token',refresh_token:'test-refresh',expires_at:Date.now()/1000+3600,hp_started_at:Date.now(),hp_last_active_at:Date.now(),user:{id:'test-user'}});
 test('idle warning precedes expiry and activity cannot extend the absolute deadline',()=>{const now=Date.now();let value={hp_started_at:now-7*3600000,hp_last_active_at:now-29*60000};assert.equal(sessionStatus(value,now).remaining,60000);assert.equal(sessionStatus(value,now).reason,'idle');value={hp_started_at:now-sessionPolicy.maxMs,hp_last_active_at:now};assert.equal(sessionStatus(value,now).remaining,0);assert.equal(sessionStatus(value,now).reason,'maximum');assert.equal(sessionStatus({},now).reason,'legacy');});
