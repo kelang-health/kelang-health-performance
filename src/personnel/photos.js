@@ -2,10 +2,11 @@ import {runtime} from '../config/runtime.js';
 import {request} from '../api/request.js';
 import {currentSession,refreshSession} from '../api/supabase/client.js';
 export const PHOTO_LIMIT=102400;
+export const PHOTO_SOURCE_LIMIT=2*1024*1024;
 export function canUploadPhoto(p,permissions,links,userId){return !!userId&&p.active&&(permissions.some(a=>a.role==='ADMIN'||a.role==='STAFF'&&a.facility_code===p.facility_code)||links.some(a=>a.personnel_id===p.id&&a.user_id===userId));}
 export async function compressPhoto(file){
  if(!['image/jpeg','image/png','image/webp'].includes(file.type))throw new Error('เลือก JPEG, PNG หรือ WebP เท่านั้น');
- if(file.size>10*1024*1024)throw new Error(`ภาพนี้มีขนาด ${(file.size/1024/1024).toFixed(1)} MB เกินขนาดที่รับได้ 10 MB กรุณาลดขนาดภาพหรือบันทึกเป็น JPEG ให้ไม่เกิน 10 MB แล้วเลือกอัปโหลดใหม่ เช่น ใช้เมนูปรับขนาดภาพในแอปรูปภาพหรือ Paint`);
+ if(file.size>PHOTO_SOURCE_LIMIT)throw new Error(`ภาพนี้มีขนาด ${(file.size/1024/1024).toFixed(2)} MB เกินขนาดที่รับได้ 2 MB กรุณาลดขนาดภาพหรือบันทึกเป็น JPEG ให้เหลือประมาณ 1–2 MB (ไม่เกิน 2 MB) แล้วเลือกอัปโหลดใหม่ เช่น ใช้เมนูปรับขนาดภาพในแอปรูปภาพหรือ Paint`);
  let image;try{image=await createImageBitmap(file);}catch{throw new Error('อ่านภาพไม่ได้ กรุณาเลือกไฟล์ใหม่');}
  try{if(image.width*image.height>40000000)throw new Error(`ภาพมีความละเอียด ${image.width} × ${image.height} พิกเซล เกิน 40 ล้านพิกเซล กรุณาลดความกว้างและความสูง เช่น ให้ด้านยาวไม่เกิน 2,000 พิกเซล แล้วเลือกอัปโหลดใหม่`);
  const ratio=Math.min(1,400/image.width,500/image.height),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.width*ratio));canvas.height=Math.max(1,Math.round(image.height*ratio));canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);
