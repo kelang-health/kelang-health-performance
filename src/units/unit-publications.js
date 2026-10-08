@@ -1,3 +1,4 @@
+import {thcPublication} from './thc-publication.js';
 const base='assets/units/06119';
 export function unitOrganization(code){
  if(code!=='06119')return '';
@@ -5,6 +6,7 @@ export function unitOrganization(code){
 }
 
 export function unitPublication(code){
+ if(code==='06116')return thcPublication();
  if(code!=='06119')return '';
  return `<section class="panel unit-publication unit-publication-intro"><div><p class="unit-publication-year">ข้อมูลเผยแพร่ · ปีงบประมาณ 2568</p><h2>รู้จัก ศบส.บ้านกล้วยแพะ</h2><p>ศูนย์บริการสาธารณสุขบ้านกล้วยแพะ สังกัดเทศบาลเมืองเขลางค์นคร จังหวัดลำปาง ให้บริการส่งเสริมสุขภาพ ป้องกันโรค รักษาพยาบาลเบื้องต้น และฟื้นฟูสุขภาพ</p><p><strong>ที่ตั้ง:</strong> หมู่ที่ 2 บ้านกล้วยแพะ ตำบลกล้วยแพะ อำเภอเมืองลำปาง จังหวัดลำปาง</p><p><strong>เวลาบริการตามเอกสาร:</strong> วันจันทร์–ศุกร์ 08.30–16.30 น. หยุดวันเสาร์–อาทิตย์และวันหยุดนักขัตฤกษ์</p><div class="link-row"><a class="unit-link" href="#unit/06119/services">ดูตารางบริการ →</a><a class="unit-link" href="${base}/smart-living-2568.pdf" target="_blank" rel="noopener">อ่านเอกสารฉบับเต็ม (PDF 16 หน้า)</a><a class="unit-link" href="${base}/smart-living-2568.pdf" download>ดาวน์โหลด PDF · 11.6 MB</a></div></div><img src="${base}/center.webp" width="1188" height="564" alt="ป้ายศูนย์บริการสาธารณสุขบ้านกล้วยแพะ เทศบาลเมืองเขลางค์นคร"></section>
  <section class="panel unit-publication"><h2>พื้นที่รับผิดชอบและบริบทชุมชน</h2><p>รับผิดชอบ 2 หมู่บ้าน แบ่งเป็น 4 ชุมชน ได้แก่ บ้านกล้วยหลวง บ้านกล้วยหลวงพัฒนา บ้านกล้วยแพะ และบ้านประสบสุข พื้นที่ประมาณ 46.06 ตารางกิโลเมตร ห่างจากอำเภอเมืองไปทางตะวันออกเฉียงใต้ประมาณ 11 กิโลเมตร</p><p>พื้นที่เป็นที่ราบสลับเนิน มีพื้นที่ป่าและพื้นที่ราบสำหรับการเกษตร ลักษณะชุมชนเป็นเมืองกึ่งชนบท ประชาชนส่วนใหญ่เป็นชาวไทลื้อ ใช้ภาษาพื้นเมืองภาคเหนือและภาษาไทลื้อ มีอาชีพเกษตรกรรมและรับจ้าง รวมถึงงานอุตสาหกรรมขนาดเล็กในครัวเรือน</p><p class="subtle">อ้างอิงข้อมูลทั่วไปในรายงาน หน้า 1–2</p></section>
