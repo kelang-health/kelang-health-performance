@@ -2,6 +2,22 @@ import {escapeHtml as e} from '../utils/core.js';
 
 // ตารางที่ผู้ดูแลยืนยันจากภาพต้นฉบับสำหรับ ศบส.บ้านกล้วยม่วง
 export const serviceSchedules={
+ '06119':{
+  name:'ศบส.บ้านกล้วยแพะ',afternoon:'13.00–16.30 น.',
+  rows:[
+   ['จันทร์','ตรวจรักษาโรคทั่วไป; คลินิกเด็กดี (สัปดาห์ที่ 3 ของเดือน)','ตรวจรักษาโรคทั่วไป; เยี่ยมบ้าน'],
+   ['อังคาร','ตรวจรักษาโรคทั่วไป','ตรวจรักษาโรคทั่วไป; คลินิกจิตเวชทางไกล (สัปดาห์ที่ 4 ของเดือน)'],
+   ['พุธ','คลินิกโรคเรื้อรัง','ตรวจรักษาโรคทั่วไป; เยี่ยมบ้าน'],
+   ['พฤหัสบดี','ตรวจรักษาโรคทั่วไป; วางแผนครอบครัว','ตรวจรักษาโรคทั่วไป; วางแผนครอบครัว'],
+   ['ศุกร์','คลินิกโรคเรื้อรัง (พบแพทย์)','ตรวจรักษาโรคทั่วไป; เยี่ยมบ้าน']
+  ],
+  notes:[
+   'คลินิกเด็กดี วันจันทร์ สัปดาห์ที่ 3 ของเดือน',
+   'คลินิกจิตเวชทางไกล วันอังคารช่วงบ่าย สัปดาห์ที่ 4 ของเดือน',
+   'หยุดวันเสาร์–อาทิตย์และวันหยุดนักขัตฤกษ์',
+   'อ้างอิงตาราง 8 หน้า 9 และเวลาบริการหน้า 8 ในรายงานสถานะสุขภาพประชาชน ปีงบประมาณ 2568'
+  ]
+ },
  '06120':{
   rows:[
    ['จันทร์','ตรวจรักษาโรคทั่วไป','เยี่ยมบ้าน'],
@@ -22,5 +38,5 @@ export const serviceSchedules={
 
 export function serviceSchedule(code){
  const schedule=serviceSchedules[code];if(!schedule)return '';
- return `<section class="panel unit-service-schedule"><h2>ตารางการให้บริการ</h2><div class="table-wrap"><table><caption>ตารางบริการประจำสัปดาห์ — ศบส.บ้านกล้วยม่วง</caption><thead><tr><th scope="col">วัน</th><th scope="col">ช่วงเช้า<br>08.30–12.00 น.</th><th scope="col">ช่วงบ่าย<br>13.00–16.00 น.</th></tr></thead><tbody>${schedule.rows.map(([day,morning,afternoon])=>`<tr><th scope="row">${e(day)}</th><td>${e(morning)}</td><td>${e(afternoon)}</td></tr>`).join('')}</tbody></table></div><p class="subtle">พักกลางวันระหว่างช่วงบริการ</p><h3>หมายเหตุ</h3><ul>${schedule.notes.map(note=>`<li>${e(note)}</li>`).join('')}</ul></section>`;
+ return `<section class="panel unit-service-schedule"><h2>ตารางการให้บริการ</h2><div class="table-wrap"><table><caption>ตารางบริการประจำสัปดาห์ — ${e(schedule.name??'ศบส.บ้านกล้วยม่วง')}</caption><thead><tr><th scope="col">วัน</th><th scope="col">ช่วงเช้า<br>08.30–12.00 น.</th><th scope="col">ช่วงบ่าย<br>${e(schedule.afternoon??'13.00–16.00 น.')}</th></tr></thead><tbody>${schedule.rows.map(([day,morning,afternoon])=>`<tr><th scope="row">${e(day)}</th><td>${e(morning)}</td><td>${e(afternoon)}</td></tr>`).join('')}</tbody></table></div><p class="subtle">พักกลางวันระหว่างช่วงบริการ</p><h3>หมายเหตุ</h3><ul>${schedule.notes.map(note=>`<li>${e(note)}</li>`).join('')}</ul></section>`;
 }
