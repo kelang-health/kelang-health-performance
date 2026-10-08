@@ -1,4 +1,5 @@
 import {mainYearKey,primaryYear,initialYear} from './utils/main-year.js';
+import {mountSessionTimeouts} from './session-timeouts.js';
 import {cdView} from './charts/cd.js';
 import {ncdView} from './charts/ncd.js';
 import {unitsView,parseUnitHash} from './units/units.js';
@@ -19,7 +20,8 @@ $('developer-credit').textContent=credit;
 const routes=[['overview','◫','ภาพรวมองค์กร'],['units','▤','หน่วยบริการ'],['area','◎','ผลงานพื้นที่ 7 หน่วย'],['service','✚','ผลงานบริการ 8 หน่วย'],['personnel','♧','บุคลากร'],['heatmap','▦','KPI Heatmap'],['trend','↗','แนวโน้ม'],['compare','⇄','เปรียบเทียบหน่วยบริการ'],['profile','▤','ข้อมูลหน่วยบริการ'],['finance','฿','งบประมาณและการเงิน'],['ncd','♡','โรคเรื้อรัง (NCD)'],['cd','◉','โรคติดต่อ'],['quality','✓','คุณภาพข้อมูล'],['staff','♙','สำหรับเจ้าหน้าที่'],['manage','⚙','จัดการข้อมูล'],['kpi-admin','☑','จัดการ KPI (ADMIN)']];
 const state={year:2569,period:'all',scope:'all',facility:'all',category:'all',route:'overview',kpi:null,facilities:[],kpis:[],inventory:[],profile:{tables:{},errors:[]},hdc:{},previous:{},permissions:[],selected:new Set(),rateMode:false,manageTable:'hp_finance_monthly',search:'',loading:true,generation:0,loginReturnRoute:null,staffDocuments:[],staffDocumentsLoading:false};
 const tableLabels={hp_finance_monthly:'เบิกจ่ายรายเดือน',hp_budget_monthly:'แผนงบประมาณ',hp_ncd_monthly:'ข้อมูล NCD',hp_cd_monthly:'โรคติดต่อ',hp_service_stats:'สถิติบริการอื่น',hp_staff:'บุคลากรแยกวิชาชีพ',hp_settings:'ตัวเลือกและการตั้งค่า',hp_data_quality:'รายการตรวจสอบคุณภาพ'};
-onSession(value=>{if(!value){state.permissions=[];state.personnelLinks=[];state.staffDocuments=[];state.staffDocumentsError='';state.profile.tables.hp_personnel=[];if(state.facilities.length)render();}});
+onSession(value=>{if(!value){state.permissions=[];state.personnelLinks=[];state.staffDocuments=[];state.staffDocumentsError='';state.profile.tables.hp_personnel=[];if($('dialog')?.open){$('dialog').dataset.requiredPassword='';$('dialog').close();$('dialog-body').replaceChildren();}if(state.facilities.length)render();}});
+mountSessionTimeouts();
 function data(table){return state.profile.tables[table]??[];}
 function facilities(){return state.facilities.filter(f=>f.active&&(state.scope!=='AREA'||f.area_unit)&&(state.facility==='all'||f.facility_code===state.facility));}
 function published(k){if(state.profile.errors.some(r=>r.table==='hp_settings'))return false;return shouldPublish(publicationSetting(data('hp_settings'),k.kpi_id,state.year),dataStatus(state.hdc[k.kpi_id],recordSet(k)));}

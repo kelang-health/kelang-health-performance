@@ -13,6 +13,8 @@ export async function handleRequest(req,env,fetcher=fetch){
  };
  try{
   let actor;try{actor=await call('/auth/v1/user','GET',undefined,bearer);}catch{return out(401,{message:'เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่'});}
+  const validSession=await call('/rest/v1/rpc/hp_check_session','POST',{},bearer);
+  if(validSession!==true)return out(401,{message:'เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่'});
   if(Number(req.headers.get('Content-Length')??0)>10000)return out(413,{message:'ข้อมูลเกินขนาดที่กำหนด'});
   const input=await req.json();
   const audit=async(operation,user_id,details)=>call('/rest/v1/hp_audit_logs','POST',{user_id:actor.id,table_name:'hp_account_management',operation,new_data:{user_id,...details}});
