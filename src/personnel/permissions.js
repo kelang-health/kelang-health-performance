@@ -1,0 +1,2 @@
+export function canManagePersonnel(permissions,person){return permissions.some(p=>p.role==='ADMIN'||p.role==='STAFF'&&p.facility_code===person.facility_code&&['member','unit_head'].includes(person.structure_role));}
+export function editablePersonnelUnits(permissions,facilities){return permissions.some(p=>p.role==='ADMIN')?facilities:facilities.filter(f=>permissions.some(p=>p.role==='STAFF'&&p.facility_code===f.facility_code));}
