@@ -22,7 +22,8 @@ export function personnelGroups(rows){
  const heads=rows.filter(p=>p.structure_role==='unit_head').sort(order),groups=new Map();
  const members=rows.filter(p=>p.structure_role!=='unit_head');
  const kelangNakorn=members.length>0&&members.every(p=>p.facility_code==='45030');
- const professionOrder=kelangNakorn?kelangNakornProfessionOrder:defaultProfessionOrder;
+ const sriMuadKlao=members.length>0&&members.every(p=>p.facility_code==='06118');
+ const professionOrder=kelangNakorn?kelangNakornProfessionOrder:sriMuadKlao?defaultProfessionOrder.map((pattern,i)=>i===2?/^(?:เจ้าพนักงาน|จพง\.?\s*)สาธารณสุข/:pattern):defaultProfessionOrder;
  for(const p of members){const title=String(p.position_name??'').trim()||'ยังไม่ระบุตำแหน่ง';if(!groups.has(title))groups.set(title,[]);groups.get(title).push(p);}
  return {heads,positions:[...groups].sort(([a],[b])=>rank(a,professionOrder)-rank(b,professionOrder)||a.localeCompare(b,'th')).map(([title,members])=>({title,members:members.sort(order)}))};
 }
