@@ -14,9 +14,11 @@ const kelangNakornProfessionOrder=[
 ];
 
 const rank=(title,order)=>{const i=order.findIndex(pattern=>pattern.test(title));return i<0?order.length:i;};
+const isCivil=p=>/^ข้าราชการ(?:\s|$)/.test(String(p.employment_type??'').trim());
+export function workGroupMembers(rows){return personnelGroups(rows).positions.flatMap(g=>g.members).sort((a,b)=>Number(isCivil(b))-Number(isCivil(a)));}
 
 export function personnelGroups(rows){
- const civil=p=>/^ข้าราชการ(?:\s|$)/.test(String(p.employment_type??'').trim());
+ const civil=isCivil;
  const name=p=>String(p.full_name??'').trim().replace(/^(นางสาว|นาง|นาย)\s*/, '');
  const order=(a,b)=>Number(civil(b))-Number(civil(a))||name(a).localeCompare(name(b),'th')||String(a.full_name??'').localeCompare(String(b.full_name??''),'th')||String(a.id??'').localeCompare(String(b.id??''));
  const heads=rows.filter(p=>p.structure_role==='unit_head').sort(order),groups=new Map();

@@ -1,5 +1,5 @@
 import {canManagePersonnel,editablePersonnelUnits} from './permissions.js';
-import {personnelGroups} from './grouping.js';
+import {personnelGroups,workGroupMembers} from './grouping.js';
 import {rest,currentSession,onSession} from '../api/supabase/client.js';
 import {escapeHtml as e} from '../utils/core.js';
 import {canUploadPhoto,uploadPhoto,signPhotos,signedPhotoUrl} from './photos.js';
@@ -47,7 +47,7 @@ document.addEventListener('submit',async event=>{const form=event.target;if(form
 function unitStructureRows(positions){
  const assigned=positions.flatMap(g=>g.members).filter(p=>p.work_group);
  let workHtml='';
- if(assigned.length){workHtml='<div class="unit-work-groups">'+workGroups.map(([key,label],i)=>{const rows=assigned.filter(p=>p.work_group===key);return rows.length?'<section class="unit-org-group unit-org-color-'+i+' "><h3>'+label+' <small>('+rows.length+' ราย)</small></h3><div class="unit-org-members">'+personnelGroups(rows).positions.flatMap(g=>g.members).map(card).join('')+'</div></section>':'';}).join('')+'</div>';positions=positions.map(g=>({...g,members:g.members.filter(p=>!p.work_group)})).filter(g=>g.members.length);}
+ if(assigned.length){workHtml='<div class="unit-work-groups">'+workGroups.map(([key,label],i)=>{const rows=assigned.filter(p=>p.work_group===key);return rows.length?'<section class="unit-org-group unit-org-color-'+i+' "><h3>'+label+' <small>('+rows.length+' ราย)</small></h3><div class="unit-org-members">'+workGroupMembers(rows).map(card).join('')+'</div></section>':'';}).join('')+'</div>';positions=positions.map(g=>({...g,members:g.members.filter(p=>!p.work_group)})).filter(g=>g.members.length);}
 
  const buckets=[[],[],[]];
  for(const g of positions){let row=2,column=buckets[2].length%2;if(/^พยาบาล/.test(g.title)){row=0;column=0;}else if(/^(?:นักวิชาการ|เจ้าพนักงาน|จพง\.?\s*)/.test(g.title)){row=0;column=1;}else if(/^ผู้ช่วยเจ้าพนักงานธุรการ/.test(g.title)){row=1;column=0;}else if(/^เจ้าหน้าที่สำรวจข้อมูล/.test(g.title)){row=1;column=1;}buckets[row].push({g,column});}
