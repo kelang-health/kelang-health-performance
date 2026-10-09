@@ -66,3 +66,5 @@ header{height:auto;min-height:77px;padding-top:10px;padding-bottom:10px;flex-wra
 
 /* Connect actual card centers, including grid gaps and responsive columns. */
 .unit-org{position:relative}.unit-org-head:after,.unit-org-branches:before,.unit-org .unit-org-group:before{display:none}.unit-org-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}.unit-org-lines line{stroke:#2985c4;stroke-width:2;shape-rendering:geometricPrecision}@media(max-width:720px){.unit-org-lines{display:none}}
+
+.unit-org-head>h3{font-size:1.5rem;line-height:1.5;font-weight:700}@media(max-width:720px){.unit-org-head>h3{font-size:1.3rem}}
