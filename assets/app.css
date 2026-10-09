@@ -61,3 +61,5 @@ header{height:auto;min-height:77px;padding-top:10px;padding-bottom:10px;flex-wra
 @container(min-width:720px){.personnel-panel .person-leaders,.person-directory{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 .unit-org-branches{display:flex;flex-direction:column;gap:24px}.unit-org-branches:before{left:25%;right:25%}.unit-org-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.unit-org-column{display:flex;flex-direction:column;gap:24px;min-width:0}.unit-org-row:not(:first-child) .unit-org-group:before,.unit-org-column .unit-org-group:not(:first-child):before{display:none}@media(max-width:720px){.unit-org-row{grid-template-columns:minmax(0,1fr)}.unit-org-column:empty{display:none}.unit-org-group:before{display:none}}
+
+.unit-work-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.unit-work-groups~.unit-org-row .unit-org-group:before{display:none}@media(max-width:1100px){.unit-work-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.unit-work-groups{grid-template-columns:minmax(0,1fr)}}
