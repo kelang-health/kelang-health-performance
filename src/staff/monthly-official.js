@@ -1,3 +1,4 @@
+import {paginateMonthlyDocument} from './monthly-pagination.js';
 import {monthlyLayoutCSS,monthlyLayoutBody} from './monthly-layout.js';
 import {validateMonthlySnapshot} from './monthly-period.js';
 // Prescribed wording, with the 16 pt field layout requested from the legacy system.
@@ -9,4 +10,4 @@ export function officialMonthlyBody(record,f){
  let printNames=[];try{printNames=JSON.parse(f.history_print_names||'[]');}catch{throw new Error('ชื่อที่ใช้พิมพ์ไม่ถูกต้อง');}if(!Array.isArray(printNames)||printNames.length>12||printNames.some(n=>typeof n!=='string'||n.length>60))throw new Error('ชื่อที่ใช้พิมพ์ไม่ถูกต้อง');
  return monthlyLayoutBody(record,f,history,printNames);
 }
-export async function preparePrintableDocument(doc){await doc.fonts.ready;await Promise.all([...doc.images].map(img=>img.decode()));for(const el of doc.querySelectorAll('.template-field')){const value=el.firstElementChild;for(let size=16;size>=8;size-=0.25){el.style.fontSize=size+'pt';if(value.getBoundingClientRect().width<=el.getBoundingClientRect().width)break;}if(value.getBoundingClientRect().width>el.getBoundingClientRect().width)value.style.transform='scaleX('+(el.getBoundingClientRect().width/value.getBoundingClientRect().width)+')';}}
+export async function preparePrintableDocument(doc){await doc.fonts.ready;await Promise.all([...doc.images].map(img=>img.decode()));for(const el of doc.querySelectorAll('.template-field')){const value=el.firstElementChild;for(let size=16;size>=8;size-=0.25){el.style.fontSize=size+'pt';if(value.getBoundingClientRect().width<=el.getBoundingClientRect().width)break;}if(value.getBoundingClientRect().width>el.getBoundingClientRect().width)value.style.transform='scaleX('+(el.getBoundingClientRect().width/value.getBoundingClientRect().width)+')';}paginateMonthlyDocument(doc);}
