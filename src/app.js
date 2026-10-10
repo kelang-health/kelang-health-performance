@@ -143,8 +143,9 @@ function openStaffDocumentForm(code,id=''){
 }
 async function printStaffDocument(id,certificate=false){
  const record=state.staffDocuments.find(d=>d.id===id);if(!record)throw new Error('ไม่พบเอกสาร');
+ const html=(certificate?printableCertificate:printableDocument)(record,currentStaffIdentity());
  const popup=window.open('','_blank');if(!popup)throw new Error('เบราว์เซอร์ปิดกั้นหน้าต่างพิมพ์ กรุณาอนุญาต pop-up สำหรับเว็บไซต์นี้');
- popup.opener=null;popup.document.open();popup.document.write((certificate?printableCertificate:printableDocument)(record,currentStaffIdentity()));popup.document.close();popup.document.getElementById('print-button')?.addEventListener('click',async()=>{await preparePrintableDocument(popup.document);popup.print();});
+ popup.opener=null;popup.document.open();popup.document.write(html);popup.document.close();await preparePrintableDocument(popup.document);popup.document.getElementById('print-button')?.addEventListener('click',async()=>{await preparePrintableDocument(popup.document);popup.print();});
  const printedAt=new Date().toISOString();await rest('hp_staff_documents','id=eq.'+encodeURIComponent(id),'PATCH',{printed_at:printedAt,updated_at:printedAt});
  record.printed_at=printedAt;record.updated_at=printedAt;render();
 }

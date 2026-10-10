@@ -1,3 +1,4 @@
+import {validateMonthlySnapshot} from './monthly-period.js';
 import {officialAnnualCSS,officialAnnualBody} from './annual-official.js';
 import {officialMonthlyCSS,officialMonthlyBody} from './monthly-official.js';
 // Layout and wording ported from compensation print.php, print_monthly.php and work_certificate.php.
@@ -29,4 +30,4 @@ ${certificateRow(f)}
 `;}
 
 function certificateRow(f){const verified=Number(f.certificate_verified)===1&&f.work_days!==''&&f.work_days!=null&&f.calendar_work_days!==''&&f.calendar_work_days!=null;const worked=Number(f.work_days);return '<tr><td>1</td><td class="name">'+esc(f.full_name)+'</td><td class="position">'+esc([f.position_name,f.position_level].filter(Boolean).join(' '))+'</td><td>'+esc(f.calendar_work_days??'')+'</td><td>'+esc(verified?f.work_days:'')+'</td><td>'+esc(verified?f.leave_days:'')+'</td><td class="result-check">'+(verified&&worked>=15?'✓':'')+'</td><td class="result-check">'+(verified&&worked<15?'✓':'')+'</td><td class="signature-cell"></td></tr>';}
-export function printableCertificate(record,context={}){if(record.form_code!=='chor11_monthly')throw new Error('ใบรับรองต้องอ้างอิงรายการรายเดือน');const f=identity(record,context);return shell('ใบรับรองวันทำงานประกอบเบิก ฉ.11',certificateCSS,certificateBody(record,f),' · A4 แนวนอน · เฉพาะบุคลากรเจ้าของรายการ'+(Number(f.certificate_verified)===1?'':' · ฉบับร่าง: ยังไม่ได้ยืนยันวันทำงาน/วันลา'));}
+export function printableCertificate(record,context={}){if(record.form_code!=='chor11_monthly')throw new Error('ใบรับรองต้องอ้างอิงรายการรายเดือน');const f=identity(record,context);validateMonthlySnapshot(record.period_month,f);return shell('ใบรับรองวันทำงานประกอบเบิก ฉ.11',certificateCSS,certificateBody(record,f),' · A4 แนวนอน · เฉพาะบุคลากรเจ้าของรายการ'+(Number(f.certificate_verified)===1?'':' · ฉบับร่าง: ยังไม่ได้ยืนยันวันทำงาน/วันลา'));}

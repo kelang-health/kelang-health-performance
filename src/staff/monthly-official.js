@@ -1,3 +1,4 @@
+import {validateMonthlySnapshot} from './monthly-period.js';
 // The unfilled page is a vector rendering of the user's prescribed PDF, not a redraw.
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const months=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
@@ -9,13 +10,15 @@ export function officialMonthlyBody(record,f){
  const first=f.applicant_first_name||'';const surname=f.applicant_last_name||'';
  let history=[];try{history=JSON.parse(f.service_history||'[]');}catch{throw new Error('ประวัติการปฏิบัติงานไม่ถูกต้อง');}
  if(!Array.isArray(history)||history.length>6)throw new Error('แบบต้นฉบับรองรับประวัติ 6 รายการ กรุณาจัดทำใบแนบหากมากกว่านี้');
+ validateMonthlySnapshot(record.period_month,f);
+ let printNames=[];try{printNames=JSON.parse(f.history_print_names||'[]');}catch{throw new Error('ชื่อที่ใช้พิมพ์ไม่ถูกต้อง');}if(!Array.isArray(printNames)||printNames.length>6||printNames.some(n=>typeof n!=='string'||n.length>60))throw new Error('ชื่อที่ใช้พิมพ์ไม่ถูกต้อง');
  const template=new URL('../../assets/forms/chor11-monthly-official.svg',import.meta.url).href;
  let body=field('facility_name',f.facility_name,448,101,118)+field('month',months[Number(record.period_month?.slice(5,7))-1]||'',438,119,78)+field('calendar_year',digits(Number(record.period_month?.slice(0,4))+543),540,119,25);
  body+=field('first_name',first,132,155,96)+field('last_name',surname,272,155,100)+field('position', [f.position_name,f.position_level].filter(Boolean).join(' '),415,155,103);
  body+=field('current_facility',f.facility_name,171,173,93)+field('province',f.unit_province,305,173,67)+field('area_level',f.level_name,424,173,94);
  body+=field('service_years',digits(f.service_years),200,191,63)+field('service_months',digits(f.service_months),282,191,89);
  if(Number(f.training_status)===2){for(const [kind,y,x] of [['regional',249,178],['district',270.2,160]]){if(Number(f['training_'+kind+'_selected'])!==1)continue;body+=field('training_'+kind+'_checked','✓',107,y-1,11);body+=field('training_'+kind+'_facility',f['training_'+kind+'_facility'],x,y,kind==='regional'?50:32)+field('training_'+kind+'_province',f['training_'+kind+'_province'],kind==='regional'?269:233,y,67)+field('training_'+kind+'_from',date(f['training_'+kind+'_from_date']),kind==='regional'?377:341,y,67)+field('training_'+kind+'_to',date(f['training_'+kind+'_to_date']),kind==='regional'?463:427,y,53);}}
- history.forEach((h,i)=>{const y=[288,324.2,360.4,396.5,432.7,468.8][i];const name=String(h.facility_name||'').replace(/^โรงพยาบาล/,''); // This literal word is already printed before the source blank; do not expand abbreviations.
+ history.forEach((h,i)=>{const y=[288,324.2,360.4,396.5,432.7,468.8][i];const name=printNames[i]||String(h.facility_name||'').replace(/^โรงพยาบาล/,''); // This literal word is already printed before the source blank; do not expand abbreviations.
   body+=field('history_'+i+'_facility',name,204,y,60)+field('history_'+i+'_province',h.province,305,y,67)+field('history_'+i+'_level',h.level_name,417,y,100);
   body+=field('history_'+i+'_from',date(h.start_date),134,y+18.1,94)+field('history_'+i+'_to',date(h.end_date),269,y+18.1,103)+field('history_'+i+'_years',digits(h.duration_years),396,y+18.1,33)+field('history_'+i+'_months',digits(h.duration_months),453,y+18.1,27)+field('history_'+i+'_days',digits(h.duration_days),513,y+18.1,21);
  });

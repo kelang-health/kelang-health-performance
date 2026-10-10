@@ -1,3 +1,4 @@
+import {validateMonthlySnapshot} from './monthly-period.js';
 import {professionalLicenseChoices} from './print.js';
 import {renderOfficialFields,officialPayload} from './official-fields.js';
 const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -101,7 +102,7 @@ export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=
     '<label>วันลา/ขาดงาน<input name="leave_days" type="number" min="0" step="0.5" value="'+esc(f.leave_days??'')+'"></label>'+
     '<label>จำนวนเงินที่ขอเบิก (บาท)<input name="total_amount" type="number" min="0" step="0.01" value="'+esc(f.total_amount??'')+'"></label>'+
     '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-  '</div>'+renderOfficialFields(code,f)+'<p class="subtle">รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
+  '</div>'+renderOfficialFields(code,f)+'<p class="subtle">เมื่อเปลี่ยนเดือน ต้องตรวจอายุงาน ประวัติ วันทำงานและวันลาใหม่ วันที่นับอายุงานและวันที่สิ้นสุดต้องตรงสิ้นเดือนที่เบิก • รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
 }
 
 function numberField(fd,key){const value=fd.get(key);return value==null||String(value).trim()===''?{}:{[key]:Number(value)};}
@@ -129,6 +130,7 @@ export function documentPayload(form,{person,facility}={}){
       form_data:{...base,...details,work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),written_at:String(fd.get('written_at')||''),...numberField(fd,'monthly_rate'),...numberField(fd,'service_years'),...numberField(fd,'service_months'),...numberField(fd,'service_days'),license_type:String(fd.get('license_type')||''),license_number:String(fd.get('license_number')||''),contact_address:String(fd.get('contact_address')||''),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
     };
   }
+  validateMonthlySnapshot(month,{...details,work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||'')});
   return {
     record_id:String(fd.get('record_id')||''),form_code:code,template_version:'2569.1',fiscal_year:fiscalYear,period_month:String(fd.get('period_month')||''),status:'draft',
     form_data:{...base,...details,period_month:String(fd.get('period_month')||''),work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),...numberField(fd,'monthly_rate'),...numberField(fd,'work_days'),...numberField(fd,'leave_days'),...numberField(fd,'total_amount'),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
