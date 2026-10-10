@@ -3,7 +3,7 @@ import {renderOfficialFields,officialPayload} from './official-fields.js';
 const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
 export const staffFormTemplates=Object.freeze([
-  {code:'chor11_annual',title:'แบบคำขอรับเงินค่าตอบแทนประจำปี',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'ผู้ใช้เลือกเก็บหรือล้าง'},
+  {code:'chor11_annual',title:'แบบคำขอรับเงินค่าตอบแทนประจำปี',version:'2569.1',effectiveFrom:'2025-10-01',mode:'PDF ต้นฉบับหน้า 5–6 ระเบียบ 2562',sourceActive:true,available:true,storage:'ผู้ใช้เลือกเก็บหรือล้าง'},
   {code:'chor11_monthly',title:'ใบขอรับเงินค่าตอบแทนเบี้ยเลี้ยงเหมาจ่ายรายเดือน',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'เก็บรายการรายเดือน'},
   {code:'leave_sick',title:'ใบลาป่วย',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:false,storage:'ระยะถัดไป'},
   {code:'leave_vacation',title:'ใบลาพักผ่อน',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:false,storage:'ระยะถัดไป'},
@@ -84,7 +84,7 @@ export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=
       '<label>วัน<input name="service_days" type="number" min="0" max="31" value="'+esc(f.service_days??'')+'"></label>'+
       '<label>เริ่มปฏิบัติงาน<input name="work_date_from" type="date" value="'+esc(f.work_date_from??'')+'"></label>'+
       '<label>ถึงวันที่<input name="work_date_to" type="date" value="'+esc(f.work_date_to??'')+'"></label>'+
-      '<label>ประเภทใบอนุญาตประกอบวิชาชีพ<select name="license_type"><option value="">ยังไม่ระบุ</option>'+Object.entries(professionalLicenseChoices).map(([key,label])=>'<option value="'+key+'" '+(f.license_type===key?'selected':'')+'>'+esc(label)+'</option>').join('')+'</select></label>'+
+      '<label>ประเภทใบอนุญาตประกอบวิชาชีพ<select name="license_type"><option value="">ยังไม่ระบุ</option>'+Object.entries({...professionalLicenseChoices,...(f.license_type&&!Object.hasOwn(professionalLicenseChoices,f.license_type)?{[f.license_type]:'ข้อมูลเดิม: ไม่มีตัวเลือกในแบบต้นฉบับ กรุณาตรวจสอบ'}:{})}).map(([key,label])=>'<option value="'+key+'" '+(f.license_type===key?'selected':'')+'>'+esc(label)+'</option>').join('')+'</select></label>'+
       '<label>เลขใบอนุญาต<input name="license_number" value="'+esc(f.license_number??'')+'" maxlength="100" placeholder="เว้นว่างได้"></label>'+
       '<label style="grid-column:1/-1">ที่อยู่ติดต่อ<textarea name="contact_address" rows="3" maxlength="1000">'+esc(f.contact_address??'')+'</textarea></label>'+
       '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
