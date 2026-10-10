@@ -1,3 +1,5 @@
+import {professionalLicenseChoices} from './print.js';
+import {renderOfficialFields,officialPayload} from './official-fields.js';
 const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
 export const staffFormTemplates=Object.freeze([
@@ -5,7 +7,7 @@ export const staffFormTemplates=Object.freeze([
   {code:'chor11_monthly',title:'ใบขอรับเงินค่าตอบแทนเบี้ยเลี้ยงเหมาจ่ายรายเดือน',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'เก็บรายการรายเดือน'},
   {code:'leave_sick',title:'ใบลาป่วย',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:false,storage:'ระยะถัดไป'},
   {code:'leave_vacation',title:'ใบลาพักผ่อน',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:false,storage:'ระยะถัดไป'},
-  {code:'work_certificate',title:'ใบรับรองวันทำงานประกอบเบิก ฉ.11',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:false,storage:'ระยะถัดไป'}
+  {code:'work_certificate',title:'ใบรับรองวันทำงานประกอบเบิก ฉ.11',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'พิมพ์จากรายการรายเดือน ไม่เพิ่มตาราง'}
 ]);
 
 export function templateByCode(code){return staffFormTemplates.find(t=>t.code===code)??null;}
@@ -52,7 +54,7 @@ export function renderStaffWorkspace({documents=[],person=null,facility=null,fis
     '</section>'+
     '<section class="panel"><div class="panel-heading"><div><h2>ใบขอรับเงินรายเดือน</h2><p class="subtle">เก็บรายการรายเดือนใน Supabase เพื่อเรียกใช้และพิมพ์ซ้ำได้</p></div>'+badge(monthly.length+' รายการ','info')+'</div>'+
       '<div class="controls"><button class="primary" data-staff-new="chor11_monthly">จัดทำใบขอรายเดือน</button></div>'+
-      (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+Number(d.form_data?.total_amount??0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท</td><td>'+badge(d.status==='ready'?'พร้อมพิมพ์':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
+      (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+Number(d.form_data?.total_amount??0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท</td><td>'+badge(d.status==='ready'?'พร้อมพิมพ์':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์ใบขอ</button> <button data-staff-certificate="'+d.id+'">พิมพ์ใบรับรอง</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
     '</section>'+
   '</div>';
   return identity+'<h2>ค่าตอบแทนและสิทธิประโยชน์</h2>'+actions+'<section class="panel"><h2>การลา</h2><p>เตรียมเปิดใช้งานในระยะถัดไป</p></section>'+renderTemplateTable();
@@ -80,11 +82,11 @@ export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=
       '<label>วัน<input name="service_days" type="number" min="0" max="31" value="'+esc(f.service_days??0)+'"></label>'+
       '<label>เริ่มปฏิบัติงาน<input name="work_date_from" type="date" value="'+esc(f.work_date_from??'')+'"></label>'+
       '<label>ถึงวันที่<input name="work_date_to" type="date" value="'+esc(f.work_date_to??'')+'"></label>'+
-      '<label>ประเภทใบอนุญาตประกอบวิชาชีพ<input name="license_type" value="'+esc(f.license_type??'')+'" maxlength="200" placeholder="เว้นว่างได้ถ้าไม่มี"></label>'+
+      '<label>ประเภทใบอนุญาตประกอบวิชาชีพ<select name="license_type"><option value="">ยังไม่ระบุ</option>'+Object.entries(professionalLicenseChoices).map(([key,label])=>'<option value="'+key+'" '+(f.license_type===key?'selected':'')+'>'+esc(label)+'</option>').join('')+'</select></label>'+
       '<label>เลขใบอนุญาต<input name="license_number" value="'+esc(f.license_number??'')+'" maxlength="100" placeholder="เว้นว่างได้"></label>'+
       '<label style="grid-column:1/-1">ที่อยู่ติดต่อ<textarea name="contact_address" rows="3" maxlength="1000">'+esc(f.contact_address??'')+'</textarea></label>'+
       '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-    '</div><p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกข้อมูล</button></div></form>';
+    '</div>'+renderOfficialFields(code,f)+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกข้อมูล</button></div></form>';
   }
   const selected=record?.period_month??f.period_month??'';
   return '<form id="staff-document-form">'+common+'<div class="form-grid">'+
@@ -97,17 +99,18 @@ export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=
     '<label>วันลา/ขาดงาน<input name="leave_days" type="number" min="0" step="0.5" value="'+esc(f.leave_days??0)+'"></label>'+
     '<label>จำนวนเงินที่ขอเบิก (บาท)<input name="total_amount" type="number" min="0" step="0.01" value="'+esc(f.total_amount??f.monthly_rate??'')+'" required></label>'+
     '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-  '</div><p class="subtle">รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกข้อมูล</button></div></form>';
+  '</div>'+renderOfficialFields(code,f)+'<p class="subtle">รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกข้อมูล</button></div></form>';
 }
 
 export function documentPayload(form,{person,facility}={}){
   const fd=new FormData(form),code=String(fd.get('form_code')||''),fiscalYear=Number(fd.get('fiscal_year'));
-  if(!templateByCode(code)?.available)throw new Error('แบบพิมพ์ไม่เปิดใช้งาน');
+  if(!['chor11_annual','chor11_monthly'].includes(code)||!templateByCode(code)?.available)throw new Error('แบบพิมพ์ไม่เปิดใช้งาน');
   if(!Number.isInteger(fiscalYear)||fiscalYear<2500||fiscalYear>2700)throw new Error('ปีงบประมาณไม่ถูกต้อง');
   const month=String(fd.get('period_month')||'');
   if(code==='chor11_monthly'&&(!/^\d{4}-\d{2}-01$/.test(month)||Number(month.slice(0,4))+543+(Number(month.slice(5,7))>=10?1:0)!==fiscalYear||Number(month.slice(5,7))<1||Number(month.slice(5,7))>12))throw new Error('เดือนที่เบิกไม่ตรงปีงบประมาณ');
   for(const key of ['monthly_rate','total_amount','work_days','leave_days','service_years','service_months','service_days']){const value=fd.get(key);if(value!==null&&(!Number.isFinite(Number(value))||Number(value)<0))throw new Error('ตัวเลขต้องเป็นจำนวนที่ไม่ติดลบ');}
   if(fd.get('work_date_from')&&fd.get('work_date_to')&&fd.get('work_date_from')>fd.get('work_date_to'))throw new Error('ช่วงปฏิบัติงานไม่ถูกต้อง');
+  const details=officialPayload(fd,code);
   const base={
     full_name:person.full_name,
     position_name:person.position_name||'',
@@ -119,13 +122,13 @@ export function documentPayload(form,{person,facility}={}){
   if(code==='chor11_annual'){
     return {
       record_id:String(fd.get('record_id')||''),form_code:code,template_version:'2569.1',fiscal_year:fiscalYear,period_month:null,status:'ready',
-      form_data:{...base,work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),written_at:String(fd.get('written_at')||''),monthly_rate:Number(fd.get('monthly_rate')||0),service_years:Number(fd.get('service_years')||0),service_months:Number(fd.get('service_months')||0),service_days:Number(fd.get('service_days')||0),license_type:String(fd.get('license_type')||''),license_number:String(fd.get('license_number')||''),contact_address:String(fd.get('contact_address')||''),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
+      form_data:{...base,...details,work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),written_at:String(fd.get('written_at')||''),monthly_rate:Number(fd.get('monthly_rate')||0),service_years:Number(fd.get('service_years')||0),service_months:Number(fd.get('service_months')||0),service_days:Number(fd.get('service_days')||0),license_type:String(fd.get('license_type')||''),license_number:String(fd.get('license_number')||''),contact_address:String(fd.get('contact_address')||''),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
     };
   }
   return {
     record_id:String(fd.get('record_id')||''),form_code:code,template_version:'2569.1',fiscal_year:fiscalYear,period_month:String(fd.get('period_month')||''),status:'ready',
-    form_data:{...base,period_month:String(fd.get('period_month')||''),work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),monthly_rate:Number(fd.get('monthly_rate')||0),work_days:Number(fd.get('work_days')||0),leave_days:Number(fd.get('leave_days')||0),total_amount:Number(fd.get('total_amount')||0),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
+    form_data:{...base,...details,period_month:String(fd.get('period_month')||''),work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),monthly_rate:Number(fd.get('monthly_rate')||0),work_days:Number(fd.get('work_days')||0),leave_days:Number(fd.get('leave_days')||0),total_amount:Number(fd.get('total_amount')||0),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
   };
 }
 
-export {printableDocument} from './print.js';
+export {printableDocument,printableCertificate} from './print.js';

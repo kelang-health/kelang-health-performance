@@ -11,11 +11,11 @@ import {
 const person={id:'p1',full_name:'นางสาว ตัวอย่าง ทดสอบ',position_name:'พยาบาลวิชาชีพ',position_level:'ชำนาญการ',employment_type:'ข้าราชการ',facility_code:'06118'};
 const facility={facility_code:'06118',short_name:'ศบส.ตัวอย่าง'};
 
-test('imports five legacy template capabilities but enables only the first two in this phase',()=>{
+test('imports five legacy template capabilities but enables annual, monthly and derived certificate',()=>{
   assert.equal(staffFormTemplates.length,5);
   assert.equal(templateByCode('chor11_annual').version,'2569.1');
   assert.equal(templateByCode('chor11_monthly').effectiveFrom,'2025-10-01');
-  assert.equal(staffFormTemplates.filter(t=>t.available).length,2);
+  assert.equal(staffFormTemplates.filter(t=>t.available).length,3);
 });
 
 test('annual form excludes citizen id and birth date inputs',()=>{

@@ -13,7 +13,7 @@ import {loadProfile,rest,readAll,login,logout,currentSession,refreshSession,onSe
 import {fetchGroup,fetchHdc} from './api/hdc/client.js';
 import {number,sum,fiscalYear,fiscalMonths,monthNames,eligible,percent,kpiStatus,rank,facilityResults,organization,periodMatches,ncdSummary,formatSourceDate,escapeHtml as e} from './utils/core.js';
 import {bars,columnChart} from './charts/charts.js';
-import {renderStaffWorkspace,renderDocumentForm,documentPayload,printableDocument,templateByCode} from './staff/documents.js';
+import {renderStaffWorkspace,renderDocumentForm,documentPayload,printableDocument,printableCertificate,templateByCode} from './staff/documents.js';
 const $=id=>document.getElementById(id);
 const fmt=(v,d=0)=>v===null||v===undefined?'—':Number(v).toLocaleString('th-TH',{minimumFractionDigits:d,maximumFractionDigits:d});
 $('developer-credit').textContent=credit;
@@ -141,10 +141,10 @@ function openStaffDocumentForm(code,id=''){
  if(!record&&code==='chor11_annual')record=state.staffDocuments.find(d=>d.form_code==='chor11_annual'&&+d.fiscal_year===+state.year)??null;
  openDialog(template.title,renderDocumentForm(code,{record,person,facility,fiscalYear:record?.fiscal_year??state.year}));
 }
-async function printStaffDocument(id){
+async function printStaffDocument(id,certificate=false){
  const record=state.staffDocuments.find(d=>d.id===id);if(!record)throw new Error('ไม่พบเอกสาร');
  const popup=window.open('','_blank');if(!popup)throw new Error('เบราว์เซอร์ปิดกั้นหน้าต่างพิมพ์ กรุณาอนุญาต pop-up สำหรับเว็บไซต์นี้');
- popup.opener=null;popup.document.open();popup.document.write(printableDocument(record,currentStaffIdentity()));popup.document.close();popup.document.getElementById('print-button')?.addEventListener('click',async()=>{await popup.document.fonts.ready;popup.print();});
+ popup.opener=null;popup.document.open();popup.document.write((certificate?printableCertificate:printableDocument)(record,currentStaffIdentity()));popup.document.close();popup.document.getElementById('print-button')?.addEventListener('click',async()=>{await popup.document.fonts.ready;popup.print();});
  const printedAt=new Date().toISOString();await rest('hp_staff_documents','id=eq.'+encodeURIComponent(id),'PATCH',{printed_at:printedAt,updated_at:printedAt});
  record.printed_at=printedAt;record.updated_at=printedAt;render();
 }
@@ -183,6 +183,7 @@ document.addEventListener('click',async event=>{const b=event.target.closest('bu
  if(b.id==='staff-retry'){await loadStaffDocuments();return;}
  if(b.dataset.staffNew){openStaffDocumentForm(b.dataset.staffNew);return;}
  if(b.dataset.staffEdit){const row=state.staffDocuments.find(d=>d.id===b.dataset.staffEdit);if(!row)throw new Error('ไม่พบเอกสาร');openStaffDocumentForm(row.form_code,row.id);return;}
+ if(b.dataset.staffCertificate){await printStaffDocument(b.dataset.staffCertificate,true);return;}
  if(b.dataset.staffPrint){await printStaffDocument(b.dataset.staffPrint);return;}
  if(b.dataset.staffPurge){const row=state.staffDocuments.find(d=>d.id===b.dataset.staffPurge);if(!row||row.form_code!=='chor11_annual'||row.owner_user_id!==currentSession()?.user?.id)throw new Error('ล้างได้เฉพาะคำขอประจำปีของตนเอง');if(!confirm('ล้างข้อมูลแบบคำขอประจำปีของคุณออกจากระบบหรือไม่? การดำเนินการนี้ย้อนกลับไม่ได้ แต่สามารถกรอกใหม่ภายหลังได้'))return;await rest('hp_staff_documents','id=eq.'+encodeURIComponent(b.dataset.staffPurge),'DELETE');await loadStaffDocuments();return;}
  if(b.id==='load-hp-accounts'){state.hpAccounts=(await accountApi({action:'list'})).accounts;render();return;}
