@@ -45,6 +45,8 @@ export function renderStaffWorkspace({documents=[],person=null,facility=null,fis
   }
   const annual=documents.find(d=>d.form_code==='chor11_annual'&&+d.fiscal_year===+fiscalYear);
   const monthly=documents.filter(d=>d.form_code==='chor11_monthly'&&+d.fiscal_year===+fiscalYear).sort((a,b)=>(b.period_month??'').localeCompare(a.period_month??''));
+  const otherYears=[...new Set(documents.map(d=>Number(d.fiscal_year)).filter(y=>Number.isInteger(y)&&y!==Number(fiscalYear)))].sort((a,b)=>b-a);
+  const yearNotice=!annual&&!monthly.length&&otherYears.length?'<div class="notice">ขณะนี้เลือกปี '+esc(fiscalYear)+' แต่ข้อมูลที่บันทึกไว้ของคุณอยู่ในปี '+otherYears.map(y=>'<button data-staff-year="'+y+'">เปิดปี '+y+'</button>').join(' ')+' กรุณาเปิดปีที่มีข้อมูลเพื่อแก้ไขหรือพิมพ์รายการเดิม</div>':'';
   const identity='<div class="notice success"><strong>'+esc(person.full_name)+'</strong> • '+esc(person.position_name||'ไม่ระบุตำแหน่ง')+' • '+esc(facility?.short_name||facility?.facility_name||person.facility_code||'')+'</div>';
   const actions='<div class="grid two-columns">'+
     '<section class="panel"><div class="panel-heading"><div><h2>แบบคำขอประจำปี</h2><p class="subtle">1 คน / 1 ปีงบประมาณ • หลังพิมพ์เลือกเก็บหรือล้างข้อมูลของตนเองได้</p></div>'+badge(annual?'มีข้อมูลแล้ว':'ยังไม่ได้จัดทำ',annual?'pass':'near')+'</div>'+
@@ -57,7 +59,7 @@ export function renderStaffWorkspace({documents=[],person=null,facility=null,fis
       (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+Number(d.form_data?.total_amount??0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท</td><td>'+badge(d.status==='ready'?'พร้อมพิมพ์':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์ใบขอ</button> <button data-staff-certificate="'+d.id+'">พิมพ์ใบรับรอง</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
     '</section>'+
   '</div>';
-  return identity+'<h2>ค่าตอบแทนและสิทธิประโยชน์</h2>'+actions+'<section class="panel"><h2>การลา</h2><p>เตรียมเปิดใช้งานในระยะถัดไป</p></section>'+renderTemplateTable();
+  return identity+yearNotice+'<h2>ค่าตอบแทนและสิทธิประโยชน์</h2>'+actions+'<section class="panel"><h2>การลา</h2><p>เตรียมเปิดใช้งานในระยะถัดไป</p></section>'+renderTemplateTable();
 }
 
 export function renderTemplateTable(){
@@ -132,3 +134,5 @@ export function documentPayload(form,{person,facility}={}){
 }
 
 export {printableDocument,printableCertificate} from './print.js';
+
+export {preparePrintableDocument} from './monthly-official.js';

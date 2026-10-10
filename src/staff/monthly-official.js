@@ -1,0 +1,26 @@
+// The unfilled page is a vector rendering of the user's prescribed PDF, not a redraw.
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const months=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const digits=v=>String(v??'').replace(/[0-9]/g,d=>'๐๑๒๓๔๕๖๗๘๙'[Number(d)]);
+const date=v=>v?digits(Number(v.slice(8,10)))+' '+months[Number(v.slice(5,7))-1]+' '+digits(Number(v.slice(0,4))+543):'';
+const field=(key,value,left,top,width)=>value==null||value===''?'':`<span class="template-field" data-print-field="${key}" style="left:${left}pt;top:${top}pt;width:${width}pt"><span class="template-value">${esc(value)}</span></span>`;
+export const officialMonthlyCSS='@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;background:#ddd;font-family:"TH Sarabun New",Sarabun,sans-serif}.official-monthly{position:relative;width:210mm;height:297mm;margin:12px auto;background:#fff;overflow:hidden}.official-background{position:absolute;inset:0;width:100%;height:100%}.template-field{position:absolute;height:18pt;line-height:18pt;display:flex;justify-content:center;align-items:center;font-size:16pt;white-space:nowrap}.template-value{display:inline-block;background:#fff;padding:0 1pt;line-height:1.05}.toolbar{position:fixed;top:12px;right:20px;z-index:5;font:14px Tahoma}.toolbar button{padding:9px 14px}.toolbar-note{display:block;background:#fff7db;padding:6px;margin-top:5px}@media print{body{background:white}.official-monthly{margin:0}.toolbar,.print-system-meta{display:none!important}}';
+export function officialMonthlyBody(record,f){
+ const parts=String(f.full_name||'').trim().split(/\s+/);const surname=parts.length>1?parts.pop():'';const first=parts.join(' ');
+ let history=[];try{history=JSON.parse(f.service_history||'[]');}catch{throw new Error('ประวัติการปฏิบัติงานไม่ถูกต้อง');}
+ if(!Array.isArray(history)||history.length>6)throw new Error('แบบต้นฉบับรองรับประวัติ 6 รายการ กรุณาจัดทำใบแนบหากมากกว่านี้');
+ const template=new URL('../../assets/forms/chor11-monthly-official.svg',import.meta.url).href;
+ let body=field('facility_name',f.facility_name,448,101,118)+field('month',months[Number(record.period_month?.slice(5,7))-1]||'',438,119,78)+field('calendar_year',digits(Number(record.period_month?.slice(0,4))+543),540,119,25);
+ body+=field('first_name',first,132,155,96)+field('last_name',surname,272,155,100)+field('position', [f.position_name,f.position_level].filter(Boolean).join(' '),415,155,103);
+ body+=field('current_facility',f.facility_name,171,173,93)+field('province',f.unit_province,305,173,67)+field('area_level',f.level_name,424,173,94);
+ body+=field('service_years',digits(f.service_years),200,191,63)+field('service_months',digits(f.service_months),282,191,89);
+ history.forEach((h,i)=>{const y=[288,324.2,360.4,396.5,432.7,468.8][i];const name=String(h.facility_name||'').replace(/^โรงพยาบาล/,'').replace(/^รพ\.สต\./,'ส่งเสริมสุขภาพตำบล');
+  body+=field('history_'+i+'_facility',name,204,y,60)+field('history_'+i+'_province',h.province,305,y,67)+field('history_'+i+'_level',h.level_name,417,y,100);
+  body+=field('history_'+i+'_from',date(h.start_date),134,y+18.1,94)+field('history_'+i+'_to',date(h.end_date),269,y+18.1,103)+field('history_'+i+'_years',digits(h.duration_years),396,y+18.1,33)+field('history_'+i+'_months',digits(h.duration_months),453,y+18.1,27)+field('history_'+i+'_days',digits(h.duration_days),513,y+18.1,21);
+ });
+ body+=field('total_years',digits(f.service_years),133,505,59)+field('total_months',digits(f.service_months),210,505,54)+field('total_days',digits(f.service_days),305,505,41);
+ body+=field('signature_name',f.full_name,345,631,131)+field('signature_position',[f.position_name,f.position_level].filter(Boolean).join(' '),344,649,132);
+ const original=new URL('../../assets/forms/chor11-monthly-official.pdf',import.meta.url).href;
+ return '<main class="official-monthly" aria-label="ใบขอรับเงินค่าตอบแทนเบี้ยเลี้ยงเหมาจ่ายสำหรับเจ้าหน้าที่ ที่ปฏิบัติงานในหน่วยบริการสังกัดเทศบาลเมืองเขลางค์นคร"><img class="official-background" src="'+template+'" alt="แบบต้นฉบับ: ข้าพเจ้าชื่อ นามสกุล ตำแหน่ง ฝึกเพิ่มพูนทักษะ ประวัติข้อ 2–7 และคำรับรอง"><div class="template-data">'+body+'</div></main><p class="print-system-meta" style="text-align:center"><a href="'+original+'" target="_blank" rel="noopener">เปิด PDF แบบต้นฉบับ</a></p>';
+}
+export async function preparePrintableDocument(doc){await doc.fonts.ready;await Promise.all([...doc.images].map(img=>img.decode()));for(const el of doc.querySelectorAll('.template-field')){const value=el.firstElementChild;for(let size=16;size>=8;size-=0.25){el.style.fontSize=size+'pt';if(value.getBoundingClientRect().width<=el.getBoundingClientRect().width)break;}if(value.getBoundingClientRect().width>el.getBoundingClientRect().width)value.style.transform='scaleX('+(el.getBoundingClientRect().width/value.getBoundingClientRect().width)+')';}}

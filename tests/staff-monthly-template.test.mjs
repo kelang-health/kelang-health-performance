@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {officialMonthlyBody} from '../src/staff/monthly-official.js';
+import {renderOfficialFields} from '../src/staff/official-fields.js';
+import {renderStaffWorkspace} from '../src/staff/documents.js';
+const record={period_month:'2026-10-01'};
+test('monthly template preserves the exact supplied blank PDF and its vector page',()=>{const digest=file=>createHash('sha256').update(fs.readFileSync(new URL('../assets/forms/'+file,import.meta.url))).digest('hex');assert.equal(digest('chor11-monthly-official.pdf'),'444625d8dc119b293bb6367ad7b9d1e51c3f221f422d5970f5f6d8ca0f700571');assert.equal(digest('chor11-monthly-official.svg'),'795374682cfa169f343b987dc48fb39fd8a735b559a7649b3b42f11b6e00981e');});
+test('monthly prints separate name fields and the area group, and never silently drops excess history',()=>{const html=officialMonthlyBody(record,{full_name:'นาย ตัวอย่าง ทดสอบ',level_name:'พื้นที่ชุมชนเมือง',service_history:'[]'});assert.match(html,/data-print-field="first_name"[^]*นาย ตัวอย่าง/);assert.match(html,/data-print-field="last_name"[^]*ทดสอบ/);assert.match(html,/data-print-field="area_level"[^]*พื้นที่ชุมชนเมือง/);assert.match(html,/chor11-monthly-official\.svg/);assert.match(html,/chor11-monthly-official\.pdf/);assert.throws(()=>officialMonthlyBody(record,{service_history:JSON.stringify(Array.from({length:7},()=>({})))}),/6 รายการ/);});
+test('monthly editor always exposes six original history slots, without fabricated records',()=>{const html=renderOfficialFields('chor11_monthly',{service_history:JSON.stringify([{facility_name:'หน่วยเดิม'}])});assert.match(html,/history_5_facility_name/);assert.doesNotMatch(html,/history_6_facility_name/);assert.equal((html.match(/value="หน่วยเดิม"/g)||[]).length,1);});
+test('staff can find existing documents when the shared dashboard defaults to another fiscal year',()=>{const html=renderStaffWorkspace({documents:[{...record,id:'m1',form_code:'chor11_monthly',fiscal_year:2570}],person:{full_name:'ทดสอบ'},fiscalYear:2569});assert.match(html,/data-staff-year="2570"/);assert.match(html,/ข้อมูลที่บันทึกไว้ของคุณอยู่ในปี/);});

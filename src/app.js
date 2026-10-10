@@ -13,7 +13,7 @@ import {loadProfile,rest,readAll,login,logout,currentSession,refreshSession,onSe
 import {fetchGroup,fetchHdc} from './api/hdc/client.js';
 import {number,sum,fiscalYear,fiscalMonths,monthNames,eligible,percent,kpiStatus,rank,facilityResults,organization,periodMatches,ncdSummary,formatSourceDate,escapeHtml as e} from './utils/core.js';
 import {bars,columnChart} from './charts/charts.js';
-import {renderStaffWorkspace,renderDocumentForm,documentPayload,printableDocument,printableCertificate,templateByCode} from './staff/documents.js';
+import {renderStaffWorkspace,renderDocumentForm,documentPayload,printableDocument,printableCertificate,preparePrintableDocument,templateByCode} from './staff/documents.js';
 const $=id=>document.getElementById(id);
 const fmt=(v,d=0)=>v===null||v===undefined?'—':Number(v).toLocaleString('th-TH',{minimumFractionDigits:d,maximumFractionDigits:d});
 $('developer-credit').textContent=credit;
@@ -144,7 +144,7 @@ function openStaffDocumentForm(code,id=''){
 async function printStaffDocument(id,certificate=false){
  const record=state.staffDocuments.find(d=>d.id===id);if(!record)throw new Error('ไม่พบเอกสาร');
  const popup=window.open('','_blank');if(!popup)throw new Error('เบราว์เซอร์ปิดกั้นหน้าต่างพิมพ์ กรุณาอนุญาต pop-up สำหรับเว็บไซต์นี้');
- popup.opener=null;popup.document.open();popup.document.write((certificate?printableCertificate:printableDocument)(record,currentStaffIdentity()));popup.document.close();popup.document.getElementById('print-button')?.addEventListener('click',async()=>{await popup.document.fonts.ready;popup.print();});
+ popup.opener=null;popup.document.open();popup.document.write((certificate?printableCertificate:printableDocument)(record,currentStaffIdentity()));popup.document.close();popup.document.getElementById('print-button')?.addEventListener('click',async()=>{await preparePrintableDocument(popup.document);popup.print();});
  const printedAt=new Date().toISOString();await rest('hp_staff_documents','id=eq.'+encodeURIComponent(id),'PATCH',{printed_at:printedAt,updated_at:printedAt});
  record.printed_at=printedAt;record.updated_at=printedAt;render();
 }
@@ -181,6 +181,7 @@ async function reloadProfile(){state.profile=await loadProfile();await loadPermi
 document.addEventListener('click',async event=>{const b=event.target.closest('button');if(!b)return;try{
  if(b.id==='staff-login'){openLogin('staff');return;}
  if(b.id==='staff-retry'){await loadStaffDocuments();return;}
+ if(b.dataset.staffYear){const year=Number(b.dataset.staffYear);if(!Number.isInteger(year)||year<2500||year>2700)throw new Error('ปีงบประมาณไม่ถูกต้อง');const select=$('year');if(![...select.options].some(o=>Number(o.value)===year))select.add(new Option(String(year),String(year)));select.value=String(year);select.dispatchEvent(new Event('change',{bubbles:true}));return;}
  if(b.dataset.staffNew){openStaffDocumentForm(b.dataset.staffNew);return;}
  if(b.dataset.staffEdit){const row=state.staffDocuments.find(d=>d.id===b.dataset.staffEdit);if(!row)throw new Error('ไม่พบเอกสาร');openStaffDocumentForm(row.form_code,row.id);return;}
  if(b.dataset.staffCertificate){await printStaffDocument(b.dataset.staffCertificate,true);return;}
