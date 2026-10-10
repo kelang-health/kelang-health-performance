@@ -56,7 +56,7 @@ export function renderStaffWorkspace({documents=[],person=null,facility=null,fis
     '</section>'+
     '<section class="panel"><div class="panel-heading"><div><h2>ใบขอรับเงินรายเดือน</h2><p class="subtle">เก็บรายการรายเดือนใน Supabase เพื่อเรียกใช้และพิมพ์ซ้ำได้</p></div>'+badge(monthly.length+' รายการ','info')+'</div>'+
       '<div class="controls"><button class="primary" data-staff-new="chor11_monthly">จัดทำใบขอรายเดือน</button></div>'+
-      (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+Number(d.form_data?.total_amount??0).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท</td><td>'+badge(d.status==='ready'?'พร้อมพิมพ์':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์ใบขอ</button> <button data-staff-certificate="'+d.id+'">พิมพ์ใบรับรอง</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
+      (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+(d.form_data?.total_amount==null?'ยังไม่ระบุ':Number(d.form_data.total_amount).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท')+'</td><td>'+badge(d.status==='ready'?'พร้อมพิมพ์':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์ใบขอ</button> <button data-staff-certificate="'+d.id+'">พิมพ์ใบรับรอง</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
     '</section>'+
   '</div>';
   return identity+yearNotice+'<h2>ค่าตอบแทนและสิทธิประโยชน์</h2>'+actions+'<section class="panel"><h2>การลา</h2><p>เตรียมเปิดใช้งานในระยะถัดไป</p></section>'+renderTemplateTable();
@@ -76,33 +76,35 @@ export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=
   if(code==='chor11_annual'){
     return '<form id="staff-document-form">'+common+'<div class="form-grid">'+
       '<label>ปีงบประมาณ<input value="'+esc(fiscalYear)+'" readonly></label>'+
-      '<label>วันที่ยื่นคำขอ<input name="request_date" type="date" value="'+esc(f.request_date??new Date().toISOString().slice(0,10))+'" required></label>'+
+      '<label>วันที่ยื่นคำขอ<input name="request_date" type="date" value="'+esc(f.request_date??'')+'"></label>'+
       '<label>เขียนที่<input name="written_at" value="'+esc(f.written_at??facility?.short_name??facility?.facility_name??'')+'" maxlength="200"></label>'+
-      '<label>อัตราค่าตอบแทนต่อเดือน (บาท)<input name="monthly_rate" type="number" min="0" step="0.01" value="'+esc(f.monthly_rate??'')+'" required></label>'+
-      '<label>ระยะเวลาปฏิบัติงาน (ปี)<input name="service_years" type="number" min="0" max="60" value="'+esc(f.service_years??0)+'"></label>'+
-      '<label>เดือน<input name="service_months" type="number" min="0" max="11" value="'+esc(f.service_months??0)+'"></label>'+
-      '<label>วัน<input name="service_days" type="number" min="0" max="31" value="'+esc(f.service_days??0)+'"></label>'+
+      '<label>อัตราค่าตอบแทนต่อเดือน (บาท)<input name="monthly_rate" type="number" min="0" step="0.01" value="'+esc(f.monthly_rate??'')+'"></label>'+
+      '<label>ระยะเวลาปฏิบัติงาน (ปี)<input name="service_years" type="number" min="0" max="60" value="'+esc(f.service_years??'')+'"></label>'+
+      '<label>เดือน<input name="service_months" type="number" min="0" max="11" value="'+esc(f.service_months??'')+'"></label>'+
+      '<label>วัน<input name="service_days" type="number" min="0" max="31" value="'+esc(f.service_days??'')+'"></label>'+
       '<label>เริ่มปฏิบัติงาน<input name="work_date_from" type="date" value="'+esc(f.work_date_from??'')+'"></label>'+
       '<label>ถึงวันที่<input name="work_date_to" type="date" value="'+esc(f.work_date_to??'')+'"></label>'+
       '<label>ประเภทใบอนุญาตประกอบวิชาชีพ<select name="license_type"><option value="">ยังไม่ระบุ</option>'+Object.entries(professionalLicenseChoices).map(([key,label])=>'<option value="'+key+'" '+(f.license_type===key?'selected':'')+'>'+esc(label)+'</option>').join('')+'</select></label>'+
       '<label>เลขใบอนุญาต<input name="license_number" value="'+esc(f.license_number??'')+'" maxlength="100" placeholder="เว้นว่างได้"></label>'+
       '<label style="grid-column:1/-1">ที่อยู่ติดต่อ<textarea name="contact_address" rows="3" maxlength="1000">'+esc(f.contact_address??'')+'</textarea></label>'+
       '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-    '</div>'+renderOfficialFields(code,f)+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกข้อมูล</button></div></form>';
+    '</div>'+renderOfficialFields(code,f)+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
   }
   const selected=record?.period_month??f.period_month??'';
   return '<form id="staff-document-form">'+common+'<div class="form-grid">'+
     '<label>เดือนที่เบิก<select name="period_month" required><option value="">เลือกเดือน</option>'+fiscalMonthOptions(fiscalYear,selected)+'</select></label>'+
-    '<label>วันที่ยื่นคำขอ<input name="request_date" type="date" value="'+esc(f.request_date??new Date().toISOString().slice(0,10))+'" required></label>'+
+    '<label>วันที่ยื่นคำขอ<input name="request_date" type="date" value="'+esc(f.request_date??'')+'"></label>'+
     '<label>เริ่มปฏิบัติงาน<input name="work_date_from" type="date" value="'+esc(f.work_date_from??'')+'"></label>'+
     '<label>ถึงวันที่<input name="work_date_to" type="date" value="'+esc(f.work_date_to??'')+'"></label>'+
-    '<label>อัตราเบี้ยเลี้ยงเหมาจ่าย (บาท)<input name="monthly_rate" type="number" min="0" step="0.01" value="'+esc(f.monthly_rate??'')+'" required></label>'+
+    '<label>อัตราเบี้ยเลี้ยงเหมาจ่าย (บาท)<input name="monthly_rate" type="number" min="0" step="0.01" value="'+esc(f.monthly_rate??'')+'"></label>'+
     '<label>วันปฏิบัติงาน<input name="work_days" type="number" min="0" step="0.5" value="'+esc(f.work_days??'')+'"></label>'+
-    '<label>วันลา/ขาดงาน<input name="leave_days" type="number" min="0" step="0.5" value="'+esc(f.leave_days??0)+'"></label>'+
-    '<label>จำนวนเงินที่ขอเบิก (บาท)<input name="total_amount" type="number" min="0" step="0.01" value="'+esc(f.total_amount??f.monthly_rate??'')+'" required></label>'+
+    '<label>วันลา/ขาดงาน<input name="leave_days" type="number" min="0" step="0.5" value="'+esc(f.leave_days??'')+'"></label>'+
+    '<label>จำนวนเงินที่ขอเบิก (บาท)<input name="total_amount" type="number" min="0" step="0.01" value="'+esc(f.total_amount??'')+'"></label>'+
     '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-  '</div>'+renderOfficialFields(code,f)+'<p class="subtle">รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกข้อมูล</button></div></form>';
+  '</div>'+renderOfficialFields(code,f)+'<p class="subtle">รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
 }
+
+function numberField(fd,key){const value=fd.get(key);return value==null||String(value).trim()===''?{}:{[key]:Number(value)};}
 
 export function documentPayload(form,{person,facility}={}){
   const fd=new FormData(form),code=String(fd.get('form_code')||''),fiscalYear=Number(fd.get('fiscal_year'));
@@ -123,13 +125,13 @@ export function documentPayload(form,{person,facility}={}){
   };
   if(code==='chor11_annual'){
     return {
-      record_id:String(fd.get('record_id')||''),form_code:code,template_version:'2569.1',fiscal_year:fiscalYear,period_month:null,status:'ready',
-      form_data:{...base,...details,work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),written_at:String(fd.get('written_at')||''),monthly_rate:Number(fd.get('monthly_rate')||0),service_years:Number(fd.get('service_years')||0),service_months:Number(fd.get('service_months')||0),service_days:Number(fd.get('service_days')||0),license_type:String(fd.get('license_type')||''),license_number:String(fd.get('license_number')||''),contact_address:String(fd.get('contact_address')||''),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
+      record_id:String(fd.get('record_id')||''),form_code:code,template_version:'2569.1',fiscal_year:fiscalYear,period_month:null,status:'draft',
+      form_data:{...base,...details,work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),written_at:String(fd.get('written_at')||''),...numberField(fd,'monthly_rate'),...numberField(fd,'service_years'),...numberField(fd,'service_months'),...numberField(fd,'service_days'),license_type:String(fd.get('license_type')||''),license_number:String(fd.get('license_number')||''),contact_address:String(fd.get('contact_address')||''),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
     };
   }
   return {
-    record_id:String(fd.get('record_id')||''),form_code:code,template_version:'2569.1',fiscal_year:fiscalYear,period_month:String(fd.get('period_month')||''),status:'ready',
-    form_data:{...base,...details,period_month:String(fd.get('period_month')||''),work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),monthly_rate:Number(fd.get('monthly_rate')||0),work_days:Number(fd.get('work_days')||0),leave_days:Number(fd.get('leave_days')||0),total_amount:Number(fd.get('total_amount')||0),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
+    record_id:String(fd.get('record_id')||''),form_code:code,template_version:'2569.1',fiscal_year:fiscalYear,period_month:String(fd.get('period_month')||''),status:'draft',
+    form_data:{...base,...details,period_month:String(fd.get('period_month')||''),work_date_from:String(fd.get('work_date_from')||''),work_date_to:String(fd.get('work_date_to')||''),...numberField(fd,'monthly_rate'),...numberField(fd,'work_days'),...numberField(fd,'leave_days'),...numberField(fd,'total_amount'),note:String(fd.get('note')||''),compensation_category:'LUMP_SUM_ALLOWANCE'}
   };
 }
 
