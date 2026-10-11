@@ -89,7 +89,7 @@ export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=
       '<label>เลขใบอนุญาต<input name="license_number" value="'+esc(f.license_number??'')+'" maxlength="100" placeholder="เว้นว่างได้"></label>'+
       '<label style="grid-column:1/-1">ที่อยู่ติดต่อ<textarea name="contact_address" rows="3" maxlength="1000">'+esc(f.contact_address??'')+'</textarea></label>'+
       '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-    '</div>'+renderOfficialFields(code,f)+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
+    '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
   }
   const selected=record?.period_month??f.period_month??'';
   return '<form id="staff-document-form">'+common+'<div class="form-grid">'+
@@ -102,7 +102,7 @@ export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=
     '<label>วันลา/ขาดงาน<input name="leave_days" type="number" min="0" step="0.5" value="'+esc(f.leave_days??'')+'"></label>'+
     '<label>จำนวนเงินที่ขอเบิก (บาท)<input name="total_amount" type="number" min="0" step="0.01" value="'+esc(f.total_amount??'')+'"></label>'+
     '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-  '</div>'+renderOfficialFields(code,f)+'<p class="subtle">เมื่อเปลี่ยนเดือน ต้องตรวจอายุงาน ประวัติ วันทำงานและวันลาใหม่ วันที่นับอายุงานและวันที่สิ้นสุดต้องตรงสิ้นเดือนที่เบิก • รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
+  '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">เมื่อเปลี่ยนเดือน ต้องตรวจอายุงาน ประวัติ วันทำงานและวันลาใหม่ วันที่นับอายุงานและวันที่สิ้นสุดต้องตรงสิ้นเดือนที่เบิก • รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
 }
 
 function numberField(fd,key){const value=fd.get(key);return value==null||String(value).trim()===''?{}:{[key]:Number(value)};}
@@ -115,7 +115,7 @@ export function documentPayload(form,{person,facility}={}){
   if(code==='chor11_monthly'&&(!/^\d{4}-\d{2}-01$/.test(month)||Number(month.slice(0,4))+543+(Number(month.slice(5,7))>=10?1:0)!==fiscalYear||Number(month.slice(5,7))<1||Number(month.slice(5,7))>12))throw new Error('เดือนที่เบิกไม่ตรงปีงบประมาณ');
   for(const key of ['monthly_rate','total_amount','work_days','leave_days','service_years','service_months','service_days']){const value=fd.get(key);if(value!==null&&(!Number.isFinite(Number(value))||Number(value)<0))throw new Error('ตัวเลขต้องเป็นจำนวนที่ไม่ติดลบ');}
   if(fd.get('work_date_from')&&fd.get('work_date_to')&&fd.get('work_date_from')>fd.get('work_date_to'))throw new Error('ช่วงปฏิบัติงานไม่ถูกต้อง');
-  const details=officialPayload(fd,code);
+  const details=officialPayload(fd,code,{person});
   const base={
     full_name:person.full_name,
     position_name:person.position_name||'',
