@@ -1,3 +1,4 @@
+import {withStaffChoices} from './form-choices.js';
 import {validateMonthlySnapshot} from './monthly-period.js';
 import {professionalLicenseChoices} from './print.js';
 import {renderOfficialFields,officialPayload} from './official-fields.js';
@@ -69,7 +70,8 @@ export function renderTemplateTable(){
   '</tbody></table></div></section>';
 }
 
-export function renderDocumentForm(code,{record=null,person,facility,fiscalYear=2569}={}){
+export function renderDocumentForm(code,options={}){return withStaffChoices(renderDocumentFields(code,options),options);}
+function renderDocumentFields(code,{record=null,person,facility,fiscalYear=2569}={}){
   const t=templateByCode(code);if(!t||!t.available)throw new Error('แบบพิมพ์นี้ยังไม่เปิดใช้งานในเว็บนี้');
   const f=record?.form_data??{};fiscalYear=record?.fiscal_year??fiscalYear;
   const common='<div class="notice success"><strong>'+esc(person.full_name)+'</strong> • '+esc(person.position_name||'ไม่ระบุตำแหน่ง')+' • '+esc(facility?.short_name||facility?.facility_name||person.facility_code||'')+'</div>'+
@@ -140,3 +142,4 @@ export function documentPayload(form,{person,facility}={}){
 export {printableDocument,printableCertificate} from './print.js';
 
 export {preparePrintableDocument} from './monthly-official.js';
+

@@ -141,7 +141,7 @@ function openStaffDocumentForm(code,id=''){
  const {person,facility}=currentStaffIdentity();if(!person)throw new Error('บัญชีนี้ยังไม่ได้ผูกกับทะเบียนบุคลากร');
  let record=id?state.staffDocuments.find(d=>d.id===id):null;
  if(!record&&code==='chor11_annual')record=state.staffDocuments.find(d=>d.personnel_id===person.id&&d.form_code==='chor11_annual'&&+d.fiscal_year===+state.year)??null;
- openDialog(template.title,renderDocumentForm(code,{record,person,facility,fiscalYear:record?.fiscal_year??state.year}));
+ openDialog(template.title,renderDocumentForm(code,{record,person,facility,fiscalYear:record?.fiscal_year??state.year,facilities:state.facilities,people:data('hp_personnel').filter(p=>p.active),documents:state.staffDocuments.filter(d=>d.personnel_id===person.id)}));
 }
 async function printStaffDocument(id,certificate=false){
  const record=state.staffDocuments.find(d=>d.id===id);if(!record)throw new Error('ไม่พบเอกสาร');
@@ -246,4 +246,5 @@ document.addEventListener('submit',async event=>{if(event.target.id!=='main-year
 try{
  const [facilitiesMaster,kpiMaster,inventory]=await Promise.all([request(new URL('./config/facilities.json',import.meta.url)),request(new URL('./config/kpi-master.json',import.meta.url)),request(new URL('./config/report-inventory.json',import.meta.url))]);state.facilities=facilitiesMaster;state.kpis=kpiMaster;state.inventory=inventory;state.selected=new Set(facilitiesMaster.map(f=>f.facility_code));$('navigation').innerHTML=routes.filter(r=>r[0]!=='profile').map(([id,icon,label])=>`<a href="#${id}"><span class="nav-icon" aria-hidden="true">${icon}</span>${e(label)}</a>`).join('');fiscalMonths.forEach((m,i)=>$('period').add(new Option(monthNames[i],String(m))));[...new Set(kpiMaster.map(k=>k.category))].forEach(c=>$('category').add(new Option(c,c)));navigate();await load();if(mustChangePassword())openRequiredPasswordChange();
 }catch(error){$('view').innerHTML=`<div class="notice error">ไม่สามารถเริ่มระบบ: ${e(error.message)}</div>`;}
+
 

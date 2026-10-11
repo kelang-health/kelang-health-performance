@@ -1,6 +1,6 @@
 {
   "name": "kelang-health-performance",
-  "version": "1.65.0",
+  "version": "1.66.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,4 +10,5 @@
     "dev": "node scripts/serve.mjs"
   }
 }
+
 
