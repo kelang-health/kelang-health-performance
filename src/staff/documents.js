@@ -51,14 +51,14 @@ export function renderStaffWorkspace({documents=[],person=null,facility=null,fis
   const yearNotice=!annual&&!monthly.length&&otherYears.length?'<div class="notice">ขณะนี้เลือกปี '+esc(fiscalYear)+' แต่ข้อมูลที่บันทึกไว้ของคุณอยู่ในปี '+otherYears.map(y=>'<button data-staff-year="'+y+'">เปิดปี '+y+'</button>').join(' ')+' กรุณาเปิดปีที่มีข้อมูลเพื่อแก้ไขหรือพิมพ์รายการเดิม</div>':'';
   const identity='<div class="notice success"><strong>'+esc(person.full_name)+'</strong> • '+esc(person.position_name||'ไม่ระบุตำแหน่ง')+' • '+esc(facility?.short_name||facility?.facility_name||person.facility_code||'')+'</div>';
   const actions='<div class="grid two-columns">'+
-    '<section class="panel"><div class="panel-heading"><div><h2>แบบคำขอประจำปี</h2><p class="subtle">1 คน / 1 ปีงบประมาณ • หลังพิมพ์เลือกเก็บหรือล้างข้อมูลของตนเองได้</p></div>'+badge(annual?'มีข้อมูลแล้ว':'ยังไม่ได้จัดทำ',annual?'pass':'near')+'</div>'+
+    '<section class="panel"><div class="panel-heading"><div><h2>แบบคำขอประจำปี</h2><p class="subtle">1 คน / 1 ปีงบประมาณ • ล้างได้เฉพาะร่างที่ยังไม่เคยยืนยัน</p></div>'+badge(annual?(annual.status==='ready'?'ตรวจครบพร้อมใช้':'ฉบับร่าง'):'ยังไม่ได้จัดทำ',annual?.status==='ready'?'pass':'near')+'</div>'+
       '<div class="controls"><button class="primary" data-staff-new="chor11_annual">'+(annual?'แก้ไขคำขอปี '+fiscalYear:'จัดทำคำขอปี '+fiscalYear)+'</button>'+
-      (annual?'<button data-staff-print="'+annual.id+'">พิมพ์</button><button class="danger" data-staff-purge="'+annual.id+'">ล้างข้อมูลของฉัน</button>':'')+'</div>'+
-      (annual?'<p class="subtle">รุ่น '+esc(annual.template_version)+' • บันทึกล่าสุด '+esc(new Date(annual.updated_at).toLocaleString('th-TH'))+(annual.printed_at?' • เคยเปิดพิมพ์ '+esc(new Date(annual.printed_at).toLocaleString('th-TH')):'')+'</p>':'')+
+      (annual?((annual.issue_count||0)>0?'<button data-staff-history="'+annual.id+'">ฉบับยืนยันย้อนหลัง ('+annual.issue_count+')</button>':'')+'<button data-staff-print="'+annual.id+'">พิมพ์</button>'+((annual.issue_count||0)===0?'<button class="danger" data-staff-purge="'+annual.id+'">ล้างข้อมูลของฉัน</button>':''):'')+'</div>'+
+      (annual?'<p class="subtle">รุ่น '+esc(annual.template_version)+' • บันทึกล่าสุด '+esc(new Date(annual.updated_at).toLocaleString('th-TH'))+((annual.preview_opened_at||annual.printed_at)?' • เคยเปิดหน้าพิมพ์ '+esc(new Date(annual.preview_opened_at||annual.printed_at).toLocaleString('th-TH')):'')+'</p>':'')+
     '</section>'+
     '<section class="panel"><div class="panel-heading"><div><h2>ใบขอรับเงินรายเดือน</h2><p class="subtle">เก็บรายการรายเดือนใน Supabase เพื่อเรียกใช้และพิมพ์ซ้ำได้</p></div>'+badge(monthly.length+' รายการ','info')+'</div>'+
       '<div class="controls"><button class="primary" data-staff-new="chor11_monthly">จัดทำใบขอรายเดือน</button></div>'+
-      (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+(d.form_data?.total_amount==null?'ยังไม่ระบุ':Number(d.form_data.total_amount).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท')+'</td><td>'+badge(d.status==='ready'?'พร้อมพิมพ์':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์ใบขอ</button> <button data-staff-certificate="'+d.id+'">พิมพ์ใบรับรอง</button></td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
+      (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+(d.form_data?.total_amount==null?'ยังไม่ระบุ':Number(d.form_data.total_amount).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท')+'</td><td>'+badge(d.status==='ready'?'ตรวจครบพร้อมใช้':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์ใบขอ</button> <button data-staff-certificate="'+d.id+'">พิมพ์ใบรับรอง</button>'+((d.issue_count||0)>0?'<button data-staff-history="'+d.id+'">ฉบับยืนยันย้อนหลัง ('+d.issue_count+')</button>':'')+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
     '</section>'+
   '</div>';
   return identity+yearNotice+'<h2>ค่าตอบแทนและสิทธิประโยชน์</h2>'+actions+'<section class="panel"><h2>การลา</h2><p>เตรียมเปิดใช้งานในระยะถัดไป</p></section>'+renderTemplateTable();
@@ -71,11 +71,12 @@ export function renderTemplateTable(){
 }
 
 export function renderDocumentForm(code,options={}){return withStaffChoices(renderDocumentFields(code,options),options);}
-function renderDocumentFields(code,{record=null,person,facility,fiscalYear=2569}={}){
+function renderDocumentFields(code,{record=null,person,facility,fiscalYear=2569,canConfirm=false}={}){
   const t=templateByCode(code);if(!t||!t.available)throw new Error('แบบพิมพ์นี้ยังไม่เปิดใช้งานในเว็บนี้');
+  const workflowActions=canConfirm&&record?.status!=='ready'?'<label><input type="checkbox" name="review_confirmed"> ตรวจข้อมูลและยืนยันความถูกต้องแล้ว (ไม่ใช่การอนุมัติราชการ)</label><button type="submit" name="document_action" value="ready" class="primary">บันทึกและยืนยันพร้อมใช้</button>':'';
   const f=record?.form_data??{};fiscalYear=record?.fiscal_year??fiscalYear;
   const common='<div class="notice success"><strong>'+esc(person.full_name)+'</strong> • '+esc(person.position_name||'ไม่ระบุตำแหน่ง')+' • '+esc(facility?.short_name||facility?.facility_name||person.facility_code||'')+'</div>'+
-    '<input type="hidden" name="record_id" value="'+esc(record?.id??'')+'"><input type="hidden" name="form_code" value="'+esc(code)+'"><input type="hidden" name="template_version" value="'+esc(t.version)+'"><input type="hidden" name="fiscal_year" value="'+esc(fiscalYear)+'">';
+    '<input type="hidden" name="expected_revision" value="'+esc(record?.revision??1)+'">'+(record?.status==='ready'?'<p class="notice">การบันทึกแก้ไขจะกลับเป็นร่าง ฉบับยืนยันเดิมยังอยู่ในประวัติ</p>':'')+'<input type="hidden" name="record_id" value="'+esc(record?.id??'')+'"><input type="hidden" name="form_code" value="'+esc(code)+'"><input type="hidden" name="template_version" value="'+esc(t.version)+'"><input type="hidden" name="fiscal_year" value="'+esc(fiscalYear)+'">';
   if(code==='chor11_annual'){
     return '<form id="staff-document-form">'+common+'<div class="form-grid">'+
       '<p class="notice" style="grid-column:1/-1">หน้า 1: กรอกข้อมูลคำขอ ที่อยู่แยกช่อง ใบอนุญาต ระยะเวลาที่ขอรับ และจำนวนเงิน • หน้า 2: ชื่อผู้ยื่นดึงจากทะเบียน ส่วนความเห็น การอนุมัติ ลายเซ็น และตำแหน่งผู้บริหารให้เติมภายหลังบนเอกสาร</p>'+
@@ -92,7 +93,7 @@ function renderDocumentFields(code,{record=null,person,facility,fiscalYear=2569}
       '<label>เลขใบอนุญาต<input name="license_number" value="'+esc(f.license_number??'')+'" maxlength="100" placeholder="เว้นว่างได้"></label>'+
       '<label style="grid-column:1/-1">ที่อยู่ติดต่อเพิ่มเติม (ไม่พิมพ์แทนช่องที่อยู่แยก)<textarea name="contact_address" rows="3" maxlength="1000">'+esc(f.contact_address??'')+'</textarea></label>'+
       '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-    '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
+    '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button>'+workflowActions+'</div></form>';
   }
   const selected=record?.period_month??f.period_month??'';
   return '<form id="staff-document-form">'+common+'<div class="form-grid">'+
@@ -105,7 +106,7 @@ function renderDocumentFields(code,{record=null,person,facility,fiscalYear=2569}
     '<label>วันลา/ขาดงาน<input name="leave_days" type="number" min="0" step="0.5" value="'+esc(f.leave_days??'')+'"></label>'+
     '<label>จำนวนเงินที่ขอเบิก (บาท)<input name="total_amount" type="number" min="0" step="0.01" value="'+esc(f.total_amount??'')+'"></label>'+
     '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-  '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">เมื่อเปลี่ยนเดือน ต้องตรวจอายุงาน ประวัติ วันทำงานและวันลาใหม่ วันที่นับอายุงานและวันที่สิ้นสุดต้องตรงสิ้นเดือนที่เบิก • รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
+  '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">เมื่อเปลี่ยนเดือน ต้องตรวจอายุงาน ประวัติ วันทำงานและวันลาใหม่ วันที่นับอายุงานและวันที่สิ้นสุดต้องตรงสิ้นเดือนที่เบิก • รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button>'+workflowActions+'</div></form>';
 }
 
 function numberField(fd,key){const value=fd.get(key);return value==null||String(value).trim()===''?{}:{[key]:Number(value)};}

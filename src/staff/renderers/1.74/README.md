@@ -1,0 +1,1 @@
+Frozen renderer for confirmed copies in release 1.74. Do not edit these modules. Future print changes require a new renderer directory and server render_version. Official source form assets retain their pinned hashes.
