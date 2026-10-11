@@ -1,5 +1,6 @@
 import {runtime} from '../../config/runtime.js';
 import {request} from '../request.js';
+export async function leaveTransferRpc(name,body){if(!['snapshot','plan','apply'].includes(name))throw new Error('ไม่อนุญาต RPC นี้');await refreshSession();if(!session)throw new Error('กรุณาเข้าสู่ระบบ');const generation=identityGeneration;const result=await request(`${runtime.supabaseUrl}/rest/v1/rpc/hp_leave_transfer_${name}`,{method:'POST',headers:{apikey:runtime.supabaseKey,Authorization:`Bearer ${session.access_token}`,'Content-Type':'application/json'},body:JSON.stringify(body)},0);checkSessionTime();if(generation!==identityGeneration)throw new Error('เซสชันหมดอายุ กรุณาเข้าสู่ระบบใหม่');return result;}
 import {sessionPolicy,sessionStatus} from './session-policy.js';
 let session=null;try{session=JSON.parse(sessionStorage.getItem('khp-session')??'null');}catch{}
 const sessionListeners=[];

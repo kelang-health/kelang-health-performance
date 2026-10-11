@@ -1,6 +1,6 @@
 // Port of compensation/workday_lib.php. Civil dates use UTC to avoid DST/time-zone drift.
 export const leaveTypes={SICK:'ลาป่วย',PERSONAL:'ลากิจ',VACATION:'ลาพักผ่อน',MATERNITY:'ลาคลอด',ORDINATION:'ลาอุปสมบท/ประกอบพิธีฮัจย์',OFFICIAL:'ไปราชการ/อบรม',OTHER:'ลา/หยุดอื่น'};
-export const statuses={pending:'รอตรวจผลอนุมัติ',approved:'บันทึกว่าอนุมัติแล้ว',rejected:'ไม่อนุมัติ',cancelled:'ยกเลิก'};
+export const statuses={pending:'รอตรวจผลอนุมัติ',approved:'บันทึกผลตามเอกสารที่ลงนามแล้ว',rejected:'ไม่อนุมัติ',cancelled:'ยกเลิก'};
 export function civilDate(value){if(!/^\d{4}-\d{2}-\d{2}$/.test(value||''))throw new Error('วันที่ไม่ถูกต้อง');const d=new Date(value+'T00:00:00Z');if(!Number.isFinite(+d)||d.toISOString().slice(0,10)!==value)throw new Error('วันที่ไม่ถูกต้อง');return d;}
 export function fiscalRange(year){if(!Number.isInteger(+year)||year<2500||year>2700)throw new Error('ปีงบประมาณไม่ถูกต้อง');return [(year-544)+'-10-01',(year-543)+'-09-30'];}
 export function monthDates(month){const d=civilDate(month);if(d.getUTCDate()!==1)throw new Error('ต้องเป็นวันที่ 1 ของเดือน');const out=[];while(d.toISOString().slice(0,7)===month.slice(0,7)){out.push(d.toISOString().slice(0,10));d.setUTCDate(d.getUTCDate()+1);}return out;}

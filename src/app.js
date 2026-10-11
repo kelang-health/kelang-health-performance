@@ -125,7 +125,7 @@ function canManageStaff(code){return !!currentSession()&&!mustChangePassword()&&
 function currentStaffIdentity(){
  const userId=currentSession()?.user?.id;const link=(state.personnelLinks??[]).find(l=>l.user_id===userId);const selected=data('hp_personnel').find(p=>p.id===state.staffPersonId&&canManageStaff(p.facility_code));const person=selected||(link?data('hp_personnel').find(p=>p.id===link.personnel_id):null);const facility=person?state.facilities.find(f=>f.facility_code===person.facility_code):null;return {userId,person,facility};
 }
-const leaveController=createLeaveController({rest,getContext:()=>({...currentStaffIdentity(),year:state.year,manager:canManageStaff(currentStaffIdentity().person?.facility_code)}),render:()=>{if(state.route==='staff')render();},openDialog,closeDialog:()=>$('dialog').close()});
+const leaveController=createLeaveController({rest,getContext:()=>({...currentStaffIdentity(),year:state.year,admin:admin(),manager:canManageStaff(currentStaffIdentity().person?.facility_code)}),render:()=>{if(state.route==='staff')render();},openDialog,closeDialog:()=>$('dialog').close()});
 async function loadStaffDocuments(){
  void leaveController.load();
  if(!currentSession()||mustChangePassword()){state.staffDocuments=[];return;}

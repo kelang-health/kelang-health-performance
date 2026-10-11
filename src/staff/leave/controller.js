@@ -1,9 +1,12 @@
 import {leaveTypes,monthDates,fiscalMonths,isHoliday,monthlyAttendance,validateLeave,leaveErrorMessage} from './core.js';
 import {esc,detailLabels,leavePanel,leaveForm,calendarForm,quotaForm,decisionForm} from './view.js';
 import {printableLeave} from './print.js';
+import {createTransferUI} from './transfer-ui.js';
+import {leaveTransferRpc} from '../../api/supabase/client.js';
 const leaveColumns='id,personnel_id,facility_code,fiscal_year,leave_type,date_from,date_to,portion,status,details,revision,created_at,updated_at';
 const calendarColumns='id,facility_code,month_start,overrides,verified,revision,verified_by,verified_at';
 export function createLeaveController({rest,getContext,render,openDialog,closeDialog}){
+ createTransferUI({getContext,openDialog,onImported:()=>load(),adapter:{snapshot:c=>leaveTransferRpc('snapshot',{pid:c.person.id,fy:c.year}),preview:packet=>leaveTransferRpc('plan',{packet}),apply:(packet,expected_token,selected)=>leaveTransferRpc('apply',{packet,expected_token,selected}),receipt:(id,c)=>rest('hp_leave_transfer_receipts','select=provenance,selected,imported_at,actor&package_id=eq.'+encodeURIComponent(id)+'&personnel_id=eq.'+c.person.id+'&fiscal_year=eq.'+c.year+'&limit=1').then(rows=>rows[0]),history:c=>rest('hp_leave_transfer_receipts','select=package_id,source_instance,imported_at&personnel_id=eq.'+c.person.id+'&fiscal_year=eq.'+c.year+'&order=imported_at.desc&limit=20'),register:(instance_id,label,c)=>rest('hp_leave_transfer_sources','','POST',{instance_id,label,facility_code:c.person.facility_code})}});
  let state={key:'',leaves:[],calendars:[],quota:null,loading:false,error:'',notice:''},month='',generation=0;
  function context(){const c=getContext();const months=fiscalMonths(c.year);if(!months.includes(month))month=months[0];return {...c,month,key:c.userId+'|'+(c.person?.id||'')+'|'+c.year};}
  async function load(){const ctx=context(),g=++generation;if(!ctx.userId||!ctx.person){state={key:ctx.key,leaves:[],calendars:[],quota:null};return;}state={...state,key:ctx.key,loading:true,error:''};try{
