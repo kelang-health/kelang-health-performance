@@ -1,3 +1,4 @@
+import {createLeaveController} from './staff/leave/controller.js';
 import {assertReadyDocument,expectedDocumentRevision,documentListFields} from './staff/document-workflow.js';
 import {mainYearKey,primaryYear,initialYear} from './utils/main-year.js';
 import {mountSessionTimeouts} from './session-timeouts.js';
@@ -124,7 +125,9 @@ function canManageStaff(code){return !!currentSession()&&!mustChangePassword()&&
 function currentStaffIdentity(){
  const userId=currentSession()?.user?.id;const link=(state.personnelLinks??[]).find(l=>l.user_id===userId);const selected=data('hp_personnel').find(p=>p.id===state.staffPersonId&&canManageStaff(p.facility_code));const person=selected||(link?data('hp_personnel').find(p=>p.id===link.personnel_id):null);const facility=person?state.facilities.find(f=>f.facility_code===person.facility_code):null;return {userId,person,facility};
 }
+const leaveController=createLeaveController({rest,getContext:()=>({...currentStaffIdentity(),year:state.year,manager:canManageStaff(currentStaffIdentity().person?.facility_code)}),render:()=>{if(state.route==='staff')render();},openDialog,closeDialog:()=>$('dialog').close()});
 async function loadStaffDocuments(){
+ void leaveController.load();
  if(!currentSession()||mustChangePassword()){state.staffDocuments=[];return;}
  const uid=currentSession().user.id,{person}=currentStaffIdentity(),year=state.year;
  state.staffDocumentsError='';if(!person){state.staffDocuments=[];state.staffDocumentsLoading=false;return;}
@@ -140,7 +143,7 @@ function staffPortal(){
  if(state.staffDocumentsLoading)return '<div class="notice">กำลังโหลดเอกสารของฉัน…</div>';
  const {person,facility}=currentStaffIdentity();
  const choices=data('hp_personnel').filter(p=>p.active&&canManageStaff(p.facility_code));const picker=choices.length?'<div class="controls"><label>จัดทำเอกสารให้บุคลากร<select id="staff-person-select"><option value="">บุคลากรที่เชื่อมบัญชีของฉัน</option>'+choices.map(p=>'<option value="'+e(p.id)+'" '+(person?.id===p.id?'selected':'')+'>'+e(p.full_name)+' · '+e(p.facility_code)+'</option>').join('')+'</select></label></div>':'';
- return picker+renderStaffWorkspace({documents:state.staffDocuments.filter(d=>d.personnel_id===person?.id),person,facility,fiscalYear:state.year});
+ return picker+renderStaffWorkspace({documents:state.staffDocuments.filter(d=>d.personnel_id===person?.id),person,facility,fiscalYear:state.year})+leaveController.html();
 }
 function openStaffDocumentForm(code,id=''){
  const template=templateByCode(code);if(!template?.available)throw new Error('แบบพิมพ์นี้ยังไม่เปิดใช้งาน');

@@ -7,8 +7,8 @@ const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt
 export const staffFormTemplates=Object.freeze([
   {code:'chor11_annual',title:'แบบคำขอรับเงินค่าตอบแทนประจำปี',version:'2569.1',effectiveFrom:'2025-10-01',mode:'PDF ต้นฉบับหน้า 5–6 ระเบียบ 2562',sourceActive:true,available:true,storage:'ผู้ใช้เลือกเก็บหรือล้าง'},
   {code:'chor11_monthly',title:'ใบขอรับเงินค่าตอบแทนเบี้ยเลี้ยงเหมาจ่ายรายเดือน',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'เก็บรายการรายเดือน'},
-  {code:'leave_sick',title:'ใบลาป่วย',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:false,storage:'ระยะถัดไป'},
-  {code:'leave_vacation',title:'ใบลาพักผ่อน',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:false,storage:'ระยะถัดไป'},
+  {code:'leave_sick',title:'ใบลาป่วย',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'ทะเบียนลาแยกตามหน่วย'},
+  {code:'leave_vacation',title:'ใบลาพักผ่อน',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'ทะเบียนลาแยกตามหน่วย'},
   {code:'work_certificate',title:'ใบรับรองวันทำงานประกอบเบิก ฉ.11',version:'2569.1',effectiveFrom:'2025-10-01',mode:'หน้าเว็บจัดพิมพ์',sourceActive:true,available:true,storage:'พิมพ์จากรายการรายเดือน ไม่เพิ่มตาราง'}
 ]);
 
@@ -61,7 +61,7 @@ export function renderStaffWorkspace({documents=[],person=null,facility=null,fis
       (monthly.length?'<div class="table-wrap"><table><thead><tr><th>เดือน</th><th>จำนวนเงิน</th><th>สถานะ</th><th>จัดการ</th></tr></thead><tbody>'+monthly.map(d=>'<tr><td>'+esc(thaiMonthLabel(d.period_month))+'</td><td>'+(d.form_data?.total_amount==null?'ยังไม่ระบุ':Number(d.form_data.total_amount).toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2})+' บาท')+'</td><td>'+badge(d.status==='ready'?'ตรวจครบพร้อมใช้':'ฉบับร่าง',d.status==='ready'?'pass':'near')+'</td><td><button data-staff-edit="'+d.id+'">แก้ไข</button> <button data-staff-print="'+d.id+'">พิมพ์ใบขอ</button> <button data-staff-certificate="'+d.id+'">พิมพ์ใบรับรอง</button>'+((d.issue_count||0)>0?'<button data-staff-history="'+d.id+'">ฉบับยืนยันย้อนหลัง ('+d.issue_count+')</button>':'')+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีใบขอรายเดือน</div>')+
     '</section>'+
   '</div>';
-  return identity+yearNotice+'<h2>ค่าตอบแทนและสิทธิประโยชน์</h2>'+actions+'<section class="panel"><h2>การลา</h2><p>เตรียมเปิดใช้งานในระยะถัดไป</p></section>'+renderTemplateTable();
+  return identity+yearNotice+'<h2>ค่าตอบแทนและสิทธิประโยชน์</h2>'+actions+renderTemplateTable();
 }
 
 export function renderTemplateTable(){
@@ -106,7 +106,7 @@ function renderDocumentFields(code,{record=null,person,facility,fiscalYear=2569,
     '<label>วันลา/ขาดงาน<input name="leave_days" type="number" min="0" step="0.5" value="'+esc(f.leave_days??'')+'"></label>'+
     '<label>จำนวนเงินที่ขอเบิก (บาท)<input name="total_amount" type="number" min="0" step="0.01" value="'+esc(f.total_amount??'')+'"></label>'+
     '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
-  '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">เมื่อเปลี่ยนเดือน ต้องตรวจอายุงาน ประวัติ วันทำงานและวันลาใหม่ วันที่นับอายุงานและวันที่สิ้นสุดต้องตรงสิ้นเดือนที่เบิก • รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button>'+workflowActions+'</div></form>';
+  '</div>'+renderOfficialFields(code,f,{person})+'<div class="notice"><label><input type="checkbox" name="leave_register_checked"> ตรวจแล้วว่ารายการลาเดือนที่เบิกใน cloud ครบถ้วน</label><button type="button" data-leave-attendance>คำนวณจากทะเบียนลา</button><p class="leave-attendance-notice" role="status">ใช้เฉพาะปฏิทินยืนยันแล้ว เติมตัวเลขเบื้องต้นโดยไม่ยืนยันวันทำงานจริงให้อัตโนมัติ</p></div><p class="subtle">เมื่อเปลี่ยนเดือน ต้องตรวจอายุงาน ประวัติ วันทำงานและวันลาใหม่ วันที่นับอายุงานและวันที่สิ้นสุดต้องตรงสิ้นเดือนที่เบิก • รายการรายเดือนจะเก็บใน Supabase เพื่อใช้ติดตามและพิมพ์ซ้ำ • ไม่มีเลขบัตรประชาชนหรือวันเกิด</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button>'+workflowActions+'</div></form>';
 }
 
 function numberField(fd,key){const value=fd.get(key);return value==null||String(value).trim()===''?{}:{[key]:Number(value)};}
