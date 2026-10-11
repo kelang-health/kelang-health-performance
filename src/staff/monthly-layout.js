@@ -21,8 +21,8 @@ export const monthlyLayoutCSS=`
 .monthly-history{margin:5px 0;break-inside:avoid}
 .monthly-primary{display:grid;grid-template-columns:auto minmax(0,1.6fr) auto minmax(0,.5fr) auto minmax(0,.85fr);gap:4px;align-items:baseline}
 .monthly-secondary{display:grid;grid-template-columns:auto 1fr auto 1fr auto .25fr auto .25fr auto .25fr auto;gap:4px;align-items:baseline;padding-left:20px;margin-top:2px}
-.monthly-closing{break-inside:avoid}.monthly-summary{margin-top:7px}.monthly-certify{text-indent:32px;margin:12px 0 0}.monthly-signature{text-align:center;width:48%;margin:28px 0 0 auto;break-inside:avoid}.monthly-signature p{margin:2px 0}
-.monthly-sheet.monthly-compact{font-size:15pt;line-height:1.08}.monthly-compact h1{margin-bottom:8px}.monthly-compact .monthly-meta{margin-bottom:6px}.monthly-compact .monthly-field{line-height:1.08}.monthly-compact .monthly-history{margin:3px 0}.monthly-compact .monthly-secondary{margin-top:1px}.monthly-compact .monthly-history-title{margin:5px 0 3px}.monthly-compact .monthly-certify{margin-top:8px}.monthly-compact .monthly-signature{margin-top:18px}
+.monthly-closing{break-inside:avoid}.monthly-summary{margin-top:7px}.monthly-certify{text-indent:32px;margin:12px 0 0}.monthly-signature{text-align:center;width:48%;margin:calc(28px + 4.56em) 0 0 auto;break-inside:avoid}.monthly-signature p{margin:2px 0}.monthly-signature .monthly-field{border-bottom:0}
+.monthly-sheet.monthly-compact{font-size:15pt;line-height:1.08}.monthly-compact h1{margin-bottom:8px}.monthly-compact .monthly-meta{margin-bottom:6px}.monthly-compact .monthly-field{line-height:1.08}.monthly-compact .monthly-history{margin:3px 0}.monthly-compact .monthly-secondary{margin-top:1px}.monthly-compact .monthly-history-title{margin:5px 0 3px}.monthly-compact .monthly-certify{margin-top:8px}.monthly-compact .monthly-signature{margin-top:calc(18px + 4.32em)}
 @media print{.monthly-sheet{min-height:0;margin:0;box-shadow:none}.monthly-field{border-bottom:1px dotted black}}
 `;
 const fullUnitName=v=>String(v??'').replace(/^ศบส\.\s*/, 'ศูนย์บริการสาธารณสุข').replace(/^รพ\.สต\.\s*/, 'โรงพยาบาลส่งเสริมสุขภาพตำบล');
@@ -48,3 +48,4 @@ export function monthlyLayoutBody(record,f,history,printNames){
  const svg=new URL('../../assets/forms/chor11-monthly-official.svg',import.meta.url).href;
  return body+`<template class="monthly-continuation"><h1>ประวัติการปฏิบัติงาน (ต่อ)</h1><p>${esc(digits(f.full_name))} · ${esc(digits(month+' '+(Number(record.period_month.slice(0,4))+543)))}</p></template><p class="print-system-meta" style="text-align:center"><a href="${pdf}">PDF แบบต้นฉบับ</a> · <a href="${svg}">ภาพแบบต้นฉบับ</a></p>`;
 }
+
