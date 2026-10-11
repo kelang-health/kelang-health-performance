@@ -78,18 +78,19 @@ function renderDocumentFields(code,{record=null,person,facility,fiscalYear=2569}
     '<input type="hidden" name="record_id" value="'+esc(record?.id??'')+'"><input type="hidden" name="form_code" value="'+esc(code)+'"><input type="hidden" name="template_version" value="'+esc(t.version)+'"><input type="hidden" name="fiscal_year" value="'+esc(fiscalYear)+'">';
   if(code==='chor11_annual'){
     return '<form id="staff-document-form">'+common+'<div class="form-grid">'+
+      '<p class="notice" style="grid-column:1/-1">หน้า 1: กรอกข้อมูลคำขอ ที่อยู่แยกช่อง ใบอนุญาต ระยะเวลาที่ขอรับ และจำนวนเงิน • หน้า 2: ชื่อผู้ยื่นดึงจากทะเบียน ส่วนความเห็น การอนุมัติ ลายเซ็น และตำแหน่งผู้บริหารให้เติมภายหลังบนเอกสาร</p>'+
       '<label>ปีงบประมาณ<input value="'+esc(fiscalYear)+'" readonly></label>'+
       '<label>วันที่ยื่นคำขอ<input name="request_date" type="date" value="'+esc(f.request_date??'')+'"></label>'+
       '<label>เขียนที่<input name="written_at" value="'+esc(f.written_at??facility?.short_name??facility?.facility_name??'')+'" maxlength="200"></label>'+
       '<label>อัตราค่าตอบแทนต่อเดือน (บาท)<input name="monthly_rate" type="number" min="0" step="0.01" value="'+esc(f.monthly_rate??'')+'"></label>'+
-      '<label>ระยะเวลาปฏิบัติงาน (ปี)<input name="service_years" type="number" min="0" max="60" value="'+esc(f.service_years??'')+'"></label>'+
+      '<label>อายุราชการ/อายุงานรวม (ปี)<input name="service_years" type="number" min="0" max="60" value="'+esc(f.service_years??'')+'"></label>'+
       '<label>เดือน<input name="service_months" type="number" min="0" max="11" value="'+esc(f.service_months??'')+'"></label>'+
       '<label>วัน<input name="service_days" type="number" min="0" max="31" value="'+esc(f.service_days??'')+'"></label>'+
       '<label>เริ่มปฏิบัติงาน<input name="work_date_from" type="date" value="'+esc(f.work_date_from??'')+'"></label>'+
       '<label>ถึงวันที่<input name="work_date_to" type="date" value="'+esc(f.work_date_to??'')+'"></label>'+
       '<label>ประเภทใบอนุญาตประกอบวิชาชีพ<select name="license_type"><option value="">ยังไม่ระบุ</option>'+Object.entries({...professionalLicenseChoices,...(f.license_type&&!Object.hasOwn(professionalLicenseChoices,f.license_type)?{[f.license_type]:'ข้อมูลเดิม: ไม่มีตัวเลือกในแบบต้นฉบับ กรุณาตรวจสอบ'}:{})}).map(([key,label])=>'<option value="'+key+'" '+(f.license_type===key?'selected':'')+'>'+esc(label)+'</option>').join('')+'</select></label>'+
       '<label>เลขใบอนุญาต<input name="license_number" value="'+esc(f.license_number??'')+'" maxlength="100" placeholder="เว้นว่างได้"></label>'+
-      '<label style="grid-column:1/-1">ที่อยู่ติดต่อ<textarea name="contact_address" rows="3" maxlength="1000">'+esc(f.contact_address??'')+'</textarea></label>'+
+      '<label style="grid-column:1/-1">ที่อยู่ติดต่อเพิ่มเติม (ไม่พิมพ์แทนช่องที่อยู่แยก)<textarea name="contact_address" rows="3" maxlength="1000">'+esc(f.contact_address??'')+'</textarea></label>'+
       '<label style="grid-column:1/-1">หมายเหตุ<textarea name="note" rows="2" maxlength="1000">'+esc(f.note??'')+'</textarea></label>'+
     '</div>'+renderOfficialFields(code,f,{person})+'<p class="subtle">ระบบไม่เก็บเลขบัตรประชาชน 13 หลักหรือวันเกิดในเอกสารนี้ • ชื่อ ตำแหน่ง และหน่วยงานดึงจากทะเบียนบุคลากร</p><div class="form-error" id="staff-document-error"></div><div class="form-actions"><button type="submit" class="primary">บันทึกฉบับร่าง</button></div></form>';
   }
