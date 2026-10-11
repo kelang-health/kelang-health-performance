@@ -104,4 +104,3 @@ BEGIN
 END $$;
 REVOKE ALL ON FUNCTION public.hp_leave_transfer_snapshot(uuid,int),public.hp_leave_transfer_plan(jsonb),public.hp_leave_transfer_apply(jsonb,text,uuid[]) FROM PUBLIC,anon;
 GRANT EXECUTE ON FUNCTION public.hp_leave_transfer_snapshot(uuid,int),public.hp_leave_transfer_plan(jsonb),public.hp_leave_transfer_apply(jsonb,text,uuid[]) TO authenticated,service_role;
-

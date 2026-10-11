@@ -43,4 +43,3 @@ BEGIN
  END LOOP;
  RETURN jsonb_build_object('duplicate',false,'token',md5(snap::text),'items',items);
 END $$;
-
