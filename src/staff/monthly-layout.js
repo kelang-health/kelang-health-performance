@@ -15,7 +15,7 @@ export const monthlyLayoutCSS=`
 .monthly-field:empty{min-height:1.14em}.monthly-field>span:empty:before{content:" "}
 .monthly-name{display:grid;grid-template-columns:auto fit-content(24%) auto fit-content(20%) auto minmax(0,1fr);gap:4px;align-items:baseline;margin:3px 0}
 .monthly-name .monthly-field{text-align:left;min-width:2em;padding-left:3px;padding-right:5px}.monthly-work .monthly-field,.monthly-primary .monthly-field{text-align:left}
-.monthly-work{display:grid;grid-template-columns:auto 1.5fr auto .5fr auto .9fr;gap:4px;align-items:baseline;margin:3px 0}
+.monthly-work{font-size:15pt;display:grid;grid-template-columns:auto 1.5fr auto .5fr auto .9fr;gap:4px;align-items:baseline;margin:3px 0}
 .monthly-history-title{margin:7px 0 4px}.monthly-training{margin-left:20px}.monthly-training p{margin:2px 0}
 .monthly-training-row{display:grid;grid-template-columns:auto 1fr auto .6fr auto .9fr auto .9fr;gap:4px;align-items:baseline;margin:3px 0}
 .monthly-history{margin:5px 0;break-inside:avoid}
