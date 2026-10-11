@@ -6,7 +6,7 @@ const months=['มกราคม','กุมภาพันธ์','มีน�
 const digits=v=>String(v??'').replace(/[0-9]/g,d=>'๐๑๒๓๔๕๖๗๘๙'[Number(d)]);
 const date=v=>v?digits(Number(v.slice(8,10)))+' '+months[Number(v.slice(5,7))-1]+' '+digits(Number(v.slice(0,4))+543):'';
 const amount=v=>v==null||v===''?'':digits(Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}));
-function field(key,value,x,y,width){return value==null||value===''?'':`<span class="template-field" data-print-field="${key}" style="left:${x}pt;top:${y}pt;width:${width}pt"><span class="template-value">${esc(value)}</span></span>`;}
+function field(key,value,x,y,width){return value==null||value===''?'':`<span class="template-field" data-print-field="${key}" style="left:${x}pt;top:${y}pt;width:${width}pt"><span class="template-value">${esc(digits(value))}</span></span>`;}
 function dateParts(key,value,y,slots){if(!value)return '';return field(key+'_day',digits(Number(value.slice(8,10))),slots[0][0],y,slots[0][1])+field(key+'_month',months[Number(value.slice(5,7))-1],slots[1][0],y,slots[1][1])+field(key+'_year',digits(Number(value.slice(0,4))+543),slots[2][0],y,slots[2][1]);}
 export const annualLicenseSlots=Object.freeze({medical:[71,345],dental:[71,363.4],nursing:[71,381.8],applied_thai:[71,400.2],physical_therapy:[112,418.6],other:[71,437],medical_practice:[354.5,345],pharmacy:[354.5,363.4],thai_medicine:[354.5,381.8],technical:[354.5,400.2]});
 export const officialAnnualCSS=officialMonthlyCSS+' @page{size:595.32pt 841.92pt;margin:0}.official-annual{width:595.32pt;height:841.92pt}.official-annual .template-field{height:17pt;line-height:17pt;font-size:16pt}.official-annual .template-mark{position:absolute;width:10pt;height:12pt;line-height:12pt;text-align:center;font:12pt Arial;color:#000;background:transparent}@media print{.official-annual{break-after:page;page-break-after:always}.official-annual:last-of-type{break-after:auto;page-break-after:auto}}';
@@ -25,8 +25,8 @@ export function officialAnnualBody(record,f){
  page1+='<span class="template-mark" data-category="LUMP_SUM_ALLOWANCE" style="left:142pt;top:680.8pt">✓</span>';
  page1+=field('claim_from',date(f.work_date_from),113,716.6,114)+field('claim_to',date(f.work_date_to),260,716.6,109)+field('claim_years',digits(f.duration_years),428,716.6,21)+field('claim_months',digits(f.duration_months),456,716.6,23)+field('claim_hours',digits(f.duration_hours),502,716.6,23);
  page1+=field('monthly_rate',amount(f.monthly_rate),276,734.6,86)+field('total_amount',amount(f.total_amount),469,734.6,60)+field('amount_in_words',f.amount_in_words,74,752.7,239);
- const page2=field('signature_name',f.full_name,326,191.1,122);
- const page=(n,body)=>'<article class="official-monthly official-annual" aria-label="แบบคำขอประจำปี ต้นฉบับระเบียบ 2562 หน้า '+n+'"><img class="official-background" src="'+new URL('../../assets/forms/chor11-annual-official-'+n+'.svg',import.meta.url).href+'" alt="หน้า '+n+' ของแบบราชการต้นฉบับ"><div class="template-data">'+body+'</div></article>';
+ const page2=field('signature_name',f.full_name,326,191.1,122)+'<div class="annual-approver-position" style="position:absolute;left:240pt;top:746pt;width:260pt;text-align:center;font-size:16pt">ตำแหน่ง ........................................................</div>';
+ const page=(n,body)=>'<article class="official-monthly official-annual" aria-label="แบบคำขอประจำปี ต้นฉบับระเบียบ 2562 หน้า '+n+'"><img class="official-background" src="'+new URL('../../assets/forms/'+(n===2?'chor11-annual-expanded-2.svg':'chor11-annual-official-1.svg'),import.meta.url).href+'" alt="หน้า '+n+' ของแบบราชการต้นฉบับ"><div class="template-data">'+body+'</div></article>';
  const original=new URL('../../assets/forms/chor11-annual-official.pdf',import.meta.url).href;
  return page(1,page1)+page(2,page2)+'<p class="print-system-meta" style="text-align:center"><a href="'+original+'" target="_blank" rel="noopener">เปิด PDF ต้นฉบับหน้า 5–6 ที่ผู้ใช้กำหนด</a></p>';
 }
