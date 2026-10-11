@@ -5,7 +5,7 @@ const months=['มกราคม','กุมภาพันธ์','มีน�
 const date=v=>v?digits(Number(v.slice(8,10)))+' '+months[Number(v.slice(5,7))-1]+' '+digits(Number(v.slice(0,4))+543):'';
 const field=(key,v,extra='')=>`<span class="monthly-field ${extra}" ${v==null||v===''?'':`data-print-field="${key}"`}><span>${esc(digits(v))}</span></span>`;
 export const monthlyLayoutCSS=`
-.monthly-sheet{width:210mm;min-height:297mm;margin:12px auto;padding:10mm 16mm 12mm;background:white;color:black;font-family:"TH Sarabun New",Sarabun,sans-serif;font-size:16pt;line-height:1.14;box-shadow:0 2px 12px #999}
+.monthly-sheet{width:210mm;min-height:297mm;margin:12px auto;padding:10mm 20mm 12mm;background:white;color:black;font-family:"TH Sarabun New",Sarabun,sans-serif;font-size:16pt;line-height:1.14;box-shadow:0 2px 12px #999}
 .monthly-sheet+.monthly-sheet{break-before:page}.monthly-sheet+.monthly-sheet h1{padding-top:10mm}
 .monthly-sheet h1{font-size:18pt;line-height:1.15;text-align:center;margin:0 0 12px}
 .monthly-sheet .monthly-meta{width:fit-content;max-width:100%;margin:0 0 10px auto}.monthly-meta .monthly-field{flex:0 1 auto;min-width:2em;text-align:left;padding:0 4px 1px}.monthly-meta .monthly-row{gap:4px;margin:2px 0}
