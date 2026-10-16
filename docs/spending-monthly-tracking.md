@@ -48,4 +48,4 @@ DDL ที่ใช้งานอยู่: `supabase/migrations/20261016032534
 - `supabase/tests/spending_rls.sql`: ทดสอบบน Cloud ใน transaction แล้ว ROLLBACK: anon, STAFF own/cross-unit, unassigned, immutable plan, unknown item, stale revision, confirm, admin reopen, delete/restore, audit
 - Cloud ไม่มีรายงานจ่ายจริงที่เกิดจากการทดสอบ
 
-Source/build อยู่ในเครื่อง ยังไม่ได้ push หรือเผยแพร่หน้าเว็บ GitHub Pages; ตารางและแผน Cloud ใช้งานจริงแล้ว
+เผยแพร่ GitHub Pages แล้วเมื่อ 16 ตุลาคม 2569 จาก commit 108be85 รุ่น 1.79 รวมคำนวณระยะเวลาประวัติงานอัตโนมัติ ทดสอบรวม 154 tests ผ่าน; Actions run 38848855123 build/deploy success และตรวจหน้า #spending บนเว็บจริงแล้ว ตารางและแผน Cloud ใช้งานจริง
