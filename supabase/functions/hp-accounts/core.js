@@ -42,7 +42,7 @@ export async function handleRequest(req,env,fetcher=fetch){
    return out(200,{accounts:accounts.map(u=>{const link=links.find(p=>p.user_id===u.id);return {id:u.id,email:u.email,name:u.user_metadata?.display_name??'',role:u.app_metadata?.hp_account_role??'USER',disabled:!!u.banned_until&&Date.parse(u.banned_until)>Date.now(),must_change_password:u.app_metadata?.hp_must_change_password===true||!u.app_metadata?.hp_password_changed_at,permissions:assignments.filter(p=>p.user_id===u.id),personnel:link?personById.get(link.personnel_id)??{id:link.personnel_id}:null};})});
   }
   if(input.action==='create'){
-   validatePassword();if(typeof input.email!=='string'||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email)||typeof input.name!=='string'||!input.name.trim()||input.name.length>100||!['STAFF','ADMIN','USER'].includes(input.role))return out(400,{message:'ตรวจชื่อ อีเมล และสิทธิ์'});
+   validatePassword();if(typeof input.email!=='string'||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email)||typeof input.name!=='string'||!input.name.trim()||input.name.length>100||!['STAFF','MONITOR','ADMIN','USER'].includes(input.role))return out(400,{message:'ตรวจชื่อ อีเมล และสิทธิ์'});
    let personnel=null;
    if(input.personnel_id!==undefined&&input.personnel_id!==null&&input.personnel_id!==''){
     if(typeof input.personnel_id!=='string'||!/^[0-9a-f-]{36}$/i.test(input.personnel_id))return out(400,{message:'รหัสเจ้าหน้าที่ไม่ถูกต้อง'});
@@ -55,12 +55,12 @@ export async function handleRequest(req,env,fetcher=fetch){
    const master=await call('/rest/v1/hp_facilities?select=facility_code&active=eq.true');const allowed=master.map(f=>f.facility_code);
    const requested=[...new Set(Array.isArray(input.facilities)?input.facilities:[])];
    if(input.role==='STAFF'&&personnel?.facility_code&&!requested.includes(personnel.facility_code))requested.unshift(personnel.facility_code);
-   const codes=input.role==='ADMIN'?allowed:input.role==='USER'?[]:requested;if(input.role!=='USER'&&!codes.length||codes.some(c=>!allowed.includes(c)))return out(400,{message:'เลือกหน่วยบริการที่ได้รับสิทธิ์อย่างน้อย 1 แห่ง'});
+   const codes=input.role==='ADMIN'?allowed:input.role==='USER'?[]:requested;if(!['USER','MONITOR'].includes(input.role)&&!codes.length||codes.some(c=>!allowed.includes(c)))return out(400,{message:'เลือกหน่วยบริการที่ได้รับสิทธิ์อย่างน้อย 1 แห่ง'});
    const user=await call('/auth/v1/admin/users','POST',{email:input.email.trim().toLowerCase(),password:input.password,email_confirm:true,user_metadata:{display_name:input.name.trim()},app_metadata:{hp_only:true,hp_created_by:actor.id,hp_account_role:input.role,hp_must_change_password:true}});
    try{
     const profiles=await call('/rest/v1/profiles?select=id,active,role&id=eq.'+encodeURIComponent(user.id));
     if(profiles.length!==1||profiles[0].active!==false||profiles[0].role!=='STAFF')throw new Error('บัญชีไม่ได้ถูกจำกัดสิทธิ์ตามที่กำหนด');
-    if(codes.length)await call('/rest/v1/hp_user_facilities','POST',codes.map(facility_code=>({user_id:user.id,facility_code,role:input.role})));
+    if(codes.length||input.role==='MONITOR')await call('/rest/v1/hp_user_facilities','POST',(codes.length?codes:[null]).map(facility_code=>({user_id:user.id,facility_code,role:input.role})));
     if(personnel)await call('/rest/v1/hp_personnel_accounts','POST',{personnel_id:personnel.id,user_id:user.id});
     await audit('INSERT',user.id,{action:'create',scope:'hospital_profile',role:input.role,facilities:codes,personnel_id:personnel?.id??null});
    }catch(error){await call('/auth/v1/admin/users/'+user.id,'DELETE');throw error;}

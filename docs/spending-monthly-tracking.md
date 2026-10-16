@@ -1,5 +1,13 @@
 # ติดตามแผนใช้เงินรายเดือน — 1.78
 
+## สิทธิ์ MONITOR — 1.80
+
+เพิ่มบทบาท MONITOR ในหน้าสร้างบัญชีและกำหนดสิทธิ์บัญชีเดิม: อ่านแผน/รายงานทั้ง 8 หน่วย แต่เขียนได้เฉพาะ facility_code ที่ ADMIN มอบหมาย การไม่เลือกหน่วยบันทึกเป็น MONITOR ที่ facility_code=null จึงอ่านได้อย่างเดียว ไม่เปลี่ยนบัญชีเดิมอัตโนมัติ
+
+ตาราง hp_user_facilities เดิมเพิ่ม id เป็น primary key และคง uniqueness (user_id,facility_code) แบบ NULLS NOT DISTINCT ไม่เพิ่มตารางใหม่ ไม่อนุญาต STAFF/ADMIN ที่ facility_code=null ส่วน spending ใช้ spending_view และ spending_manager แยกอ่าน/เขียน ตรวจ session ตามเดิม ไม่เพิ่มสิทธิ์บุคลากร/การลา/จัดการบัญชีให้ MONITOR
+
+ทดสอบ 156 unit tests พร้อม UI MONITOR แบบมีหน่วย/ไม่มีหน่วย และ SQL transaction `spending_monitor_rls.sql` บน Cloud แล้ว ROLLBACK ผ่านครบ รวมแก้ของตนเอง ปิดการเขียนข้ามหน่วย และป้องกันสิทธิ์ในโมดูลอื่น บริการ hp-accounts รุ่น 7 รองรับการสร้างบัญชี MONITOR โดยรักษา verify_jwt=true
+
 หน้า `#spending` เข้าได้จากเมนูติดตามแผนใช้เงินและหน้าเจ้าหน้าที่ ปีเริ่มต้น 2570 (ต.ค. 2569–ก.ย. 2570) แยกตัวกรองจากปีของ HDC
 
 ## การทำงาน

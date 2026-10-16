@@ -7,4 +7,5 @@ export function validateAmounts(plan,amounts,complete=false){const allowed=new S
 export function total(amounts,ids){return (ids??Object.keys(amounts??{})).reduce((s,k)=>s+(cents(amounts?.[k])??0),0)/100;}
 export function cumulative(reports,period,ids){const end=fiscalOrder.indexOf(+period);return Math.round(reports.filter(r=>r.status==='confirmed'&&fiscalOrder.indexOf(+r.period)<=end).reduce((s,r)=>s+Math.round(total(r.payload.amounts,ids)*100),0))/100;}
 export function periodLabel(year,month){const i=fiscalOrder.indexOf(+month);return monthLabels[i]+' '+(+year-(+month>=10?1:0));}
-export function canManage(permissions,code){return permissions.some(p=>p.role==='ADMIN'||p.role==='STAFF'&&p.facility_code===code);}
+export function canManage(permissions,code){return permissions.some(p=>p.role==='ADMIN'||['STAFF','MONITOR'].includes(p.role)&&p.facility_code===code);}
+export function canView(permissions,code){return permissions.some(p=>p.role==='ADMIN'||p.role==='MONITOR'||p.role==='STAFF'&&p.facility_code===code);}
