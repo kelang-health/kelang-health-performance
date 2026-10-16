@@ -11,3 +11,31 @@ test('half-day and cross-year validation matches local restrictions',()=>{assert
 test('leave print ports source forms, escapes text, leaves unknown quota blank and refuses unsupported originals',()=>{const html=printableLeave({...leave,leave_type:'VACATION'},{person:{full_name:'<script>x</script>'},calendars:[oct]});assert.match(html,/ใบลาพักผ่อน/);assert.doesNotMatch(html,/<script>|onclick=/);assert.match(html,/มีสิทธิลาพักผ่อนประจำปีอีก <span class="line w-sm">&nbsp;/);assert.match(html,/THSarabunNew.ttf/);assert.throws(()=>printableLeave({...leave,leave_type:'OTHER'},{person:{full_name:'ทดสอบ'}}));});
 
 test('database overlap and calendar gate give actionable Thai messages',()=>{assert.match(leaveErrorMessage(new Error('conflicting key value violates exclusion constraint')),/ซ้อน/);assert.match(leaveErrorMessage(new Error('Verify all affected monthly calendars first')),/ทุกเดือน/);assert.equal(leaveErrorMessage(new Error('ข้อมูลเดิมยังอยู่')),'ข้อมูลเดิมยังอยู่');});
+
+test('general leave forms print the saved delegate and identity without changing the request',()=>{
+ for(const type of ['SICK','PERSONAL','MATERNITY']){
+  const record={...leave,leave_type:type,details:{full_name:'นางสาวชื่อในคำขอ ทดสอบ',delegate_name:'นายผู้แทน <ทดสอบ>',contact_phone:'0123456789'}};
+  const original=structuredClone(record);
+  const html=printableLeave(record,{person:{full_name:'ชื่อทะเบียนภายหลัง'},calendars:[oct]});
+  const sign=html.match(/<div class="request-sign signature">([\s\S]*?)<div class="lower">/)[1];
+  assert.match(sign,/signature-space/);assert.doesNotMatch(sign,/sigline/);
+  assert.match(sign,/\(นางสาวชื่อในคำขอ ทดสอบ\)/);
+  assert.match(html,/โทรศัพท์[\s\S]*โดยมอบหมายให้[\s\S]*นายผู้แทน &lt;ทดสอบ&gt;[\s\S]*ปฏิบัติหน้าที่แทนระหว่างการลา/);
+  assert.deepEqual(record,original);
+ }
+});
+
+test('missing saved delegate stays blank rather than using another person',()=>{
+ const html=printableLeave(leave,{person:{full_name:'ผู้ลา',delegate_name:'บุคคลอื่น'},calendars:[oct]});
+ assert.match(html,/class="line delegate-name">&nbsp;<\/span>/);
+ assert.doesNotMatch(html,/บุคคลอื่น/);
+});
+
+test('vacation form shares the blank signature area and inset comment lines',()=>{
+ const html=printableLeave({...leave,leave_type:'VACATION'},{person:{full_name:'ผู้ลาพักผ่อน'},calendars:[oct]});
+ const sign=html.match(/<div class="request-sign signature">([\s\S]*?)<div class="lower">/)[1];
+ assert.match(sign,/signature-space/);assert.doesNotMatch(sign,/sigline/);
+ assert.match(sign,/\(ผู้ลาพักผ่อน\)/);
+ assert.match(html,/\.sheet \.signature-space\{height:18mm\}/);
+ assert.match(html,/\.sheet \.lower>div:last-child\{padding-right:3mm\}/);
+});
