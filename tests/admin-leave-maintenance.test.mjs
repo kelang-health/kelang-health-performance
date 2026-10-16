@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {leavePanel} from '../src/staff/leave/view.js';
+const ctx={person:{full_name:'Test'},key:'test',year:2570,month:'2026-10-01',manager:true};
+const state={key:'test',calendars:[],quota:null,leaves:['pending','approved','rejected','cancelled'].map((status,i)=>({id:'l'+i,status,fiscal_year:2570,leave_type:'SICK',date_from:'2026-10-01',date_to:'2026-10-01',portion:'full'}))};
+test('ADMIN edits every status and only cancelled leave offers deletion',()=>{const html=leavePanel({...ctx,admin:true},state);for(let i=0;i<4;i++)assert.match(html,new RegExp('data-leave-edit="l'+i+'"'));assert.match(html,/data-leave-delete="l3"/);assert.equal((html.match(/data-leave-delete=/g)||[]).length,1);});
+test('STAFF and ordinary users have no delete button or closed edit',()=>{for(const manager of [true,false]){const html=leavePanel({...ctx,manager,admin:false},state);assert.match(html,/data-leave-edit="l0"/);assert.doesNotMatch(html,/data-leave-delete|data-leave-edit="l[123]"/);}});
