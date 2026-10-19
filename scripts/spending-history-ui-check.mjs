@@ -21,7 +21,7 @@ try{for(const role of ['STAFF','ADMIN','MONITOR','READER','PUBLIC','USER']){
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(result)});
  });
  await page.goto(url+'/#spending-history');await page.waitForFunction(()=>document.querySelector('#refresh')?.disabled===false);
- if(['PUBLIC','USER'].includes(role)){assert.match(await page.locator('#view').innerText(),role==='PUBLIC'?/กรุณาเข้าสู่ระบบ/:/ยังไม่มีสิทธิ์/);assert.equal(await page.locator('[data-history="save"]').count(),0);await page.close();continue;}
+ if(['PUBLIC','USER'].includes(role)){await page.locator('#view').getByText(role==='PUBLIC'?/กรุณาเข้าสู่ระบบ/:/ยังไม่มีสิทธิ์/).waitFor();assert.match(await page.locator('#view').innerText(),role==='PUBLIC'?/กรุณาเข้าสู่ระบบ/:/ยังไม่มีสิทธิ์/);assert.equal(await page.locator('[data-history="save"]').count(),0);await page.close();continue;}
  await page.waitForSelector('.history-panel table');
  assert.equal(await page.locator('#history-year').inputValue(),'2569');assert.ok(await page.locator('.filters').isHidden());
  assert.match(await page.locator('.history-panel').innerText(),/ยังเปรียบเทียบไม่ได้/);

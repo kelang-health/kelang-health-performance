@@ -36,3 +36,5 @@
 ไม่ได้เพิ่มตารางหรือแก้ schema ในรุ่นนี้ ใช้ `hp_spending_history` และ `hp_spending_reports` เดิม ข้อมูลทดสอบหน้าจอเป็น fixtures ส่วนทดสอบฐานข้อมูล rollback ทั้งหมด ไม่สร้างยอดจ่ายทดสอบค้างในระบบจริง
 
 ทดสอบผ่าน `tests/spending-history.test.mjs`, `scripts/spending-history-ui-check.mjs`, `scripts/spending-ui-check.mjs`, `scripts/finance-2570-ui-check.mjs` และ `supabase/tests/spending_history.sql`
+
+เผยแพร่ GitHub Pages แล้ว และรันทดสอบ UI ทั้ง 6 บทบาทกับไฟล์หน้าเว็บที่เผยแพร่จริงผ่านครบ โดยจำลอง REST สำหรับการอ่าน/เขียนทดสอบ จึงไม่ต้องใช้บัญชีจริงหรือสร้างยอดจ่ายในระบบจริง ทดสอบออกจากระบบขณะมีร่างด้วยแล้ว ข้อมูลหน้ากรอกและคำเตือนร่างถูกล้างตามเซสชัน
