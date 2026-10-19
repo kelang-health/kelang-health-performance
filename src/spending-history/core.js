@@ -8,6 +8,17 @@ export function coverageError(year,start,end){
  const valid=s=>/^\d{4}-\d{2}-\d{2}$/.test(s)&&Number.isFinite(Date.parse(s))&&new Date(s).toISOString().slice(0,10)===s;
  if(!valid(start)||!valid(end)||start>end||start<`${year-544}-10-01`||end>`${year-543}-09-30`)return 'ระบุวันที่เริ่ม–สิ้นสุดภายในปีงบประมาณเดียวกันให้ครบ';return '';
 }
+export function coverageKind(row){
+ if(!row?.coverage_start||!row?.coverage_end||coverageError(row.fiscal_year,row.coverage_start,row.coverage_end))return 'unknown';
+ return row.coverage_start===`${row.fiscal_year-544}-10-01`&&row.coverage_end===`${row.fiscal_year-543}-09-30`?'full':'partial';
+}
+export function coverageLabel(row){
+ const kind=coverageKind(row);
+ if(kind==='unknown')return 'ยังไม่ยืนยันช่วงเวลา';
+ if(kind==='partial')return 'ข้อมูลบางช่วงของปี';
+ if(!knownTotal(row.payload.groups).complete)return 'ช่วงเวลาทั้งปี · ข้อมูลยังไม่ครบ';
+ return row.status==='confirmed'?'ยืนยันข้อมูลครบปี':'ครอบคลุมทั้งปี · รอตรวจยืนยัน';
+}
 export function comparison(a,b,id='all'){
  const groups=r=>(r?.payload.groups??[]).filter(g=>id==='all'||g.id===id);
  const x=knownTotal(groups(a)),y=knownTotal(groups(b));
