@@ -1,0 +1,54 @@
+BEGIN;
+CREATE TEMP TABLE history_actors(label text,uid uuid,sid uuid);
+INSERT INTO history_actors SELECT label,gen_random_uuid(),gen_random_uuid() FROM unnest(ARRAY['staff','admin','monitor','reader','unassigned']) label;
+INSERT INTO auth.users(id,aud,role,email) SELECT uid,'authenticated','authenticated','history-test-'||uid||'@example.invalid' FROM history_actors;
+INSERT INTO auth.sessions(id,user_id,created_at,updated_at) SELECT sid,uid,now(),now() FROM history_actors;
+INSERT INTO hp_private.session_activity(session_id,user_id) SELECT sid,uid FROM history_actors;
+INSERT INTO public.hp_user_facilities(user_id,facility_code,role) SELECT uid,CASE WHEN label='reader' THEN NULL ELSE '06116' END,CASE WHEN label='admin' THEN 'ADMIN' WHEN label IN ('monitor','reader') THEN 'MONITOR' ELSE 'STAFF' END FROM history_actors WHERE label<>'unassigned';
+CREATE TEMP TABLE history_results(name text);
+GRANT SELECT ON history_actors TO authenticated;
+GRANT ALL ON history_results TO authenticated;
+INSERT INTO public.hp_spending_history(facility_code,fiscal_year,payload)
+SELECT code,2566,jsonb_build_object('groups',(SELECT jsonb_agg(jsonb_build_object('id',i::text,'label','หมวด '||i,'amount',0,'planned',null,'commitment',null,'note','','details',jsonb_build_array(jsonb_build_object('id','r1','label','รายการ','amount',0,'planned',null,'commitment',null)))) FROM generate_series(1,11) i)) FROM unnest(ARRAY['06116','06117']) code;
+SET LOCAL ROLE anon;
+DO $$BEGIN BEGIN PERFORM * FROM public.hp_spending_history;RAISE EXCEPTION 'anon read';EXCEPTION WHEN insufficient_privilege THEN NULL;END;END$$;
+RESET ROLE;
+SET LOCAL ROLE authenticated;
+SELECT set_config('request.jwt.claims',(SELECT jsonb_build_object('sub',uid,'session_id',sid,'role','authenticated')::text FROM history_actors WHERE label='staff'),true);
+DO $$DECLARE n int;BEGIN
+ IF (SELECT count(*) FROM public.hp_spending_history WHERE fiscal_year=2566)<>1 THEN RAISE EXCEPTION 'Staff read scope';END IF;
+ UPDATE public.hp_spending_history SET revision=2 WHERE fiscal_year=2566 AND facility_code='06117';GET DIAGNOSTICS n=ROW_COUNT;IF n<>0 THEN RAISE EXCEPTION 'Cross-unit write';END IF;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,status='confirmed' WHERE fiscal_year=2566;RAISE EXCEPTION 'Missing dates accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,coverage_start='2022-10-01',coverage_end='2024-09-30' WHERE fiscal_year=2566;RAISE EXCEPTION 'Invalid dates accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,source='{"forged":true}' WHERE fiscal_year=2566;RAISE EXCEPTION 'Source edit accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,payload=jsonb_set(payload,'{groups,0,amount}','-1') WHERE fiscal_year=2566;RAISE EXCEPTION 'Negative accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,payload=jsonb_set(payload,'{groups,0,amount}','0.001') WHERE fiscal_year=2566;RAISE EXCEPTION 'Precision accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,payload=jsonb_set(payload,'{groups,0,id}','"11"') WHERE fiscal_year=2566;RAISE EXCEPTION 'Duplicate category accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,payload=jsonb_set(payload,'{groups,0,details,0,label}','"changed"') WHERE fiscal_year=2566;RAISE EXCEPTION 'Detail identity accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=1 WHERE fiscal_year=2566;RAISE EXCEPTION 'Stale revision accepted';EXCEPTION WHEN serialization_failure THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,status='confirmed',coverage_start='2022-10-01',coverage_end='2023-09-30',payload=jsonb_set(payload,'{groups,0,amount}','null') WHERE fiscal_year=2566;RAISE EXCEPTION 'Null confirmation accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ BEGIN UPDATE public.hp_spending_history SET revision=2,status='confirmed',coverage_start='2022-10-01',coverage_end='2023-09-30',payload=jsonb_set(payload,'{groups,0,amount}','1') WHERE fiscal_year=2566;RAISE EXCEPTION 'Unexplained difference accepted';EXCEPTION WHEN check_violation THEN NULL;END;
+ UPDATE public.hp_spending_history SET revision=2,status='confirmed',coverage_start='2022-10-01',coverage_end='2023-09-30' WHERE fiscal_year=2566;
+ BEGIN UPDATE public.hp_spending_history SET revision=3,status='draft',reason='reopen' WHERE fiscal_year=2566;RAISE EXCEPTION 'Staff reopened';EXCEPTION WHEN insufficient_privilege THEN NULL;END;
+ BEGIN DELETE FROM public.hp_spending_history WHERE fiscal_year=2566;RAISE EXCEPTION 'Deleted';EXCEPTION WHEN insufficient_privilege THEN NULL;END;
+ INSERT INTO history_results VALUES('STAFF scope, validation, source identity, stale revision, null/zero and confirmation lock pass');
+END$$;
+SELECT set_config('request.jwt.claims',(SELECT jsonb_build_object('sub',uid,'session_id',sid,'role','authenticated')::text FROM history_actors WHERE label='admin'),true);
+UPDATE public.hp_spending_history SET status='draft',revision=3,reason='ทดสอบเปิดแก้ไข' WHERE fiscal_year=2566 AND facility_code='06116';
+SELECT set_config('request.jwt.claims',(SELECT jsonb_build_object('sub',uid,'session_id',sid,'role','authenticated')::text FROM history_actors WHERE label='monitor'),true);
+DO $$DECLARE n int;BEGIN
+ IF (SELECT count(*) FROM public.hp_spending_history WHERE fiscal_year=2566)<>2 THEN RAISE EXCEPTION 'Monitor visibility';END IF;
+ UPDATE public.hp_spending_history SET revision=4 WHERE fiscal_year=2566 AND facility_code='06116';GET DIAGNOSTICS n=ROW_COUNT;IF n<>1 THEN RAISE EXCEPTION 'Monitor own write';END IF;
+ UPDATE public.hp_spending_history SET revision=2 WHERE fiscal_year=2566 AND facility_code='06117';GET DIAGNOSTICS n=ROW_COUNT;IF n<>0 THEN RAISE EXCEPTION 'Monitor cross write';END IF;
+ INSERT INTO history_results VALUES('ADMIN reopen, MONITOR all-read/own-write pass');END$$;
+SELECT set_config('request.jwt.claims',(SELECT jsonb_build_object('sub',uid,'session_id',sid,'role','authenticated')::text FROM history_actors WHERE label='reader'),true);
+DO $$DECLARE n int;BEGIN
+ IF (SELECT count(*) FROM public.hp_spending_history WHERE fiscal_year=2566)<>2 THEN RAISE EXCEPTION 'Reader visibility';END IF;
+ UPDATE public.hp_spending_history SET revision=revision+1 WHERE fiscal_year=2566;GET DIAGNOSTICS n=ROW_COUNT;IF n<>0 THEN RAISE EXCEPTION 'Reader write';END IF;END$$;
+SELECT set_config('request.jwt.claims',(SELECT jsonb_build_object('sub',uid,'session_id',sid,'role','authenticated')::text FROM history_actors WHERE label='unassigned'),true);
+DO $$BEGIN IF EXISTS(SELECT 1 FROM public.hp_spending_history) THEN RAISE EXCEPTION 'Unassigned visibility';END IF;END$$;
+RESET ROLE;
+DO $$BEGIN IF NOT EXISTS(SELECT 1 FROM public.hp_audit_logs a JOIN history_actors t ON t.uid=a.user_id WHERE a.table_name='hp_spending_history' AND operation='UPDATE') THEN RAISE EXCEPTION 'Audit missing';END IF;END$$;
+INSERT INTO history_results VALUES('Anonymous, read-only, unassigned, and audit checks pass');
+SELECT * FROM history_results;
+ROLLBACK;

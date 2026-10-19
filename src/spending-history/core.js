@@ -1,0 +1,35 @@
+import {cents} from '../staff/spending/core.js';
+export const years=[2567,2568,2569];
+export const categoryLabels=['ค่ายาและเวชภัณฑ์','ค่าวัสดุ','ค่าตอบแทนทางการแพทย์','ค่าบริการทางการแพทย์','ค่าครุภัณฑ์ ที่ดินและสิ่งก่อสร้าง','ค่าใช้สอย','ค่าสาธารณูปโภค','ค่าจ้างลูกจ้างชั่วคราว','ค่าตอบแทนการปฏิบัติงานนอกเวลาราชการ','ค่าใช้จ่ายในการเดินทางไปราชการ','ค่าใช้จ่ายอื่นที่เกี่ยวข้องกับการสาธารณสุข'];
+export const amount=v=>cents(v)===null?null:cents(v)/100;
+export function knownTotal(groups,field='amount'){const values=groups.map(g=>{try{return amount(g[field]);}catch{return null;}});return {value:values.some(v=>v!==null)?values.reduce((s,v)=>s+Math.round((v??0)*100),0)/100:null,complete:values.length>0&&values.every(v=>v!==null),count:values.filter(v=>v!==null).length};}
+export function coverageError(year,start,end){
+ if(!start&&!end)return '';
+ const valid=s=>/^\d{4}-\d{2}-\d{2}$/.test(s)&&Number.isFinite(Date.parse(s))&&new Date(s).toISOString().slice(0,10)===s;
+ if(!valid(start)||!valid(end)||start>end||start<`${year-544}-10-01`||end>`${year-543}-09-30`)return 'ระบุวันที่เริ่ม–สิ้นสุดภายในปีงบประมาณเดียวกันให้ครบ';return '';
+}
+export function comparison(a,b,id='all'){
+ const groups=r=>(r?.payload.groups??[]).filter(g=>id==='all'||g.id===id);
+ const x=knownTotal(groups(a)),y=knownTotal(groups(b));
+ const out={a:x.value,b:y.value,difference:null,percent:null,label:'ยังเปรียบเทียบไม่ได้'};
+ if(!a||!b||a.fiscal_year===b.fiscal_year||a.status!=='confirmed'||b.status!=='confirmed'||!x.complete||!y.complete||!a.coverage_start||!b.coverage_start||!a.coverage_end||!b.coverage_end)return out;
+ if(a.coverage_start.slice(5)!==b.coverage_start.slice(5)||a.coverage_end.slice(5)!==b.coverage_end.slice(5))return {...out,label:'ช่วงเวลาไม่ตรงกัน'};
+ out.difference=(Math.round(y.value*100)-Math.round(x.value*100))/100;
+ out.percent=x.value===0?null:out.difference/x.value*100;
+ out.label=x.value===0?(y.value>0?'เริ่มมีรายจ่าย':'ไม่มีรายจ่ายทั้งสองปี'):out.difference>0?'เพิ่มขึ้น':out.difference<0?'ลดลง':'เท่าเดิม';return out;
+}
+export function validateSnapshot(row,confirm=false){
+ const p=structuredClone(row.payload);
+ if(p.groups?.length!==11||new Set(p.groups.map(g=>g.id)).size!==11||p.groups.some(g=>!/^([1-9]|10|11)$/.test(g.id)))throw new Error('ข้อมูลหมวดไม่ครบ 11 หมวด');
+ const issue=coverageError(row.fiscal_year,row.coverage_start??'',row.coverage_end??'');if(issue)throw new Error(issue);
+ if(confirm&&(!row.coverage_start||!row.coverage_end))throw new Error('ระบุช่วงเวลาของจ่ายจริงก่อนยืนยัน');
+ for(const g of p.groups){
+  for(const k of ['amount','commitment','planned'])g[k]=amount(g[k]);
+  for(const d of g.details??[])for(const k of ['amount','commitment','planned'])d[k]=amount(d[k]);
+  if(confirm&&g.amount===null)throw new Error('กรอกจ่ายจริงให้ครบทุกหมวด หากไม่มีให้กรอก 0');
+  const t=knownTotal(g.details??[]);
+  if(confirm&&g.details?.length&&(!t.complete||t.value!==g.amount)&&!(g.note?.trim().length>=5))throw new Error('หมวด '+g.id+' ระบุเหตุผลที่ยอดหมวดต่างจากรายละเอียดหรือรายละเอียดไม่ครบ');
+ }
+ if(confirm&&row.source?.issues?.length&&!(row.review_note?.trim().length>=10))throw new Error('บันทึกผลตรวจข้อสังเกตจากต้นฉบับก่อนยืนยัน');
+ return p;
+}
