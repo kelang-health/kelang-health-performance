@@ -2,6 +2,18 @@ import {cents} from '../staff/spending/core.js';
 export const years=[2567,2568,2569];
 export const categoryLabels=['ค่ายาและเวชภัณฑ์','ค่าวัสดุ','ค่าตอบแทนทางการแพทย์','ค่าบริการทางการแพทย์','ค่าครุภัณฑ์ ที่ดินและสิ่งก่อสร้าง','ค่าใช้สอย','ค่าสาธารณูปโภค','ค่าจ้างลูกจ้างชั่วคราว','ค่าตอบแทนการปฏิบัติงานนอกเวลาราชการ','ค่าใช้จ่ายในการเดินทางไปราชการ','ค่าใช้จ่ายอื่นที่เกี่ยวข้องกับการสาธารณสุข'];
 export const amount=v=>cents(v)===null?null:cents(v)/100;
+export const canAddDetails=year=>[2568,2569].includes(+year);
+export function addDetail(group,{id,label,amount:value,commitment=null}){
+ if(!/^m_[a-f0-9]{24}$/.test(id)||group.details.some(d=>d.id===id))throw new Error('รหัสรายการใหม่ไม่ถูกต้อง');
+ const name=String(label??'').trim();if(!name||name.length>500)throw new Error('ระบุชื่อรายการ 1–500 ตัวอักษร');
+ if(group.details.length>=250)throw new Error('รายการย่อยเกิน 250 รายการต่อหมวด');
+ const paid=amount(value);if(paid===null)throw new Error('ระบุจ่ายจริงของรายการใหม่ หากไม่มีให้กรอก 0');
+ const before=knownTotal(group.details),previous=amount(group.amount);
+ group.details.push({id,label:name,amount:paid,commitment:amount(commitment),planned:null});
+ // Preserve an independently documented category total when details are incomplete.
+ const t=knownTotal(group.details);if(t.complete&&(previous===null||previous===0&&group.details.length===1||before.complete&&before.value===previous))group.amount=t.value;
+ return group.details.at(-1);
+}
 export function knownTotal(groups,field='amount'){const values=groups.map(g=>{try{return amount(g[field]);}catch{return null;}});return {value:values.some(v=>v!==null)?values.reduce((s,v)=>s+Math.round((v??0)*100),0)/100:null,complete:values.length>0&&values.every(v=>v!==null),count:values.filter(v=>v!==null).length};}
 export function coverageError(year,start,end){
  if(!start&&!end)return '';
@@ -35,6 +47,8 @@ export function validateSnapshot(row,confirm=false){
  const issue=coverageError(row.fiscal_year,row.coverage_start??'',row.coverage_end??'');if(issue)throw new Error(issue);
  if(confirm&&(!row.coverage_start||!row.coverage_end))throw new Error('ระบุช่วงเวลาของจ่ายจริงก่อนยืนยัน');
  for(const g of p.groups){
+  if(!Array.isArray(g.details)||g.details.length>250||new Set(g.details.map(d=>d.id)).size!==g.details.length)throw new Error('รายการย่อยซ้ำหรือเกินจำนวนที่กำหนด');
+  for(const d of g.details){if(!/^[a-zA-Z0-9_-]{1,30}$/.test(d.id)||!String(d.label??'').trim()||String(d.label).length>500)throw new Error('ชื่อหรือรหัสรายการย่อยไม่ถูกต้อง');}
   for(const k of ['amount','commitment','planned'])g[k]=amount(g[k]);
   for(const d of g.details??[])for(const k of ['amount','commitment','planned'])d[k]=amount(d[k]);
   if(confirm&&g.amount===null)throw new Error('กรอกจ่ายจริงให้ครบทุกหมวด หากไม่มีให้กรอก 0');
