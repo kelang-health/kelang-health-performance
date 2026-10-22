@@ -75,3 +75,27 @@ header{height:auto;min-height:77px;padding-top:10px;padding-bottom:10px;flex-wra
 .annual-entry .annual-entry-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));align-items:end}.annual-entry .annual-entry-filters label{min-width:0}.annual-entry .table-wrap{max-width:100%;overflow:auto}#annual-import-preview pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:260px;overflow:auto}#annual-entry-form label>span{display:block;margin-top:5px}.annual-entry-scroll-note{display:none}@media(max-width:700px){.annual-entry-scroll-note{display:block}.annual-entry .annual-entry-filters{grid-template-columns:1fr}}
 .history-panel small{display:block;color:var(--muted,#64748b);font-weight:normal;white-space:normal;margin-top:.35rem}.history-panel input[type=number]{min-width:120px;width:100%;max-width:210px}.history-panel .history-group{border:1px solid #dbe4e6;border-radius:8px;margin:12px 0}.history-group summary{padding:14px;cursor:pointer;font-weight:600}.history-group-body{padding:0 14px 14px}.history-chart>div{margin:16px 0}.history-chart>div>div{display:flex;align-items:center;gap:8px;margin:6px 0}.history-chart i{display:inline-block;height:14px;background:#64748b;border-radius:3px}.history-chart i.current{background:#087f8c}.history-panel textarea{width:100%;min-height:64px}.history-panel td{vertical-align:top}.history-panel .controls{flex-wrap:wrap}.history-panel .controls label{min-width:150px;max-width:100%}@media(max-width:600px){.history-panel .controls label{width:100%}.history-panel .controls select,.history-panel .controls input{width:100%;max-width:100%}.history-chart>div>div{font-size:12px;gap:4px}}
 .history-panel [data-hfield="label"]{width:100%;min-width:240px}.history-add-row .controls label{display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px}.history-add-row .controls label:first-child{flex:2}.history-add-row input[type="text"]{width:100%}
+
+/* Historical entry: readable names, consistent amount columns and mobile rows. */
+.history-panel [data-hfield="label"]{text-align:left;min-width:0;line-height:1.5;min-height:58px;resize:vertical;padding:10px 12px}
+.history-panel .history-detail-table{table-layout:fixed;white-space:normal}
+.history-panel .history-detail-table th:first-child{width:60%}
+.history-panel .history-detail-table th:not(:first-child){width:20%;text-align:left}
+.history-panel .history-detail-table td{padding:8px;vertical-align:middle;min-width:0;max-width:none}
+.history-panel .history-detail-table td:first-child{padding-left:0}
+.history-panel .history-detail-table input[type=number]{width:100%;max-width:none;min-width:0;min-height:48px;font-variant-numeric:tabular-nums}
+.history-panel .history-detail-table tr:focus-within{background:#e8f5ef}
+.history-panel .history-detail-table input:focus,.history-panel .history-detail-table textarea:focus{outline:2px solid var(--teal);border-color:var(--teal);outline-offset:1px}
+.history-panel .history-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:14px 0}
+.history-panel .history-totals label{display:flex;flex-direction:column;align-items:stretch;min-width:0;gap:4px}
+.history-panel .history-totals input[type=number]{width:100%;max-width:none;min-width:0;min-height:48px}
+@media(max-width:640px){
+ .history-panel .history-detail-table thead{display:none}
+ .history-panel .history-detail-table,.history-panel .history-detail-table tbody{display:block;width:100%}
+ .history-panel .history-detail-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+ .history-panel .history-detail-table td{display:block;padding:0;border:0;white-space:normal}
+ .history-panel .history-detail-table td:first-child{grid-column:1/-1;width:100%;min-width:0}
+ .history-panel .history-detail-table td::before{content:attr(data-column);display:block;font-size:.8rem;color:var(--muted);margin-bottom:6px;text-align:left}
+ .history-panel .history-detail-table input,.history-panel .history-detail-table textarea{font-size:16px}
+ .history-panel .history-totals{grid-template-columns:1fr}
+}
