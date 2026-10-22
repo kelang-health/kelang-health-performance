@@ -12,6 +12,18 @@ export function withDefaultCoverage(row){
  }
  return draft;
 }
+export function isUnbudgetedGroup(group){
+ try{return !group.details?.length&&['planned','amount','commitment'].every(field=>{const value=amount(group[field]);return value===null||value===0;});}catch{return false;}
+}
+export function withHistoryDefaults(row){
+ const draft=withDefaultCoverage(row);
+ if(draft.status==='draft'&&canAddDetails(draft.fiscal_year)){
+  for(const group of draft.payload.groups){
+   if(isUnbudgetedGroup(group))group.amount=0;
+  }
+ }
+ return draft;
+}
 export function addDetail(group,{id,label,amount:value,commitment=null}){
  if(!/^m_[a-f0-9]{24}$/.test(id)||group.details.some(d=>d.id===id))throw new Error('รหัสรายการใหม่ไม่ถูกต้อง');
  const name=String(label??'').trim();if(!name||name.length>500)throw new Error('ระบุชื่อรายการ 1–500 ตัวอักษร');

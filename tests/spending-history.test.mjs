@@ -1,7 +1,23 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails,confirmationIssues,withDefaultCoverage} from '../src/spending-history/core.js';
+import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails,confirmationIssues,withDefaultCoverage,isUnbudgetedGroup,withHistoryDefaults} from '../src/spending-history/core.js';
 import {spendingRoute,isAnnualYear} from '../src/staff/spending/workspace.js';
 const row=(year=2568)=>({fiscal_year:year,status:'confirmed',coverage_start:`${year-544}-10-01`,coverage_end:`${year-543}-08-31`,review_note:'ตรวจสอบกับหลักฐานแล้ว',source:{issues:[]},payload:{groups:categoryLabels.map((label,i)=>({id:String(i+1),label,amount:100,commitment:null,planned:null,note:'',details:[]}))}});
+
+test('unbudgeted empty categories do not block confirmation; budgeted and itemized gaps remain unknown',()=>{
+ const r=row(2569);r.status='draft';
+ r.payload.groups[0].amount=null;r.payload.groups[1].amount=null;r.payload.groups[1].planned=10000;
+ r.payload.groups[2].amount=null;r.payload.groups[2].details=[{id:'r1',label:'รายการที่ต้องตรวจ',amount:null}];
+ r.payload.groups[3].amount=null;r.payload.groups[3].commitment=500;
+ const d=withHistoryDefaults(r);assert.equal(d.payload.groups[0].amount,0);assert.equal(isUnbudgetedGroup(d.payload.groups[0]),true);
+ assert.equal(r.payload.groups[0].amount,null);
+ for(const index of [1,2,3])assert.equal(d.payload.groups[index].amount,null);
+ assert.deepEqual(confirmationIssues(d).map(p=>p.target),['amount:2','amount:3','amount:4']);
+ r.status='confirmed';assert.deepEqual(withHistoryDefaults(r),r);
+ r.status='draft';r.fiscal_year=2567;assert.equal(withHistoryDefaults(r).payload.groups[0].amount,null);
+ const zeroPlan={planned:0,amount:null,commitment:0,details:[]};assert.equal(isUnbudgetedGroup(zeroPlan),true);
+ assert.equal(isUnbudgetedGroup({...zeroPlan,amount:75}),false);assert.equal(isUnbudgetedGroup({...zeroPlan,planned:-1}),false);
+ const empty=row(2569);empty.status='draft';empty.payload.groups[0].amount=null;assert.doesNotThrow(()=>validateSnapshot(withHistoryDefaults(empty),true));
+});
 
 test('empty draft dates default to fiscal boundaries while partial and locked records remain intact',()=>{
  for(const y of [2567,2568,2569]){
