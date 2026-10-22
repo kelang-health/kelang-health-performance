@@ -23,12 +23,17 @@ export function withDefaultCoverage(row){
  return draft;
 }
 export function isUnbudgetedGroup(group){
- try{return !group.details?.length&&['planned','amount','commitment'].every(field=>{const value=amount(group[field]);return value===null||value===0;});}catch{return false;}
+ try{return ['planned','amount','commitment'].every(field=>{const value=amount(group[field]);return value===null||value===0;})&&(group.details??[]).every(isUnbudgetedGroup);}catch{return false;}
 }
 export function withHistoryDefaults(row){
  const draft=withDefaultCoverage(row);
  if(draft.status==='draft'&&canAddDetails(draft.fiscal_year)){
   for(const group of draft.payload.groups){
+   // An explicit zero total also establishes no spending in its empty detail cells.
+   const noSpending=amount(group.amount)===0&&(group.details??[]).every(detail=>amount(detail.amount)===null||amount(detail.amount)===0);
+   for(const detail of group.details??[]){
+    if(amount(detail.amount)===null&&(isUnbudgetedGroup(detail)||noSpending))detail.amount=0;
+   }
    if(isUnbudgetedGroup(group))group.amount=0;
   }
  }

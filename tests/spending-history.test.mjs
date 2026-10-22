@@ -10,10 +10,24 @@ test('coverage dates use fixed day/month/year and reject nonexistent or US order
  assert.equal(parseCoverageDate(''),'');assert.equal(displayCoverageDate(null),'');
 });
 
+test('unbudgeted blank details and explicit zero categories require no discrepancy explanation',()=>{
+ const r=row(2569);r.status='draft';
+ r.payload.groups[1].details=[{id:'paid',label:'วัสดุที่จ่าย',amount:100,planned:200},{id:'empty',label:'ไม่ได้ตั้งงบ',amount:null,planned:null,commitment:null}];
+ r.payload.groups[4].amount=0;r.payload.groups[4].planned=500;r.payload.groups[4].details=[{id:'budget',label:'ตั้งงบแต่ไม่ได้จ่าย',amount:null,planned:500}];
+ r.payload.groups[10].amount=null;r.payload.groups[10].details=[{id:'none',label:'ไม่มีแผน',amount:null,planned:0}];
+ const d=withHistoryDefaults(r);
+ assert.equal(d.payload.groups[1].details[1].amount,0);assert.equal(d.payload.groups[4].details[0].amount,0);assert.equal(d.payload.groups[10].amount,0);
+ assert.deepEqual(confirmationIssues(d),[]);assert.doesNotThrow(()=>validateSnapshot(d,true));assert.equal(r.payload.groups[1].details[1].amount,null);
+ r.payload.groups[1].details[1].planned=50;assert.equal(withHistoryDefaults(r).payload.groups[1].details[1].amount,null);
+ r.payload.groups[1].details[1].planned=null;r.payload.groups[1].details[1].commitment=25;assert.equal(withHistoryDefaults(r).payload.groups[1].details[1].amount,null);
+ r.payload.groups[4].details[0].amount=10;assert.ok(confirmationIssues(withHistoryDefaults(r)).some(p=>p.target==='note:5'));
+ r.payload.groups[1].details[1].commitment=null;r.payload.groups[1].amount=101;assert.ok(confirmationIssues(withHistoryDefaults(r)).some(p=>p.target==='note:2'));
+});
+
 test('unbudgeted empty categories do not block confirmation; budgeted and itemized gaps remain unknown',()=>{
  const r=row(2569);r.status='draft';
  r.payload.groups[0].amount=null;r.payload.groups[1].amount=null;r.payload.groups[1].planned=10000;
- r.payload.groups[2].amount=null;r.payload.groups[2].details=[{id:'r1',label:'รายการที่ต้องตรวจ',amount:null}];
+ r.payload.groups[2].amount=null;r.payload.groups[2].details=[{id:'r1',label:'รายการที่ต้องตรวจ',amount:null,planned:500}];
  r.payload.groups[3].amount=null;r.payload.groups[3].commitment=500;
  const d=withHistoryDefaults(r);assert.equal(d.payload.groups[0].amount,0);assert.equal(isUnbudgetedGroup(d.payload.groups[0]),true);
  assert.equal(r.payload.groups[0].amount,null);
