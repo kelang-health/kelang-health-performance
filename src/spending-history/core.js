@@ -3,6 +3,16 @@ export const years=[2567,2568,2569];
 export const categoryLabels=['ค่ายาและเวชภัณฑ์','ค่าวัสดุ','ค่าตอบแทนทางการแพทย์','ค่าบริการทางการแพทย์','ค่าครุภัณฑ์ ที่ดินและสิ่งก่อสร้าง','ค่าใช้สอย','ค่าสาธารณูปโภค','ค่าจ้างลูกจ้างชั่วคราว','ค่าตอบแทนการปฏิบัติงานนอกเวลาราชการ','ค่าใช้จ่ายในการเดินทางไปราชการ','ค่าใช้จ่ายอื่นที่เกี่ยวข้องกับการสาธารณสุข'];
 export const amount=v=>cents(v)===null?null:cents(v)/100;
 export const canAddDetails=year=>[2568,2569].includes(+year);
+export function displayCoverageDate(value){
+ const match=/^(\d{4})-(\d{2})-(\d{2})$/.exec(value??'');
+ return match?`${match[3]}/${match[2]}/${match[1]}`:value??'';
+}
+export function parseCoverageDate(value){
+ const raw=String(value??'').trim(),match=/^(\d{2})\/?(\d{2})\/?(\d{4})$/.exec(raw);
+ if(!match)return raw;
+ const iso=`${match[3]}-${match[2]}-${match[1]}`,date=new Date(iso+'T00:00:00Z');
+ return Number.isFinite(+date)&&date.toISOString().slice(0,10)===iso?iso:raw;
+}
 export function withDefaultCoverage(row){
  const draft=structuredClone(row);
  // Existing partial periods and locked records retain their recorded coverage.

@@ -1,7 +1,14 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails,confirmationIssues,withDefaultCoverage,isUnbudgetedGroup,withHistoryDefaults} from '../src/spending-history/core.js';
+import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails,confirmationIssues,withDefaultCoverage,isUnbudgetedGroup,withHistoryDefaults,displayCoverageDate,parseCoverageDate} from '../src/spending-history/core.js';
 import {spendingRoute,isAnnualYear} from '../src/staff/spending/workspace.js';
 const row=(year=2568)=>({fiscal_year:year,status:'confirmed',coverage_start:`${year-544}-10-01`,coverage_end:`${year-543}-08-31`,review_note:'ตรวจสอบกับหลักฐานแล้ว',source:{issues:[]},payload:{groups:categoryLabels.map((label,i)=>({id:String(i+1),label,amount:100,commitment:null,planned:null,note:'',details:[]}))}});
+
+test('coverage dates use fixed day/month/year and reject nonexistent or US ordered dates',()=>{
+ assert.equal(displayCoverageDate('2025-10-01'),'01/10/2025');assert.equal(parseCoverageDate('01/10/2025'),'2025-10-01');
+ assert.equal(parseCoverageDate('31082026'),'2026-08-31');assert.equal(parseCoverageDate('29/02/2024'),'2024-02-29');
+ for(const text of ['31/02/2026','08/31/2026','29/02/2025','1/10/2025'])assert.ok(coverageError(2569,parseCoverageDate(text),'2026-09-30'));
+ assert.equal(parseCoverageDate(''),'');assert.equal(displayCoverageDate(null),'');
+});
 
 test('unbudgeted empty categories do not block confirmation; budgeted and itemized gaps remain unknown',()=>{
  const r=row(2569);r.status='draft';
