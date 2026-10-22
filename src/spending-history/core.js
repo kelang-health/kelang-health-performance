@@ -41,6 +41,20 @@ export function comparison(a,b,id='all'){
  out.percent=x.value===0?null:out.difference/x.value*100;
  out.label=x.value===0?(y.value>0?'เริ่มมีรายจ่าย':'ไม่มีรายจ่ายทั้งสองปี'):out.difference>0?'เพิ่มขึ้น':out.difference<0?'ลดลง':'เท่าเดิม';return out;
 }
+// Describe every confirmation blocker so a long, folded form can point to each field.
+export function confirmationIssues(row){
+ const issues=[],add=(target,message)=>issues.push({target,message});
+ const dates=coverageError(row.fiscal_year,row.coverage_start??'',row.coverage_end??'');
+ if(dates||!row.coverage_start||!row.coverage_end)add('dates',dates||'ระบุช่วงเวลาของจ่ายจริงก่อนยืนยัน');
+ for(const g of row.payload.groups){
+  let paid;try{paid=amount(g.amount);}catch{add('amount:'+g.id,'หมวด '+g.id+' '+g.label+': กรอกยอดจ่ายจริงเป็นจำนวนไม่ติดลบ ทศนิยมไม่เกิน 2 ตำแหน่ง');continue;}
+  if(paid===null)add('amount:'+g.id,'หมวด '+g.id+' '+g.label+': กรอกจ่ายจริงให้ครบทุกหมวด หากไม่มีให้กรอก 0 หลังตรวจสอบแล้ว');
+  const t=knownTotal(g.details??[]);
+  if(paid!==null&&g.details?.length&&(!t.complete||t.value!==paid)&&!(g.note?.trim().length>=5))add('note:'+g.id,'หมวด '+g.id+' '+g.label+': ระบุเหตุผลอย่างน้อย 5 ตัวอักษร เนื่องจากรายละเอียดไม่ครบหรือยอดต่างจากยอดหมวด');
+ }
+ if(row.source?.issues?.length&&!(row.review_note?.trim().length>=10))add('review','บันทึกผลตรวจข้อสังเกตจากต้นฉบับอย่างน้อย 10 ตัวอักษรก่อนยืนยัน');
+ return issues;
+}
 export function validateSnapshot(row,confirm=false){
  const p=structuredClone(row.payload);
  if(p.groups?.length!==11||new Set(p.groups.map(g=>g.id)).size!==11||p.groups.some(g=>!/^([1-9]|10|11)$/.test(g.id)))throw new Error('ข้อมูลหมวดไม่ครบ 11 หมวด');

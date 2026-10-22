@@ -1,7 +1,17 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails} from '../src/spending-history/core.js';
+import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails,confirmationIssues} from '../src/spending-history/core.js';
 import {spendingRoute,isAnnualYear} from '../src/staff/spending/workspace.js';
 const row=(year=2568)=>({fiscal_year:year,status:'confirmed',coverage_start:`${year-544}-10-01`,coverage_end:`${year-543}-08-31`,review_note:'ตรวจสอบกับหลักฐานแล้ว',source:{issues:[]},payload:{groups:categoryLabels.map((label,i)=>({id:String(i+1),label,amount:100,commitment:null,planned:null,note:'',details:[]}))}});
+
+test('confirmation reports all blockers with field targets without filling missing financial data',()=>{
+ const r=row();r.coverage_start=null;r.coverage_end=null;r.review_note='';r.source.issues=['ต้องตรวจต้นฉบับ'];
+ r.payload.groups[0].amount=null;r.payload.groups[1].details=[{id:'r1',label:'หลักฐานยังไม่ครบ',amount:null}];
+ assert.deepEqual(confirmationIssues(r).map(x=>x.target),['dates','amount:1','note:2','review']);
+ assert.equal(r.payload.groups[0].amount,null);
+ r.coverage_start='2024-10-01';r.coverage_end='2025-08-31';r.payload.groups[0].amount=0;r.payload.groups[1].note='ตรวจยอดหมวดจากบัญชีรวมแล้ว';r.review_note='ตรวจสอบข้อสังเกตกับหลักฐานแล้ว';
+ assert.deepEqual(confirmationIssues(r),[]);assert.doesNotThrow(()=>validateSnapshot(r,true));
+ r.payload.groups[0].amount='1.001';assert.equal(confirmationIssues(r)[0].target,'amount:1');
+});
 test('historical comparison uses confirmed actuals, matching periods, cents, not commitments',()=>{const a=row(),b=row(2569);b.payload.groups[0].amount=125.25;b.payload.groups[0].commitment=999;assert.equal(comparison(a,b,'1').difference,25.25);assert.equal(comparison(a,b,'1').percent,25.25);b.status='draft';assert.equal(comparison(a,b).difference,null);b.status='confirmed';b.coverage_end='2026-09-30';assert.equal(comparison(a,b).label,'ช่วงเวลาไม่ตรงกัน');});
 test('unknown, partial totals, same year and zero bases do not produce misleading growth',()=>{const a=row(),b=row(2569);a.payload.groups[0].amount=null;assert.equal(comparison(a,b).difference,null);assert.equal(knownTotal(a.payload.groups).count,10);a.payload.groups[0].amount=0;assert.equal(comparison(a,b,'1').label,'เริ่มมีรายจ่าย');assert.equal(comparison(a,b,'1').percent,null);b.payload.groups[0].amount=0;assert.equal(comparison(a,b,'1').label,'ไม่มีรายจ่ายทั้งสองปี');assert.equal(comparison(a,a).difference,null);assert.equal(comparison(null,b).difference,null);});
 test('historical drafts retain missing data; confirmation requires amounts, source review and dates',()=>{const a=row();a.payload.groups[0].amount=null;assert.equal(validateSnapshot(a).groups[0].amount,null);assert.throws(()=>validateSnapshot(a,true),/ครบทุกหมวด/);a.payload.groups[0].amount=0;a.coverage_start=null;a.coverage_end=null;assert.throws(()=>validateSnapshot(a,true),/ช่วงเวลา/);a.coverage_start='2024-10-01';a.coverage_end='2025-08-31';a.source.issues=['ยอดต่าง'];a.review_note='';assert.throws(()=>validateSnapshot(a,true),/ข้อสังเกต/);});
