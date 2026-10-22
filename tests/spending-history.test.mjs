@@ -1,7 +1,18 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails,confirmationIssues} from '../src/spending-history/core.js';
+import {comparison,knownTotal,validateSnapshot,coverageError,categoryLabels,coverageKind,coverageLabel,addDetail,canAddDetails,confirmationIssues,withDefaultCoverage} from '../src/spending-history/core.js';
 import {spendingRoute,isAnnualYear} from '../src/staff/spending/workspace.js';
 const row=(year=2568)=>({fiscal_year:year,status:'confirmed',coverage_start:`${year-544}-10-01`,coverage_end:`${year-543}-08-31`,review_note:'ตรวจสอบกับหลักฐานแล้ว',source:{issues:[]},payload:{groups:categoryLabels.map((label,i)=>({id:String(i+1),label,amount:100,commitment:null,planned:null,note:'',details:[]}))}});
+
+test('empty draft dates default to fiscal boundaries while partial and locked records remain intact',()=>{
+ for(const y of [2567,2568,2569]){
+  const r=row(y);r.status='draft';r.coverage_start=null;r.coverage_end=null;
+  const d=withDefaultCoverage(r);assert.equal(d.coverage_start,`${y-544}-10-01`);assert.equal(d.coverage_end,`${y-543}-09-30`);
+  assert.equal(r.coverage_start,null);assert.equal(confirmationIssues(d).some(p=>p.target==='dates'),false);assert.doesNotThrow(()=>validateSnapshot(d,true));
+ }
+ const partial=row(2569);partial.status='draft';assert.deepEqual(withDefaultCoverage(partial),partial);
+ partial.coverage_start=null;assert.deepEqual(withDefaultCoverage(partial),partial);
+ const locked=row();locked.coverage_start=null;locked.coverage_end=null;assert.deepEqual(withDefaultCoverage(locked),locked);
+});
 
 test('confirmation reports all blockers with field targets without filling missing financial data',()=>{
  const r=row();r.coverage_start=null;r.coverage_end=null;r.review_note='';r.source.issues=['ต้องตรวจต้นฉบับ'];

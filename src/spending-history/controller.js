@@ -1,6 +1,6 @@
 import {escapeHtml as e} from '../utils/core.js';
 import {canManage,canView,money} from '../staff/spending/core.js';
-import {years,categoryLabels,amount,knownTotal,comparison,validateSnapshot,coverageKind,coverageLabel,canAddDetails,addDetail,confirmationIssues} from './core.js';
+import {years,categoryLabels,amount,knownTotal,comparison,validateSnapshot,coverageKind,coverageLabel,canAddDetails,addDetail,confirmationIssues,withDefaultCoverage} from './core.js';
 const fields='id,facility_code,fiscal_year,status,coverage_start,coverage_end,payload,source,review_note,reason,revision,updated_at';
 export function createSpendingHistory({rest,getContext,render}){
  let tab='compare',year=2569,baseYear=2568,unit='all',category='all',rows=[],draft=null,key='',loaded='',loading=false,busy=false,dirty=false,error='',notice='',generation=0;
@@ -12,7 +12,7 @@ export function createSpendingHistory({rest,getContext,render}){
  const editableItems=()=>canAddDetails(year);
  const confirmationLabel=()=>editableItems()?'ยืนยันบันทึก':coverageKind(draft)==='full'?'ยืนยันข้อมูลครบปี':'ยืนยันข้อมูลถึงวันที่ระบุ';
  const writable=()=>!!draft&&draft.status!=='confirmed'&&canManage(context().permissions,unit)&&!busy&&!loading&&loaded===selection();
- function reset(){problems=[];pendingItems={};draft=record()?structuredClone(record()):null;dirty=false;}
+ function reset(){problems=[];pendingItems={};draft=record()?withDefaultCoverage(record()):null;dirty=false;}
  function leave(){return !dirty||confirm('มีประวัติรายจ่ายที่ยังไม่บันทึก ต้องการละทิ้งการแก้ไขหรือไม่?');}
  async function load(){const token=++generation,k=selection();key=k;loading=true;error='';rows=[];draft=null;try{if(!context().userId||!units().length)return;const result=await rest('hp_spending_history','select='+fields+'&fiscal_year=in.(2567,2568,2569)&order=fiscal_year,facility_code&limit=100');if(token!==generation||k!==selection())return;if(result.length>=100)throw new Error('ข้อมูลเกินขอบเขต กรุณาติดต่อผู้ดูแล');rows=result;loaded=k;reset();}catch(err){if(token===generation)error=err.message;}finally{if(token===generation){loading=false;render();}}}
  function ensure(){const k=selection();if(k!==key){generation++;key=k;loaded='';rows=[];draft=null;dirty=false;error='';notice='';loading=!!context().userId&&!!units().length;if(loading)queueMicrotask(load);}}
@@ -41,7 +41,7 @@ export function createSpendingHistory({rest,getContext,render}){
   out+='<p class="notice" id="history-coverage-status">'+e(coverageLabel(draft))+' · '+period(draft)+'</p>';
   if(!canManage(context().permissions,unit))out+='<p class="notice">ดูข้อมูลหน่วยนี้ได้อย่างเดียว</p>';
   if(draft.status==='confirmed')out+='<p class="notice">ข้อมูลยืนยันแล้ว ADMIN ต้องเปิดแก้พร้อมเหตุผลก่อน</p>';
-  out+='<div class="controls"><label>จ่ายจริงตั้งแต่<input id="history-start" type="date" value="'+e(draft.coverage_start??'')+'" '+dis+'></label><label>จ่ายจริงถึง<input id="history-end" type="date" value="'+e(draft.coverage_end??'')+'" '+dis+'></label></div><p class="subtle">วันที่แสดงเป็น ค.ศ. ตามเครื่อง ข้อมูลต้องอยู่ภายในปีงบประมาณ '+year+' · งบผูกพันแยกจากจ่ายจริง · เมื่อกรอกรายการย่อยครบ ระบบรวมเข้ายอดหมวดอัตโนมัติ</p>';
+  out+='<div class="controls"><label>จ่ายจริงตั้งแต่<input id="history-start" type="date" value="'+e(draft.coverage_start??'')+'" '+dis+'></label><label>จ่ายจริงถึง<input id="history-end" type="date" value="'+e(draft.coverage_end??'')+'" '+dis+'></label></div><p class="subtle">ระบบกำหนดช่วงวันที่อัตโนมัติตามปีงบประมาณเมื่อยังไม่มีวันที่ (1 ต.ค.–30 ก.ย.) หากต้นฉบับระบุข้อมูลบางช่วงจะคงวันที่เดิมไว้ · วันที่แสดงเป็น ค.ศ. ตามเครื่อง แก้ไขได้เมื่อรายงานเฉพาะบางช่วงของปีงบประมาณ '+year+' · งบผูกพันแยกจากจ่ายจริง · เมื่อกรอกรายการย่อยครบ ระบบรวมเข้ายอดหมวดอัตโนมัติ</p>';
   if(draft.source.issues?.length)out+='<details class="notice" open><summary>ข้อสังเกตจากต้นฉบับที่ต้องตรวจสอบ</summary>'+draft.source.issues.map(x=>'<p>'+e(x)+'</p>').join('')+'</details>';
   for(const g of draft.payload.groups){const t=knownTotal(g.details??[]),gap=g.amount===null||t.value===null?null:Math.round((g.amount-t.value)*100)/100;
    out+='<details class="history-group"><summary>'+e(g.id+'. '+g.label)+'<small data-hsummary="'+g.id+'">จ่ายจริง '+money(g.amount)+' · งบผูกพัน '+money(g.commitment)+'</small></summary><div class="history-group-body"><div class="controls">'+['amount','commitment','planned'].map((f,i)=>'<label>'+['จ่ายจริงรายหมวด','งบผูกพัน','วงเงินแผน (ถ้ามี)'][i]+'<input data-hgroup="'+g.id+'" data-hfield="'+f+'" type="number" min="0" max="999999999.99" step="0.01" value="'+e(g[f]??'')+'" '+dis+'></label>').join('')+'</div>';
