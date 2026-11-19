@@ -7,7 +7,7 @@ import {assertReadyDocument,expectedDocumentRevision,documentListFields} from '.
 import {mainYearKey,primaryYear,initialYear} from './utils/main-year.js';
 import {mountSessionTimeouts} from './session-timeouts.js';
 import {cdView} from './charts/cd.js';
-import {ncdView} from './charts/ncd.js';
+import {ncdView,ncdHdcComparison} from './charts/ncd.js';
 import {unitsView,parseUnitHash} from './units/units.js';
 import {personnelView,mountPersonnel,unitPersonnel} from './personnel/personnel.js';
 import {closeSidebar} from './sidebar.js';
@@ -80,7 +80,10 @@ function ncdDashboard(){
  const content=state.loading&&!indicators.length
   ?'<div class="empty" role="status">กำลังโหลดข้อมูล HDC…</div>'
   :kpiCards(indicators);
- return panel('ตัวชี้วัดโรคไม่ติดต่อจาก HDC',content,'ผลตามตัวกรองด้านบน • เลือกการ์ดเพื่อดูผลรายหน่วยและรายงานต้นทาง')+diseaseView('ncd');
+ const comparison=ncdHdcComparison(new Map(indicators.map(k=>[k.kpi_id,aggregate(k)])));
+ return panel('คัดกรองและติดตามเบาหวาน–ความดันโลหิตสูง',comparison,'ร้อยละจาก HDC ตามตัวกรองด้านบน • การติดตามคิดจากกลุ่มสงสัยป่วย')
+  +panel('ตัวชี้วัดโรคไม่ติดต่อจาก HDC',content,'ผลตามตัวกรองด้านบน • เลือกการ์ดเพื่อดูผลรายหน่วยและรายงานต้นทาง')
+  +diseaseView('ncd');
 }
 function diseaseView(kind){return (kind==='ncd'?ncdView:cdView)({rows:data(kind==='ncd'?'hp_ncd_monthly':'hp_cd_monthly'),population:data('hp_population'),units:facilities(),year:state.year,period:state.period,rate:state.rateMode,selectedDisease:state.disease,panel,table});}
 function quality(){const failures=state.kpis.filter(k=>state.hdc[k.kpi_id]?.error);const missing=state.kpis.flatMap(k=>recordSet(k).filter(r=>r.eligible&&r.value===null).map(r=>({k,r})));const unresolved=data('hp_data_quality').filter(r=>!r.resolved);const rows=state.kpis.map(k=>{const response=state.hdc[k.kpi_id];const records=recordSet(k);const eligibleRows=records.filter(r=>r.eligible);const noDen=eligibleRows.filter(r=>r.missing_denominator);const age=response?.source_date?Date.now()-Date.parse(String(response.source_date).replace(/^(\d{4})(\d{2})(\d{2}).*$/,'$1-$2-$3T00:00:00+07:00')):null;return [e(k.name),badge(response?.error?{key:response.stale?'near':'low',text:response.stale?'ข้อมูลแคช • API ขัดข้อง':'API ขัดข้อง'}:{key:'pass',text:'✓ API ตอบสำเร็จ'}),`${eligibleRows.filter(r=>r.value!==null).length}/${eligibleRows.length}`,fmt(noDen.length),e(formatSourceDate(response?.source_date)),response?.fetched_at?e(formatSourceDate(response.fetched_at)):'—',age!==null&&age>runtime.staleDays*86400000?'ข้อมูลเกิน 30 วัน':'—',e(response?.error??'')];});return `<div class="grid stats">${stat('API มีปัญหา',fmt(failures.length))}${stat('KPI / หน่วยขาดข้อมูล',fmt(missing.length))}${stat('รายการรอตรวจสอบ',fmt(unresolved.length))}${stat('Hospital Profile',state.profile.errors.length?'เชื่อมต่อบางส่วน':'เชื่อมต่อแล้ว')}</div>`+panel('สถานะ HDC และความครบถ้วน',table(['ตัวชี้วัด','สถานะ','มีข้อมูล','ขาดตัวหาร / ตัวหาร 0','วันที่ข้อมูล','ดึงสำเร็จล่าสุด','ความเก่า','รายละเอียด'],rows))+panel('ข้อมูล Hospital Profile ที่ต้องตรวจสอบ',table(['หน่วยบริการ','ประเภท','รายละเอียด','สถานะ'],data('hp_data_quality').map(r=>[e(r.facility_code),e(r.issue_type),e(r.detail),r.resolved?'✓ ตรวจสอบแล้ว':'! รอตรวจสอบ'])),'วันที่ต้นทางของชุดเดิมไม่ระบุ; เวลาย้ายข้อมูลไม่ใช่วันที่ข้อมูลอัปเดต')+panel('ตรวจ master หน่วยบริการ',table(['รหัส','หน่วยบริการ','พื้นที่','บริการ'],state.facilities.map(f=>[e(f.facility_code),e(f.facility_name),f.area_unit?'✓ มีพื้นที่':'N/A',f.service_unit?'✓ บริการ':'—'])))+panel('ทะเบียนรายงาน HDC เดิม',`<details><summary>ตรวจรายการรายงาน ${state.inventory.length} รายการ</summary>${table(['ตาราง','รายงาน','สถานะ'],state.inventory.map(r=>[e(r.table),r.source_url?`<a href="${e(r.source_url)}" target="_blank" rel="noopener">${e(r.title)}</a>`:e(r.title),r.integrated?'เชื่อมในระบบใหม่':'นิยามเดิม • ยังไม่รวมการคำนวณใหม่']))}</details>`,'รายการที่ยังไม่ยืนยัน scope/สูตรจะไม่ถูกนำมาประเมิน KPI อัตโนมัติ');}

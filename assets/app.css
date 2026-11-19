@@ -99,3 +99,22 @@ header{height:auto;min-height:77px;padding-top:10px;padding-bottom:10px;flex-wra
  .history-panel .history-detail-table input,.history-panel .history-detail-table textarea{font-size:16px}
  .history-panel .history-totals{grid-template-columns:1fr}
 }
+
+.ncd-hdc-bars{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.ncd-hdc-row,.ncd-hdc-axis{display:grid;grid-template-columns:minmax(10rem,1fr) minmax(0,3fr) minmax(9rem,1fr);gap:1rem;align-items:center}
+.ncd-hdc-row{--ncd-bar:#08786d}
+.ncd-hdc-row.diabetes{--ncd-bar:#3759ab}
+.ncd-hdc-label,.ncd-hdc-value{font-weight:700}
+.ncd-hdc-value{font-variant-numeric:tabular-nums}
+.ncd-hdc-label small,.ncd-hdc-value small{display:block;font-weight:400;color:var(--muted,#52666a)}
+.ncd-hdc-track{display:block;min-width:0;height:1.25rem;border-radius:.4rem;background:repeating-linear-gradient(to right,transparent 0 calc(25% - 1px),#d3dedb calc(25% - 1px) 25%),#edf3f2;overflow:hidden}
+.ncd-hdc-fill{display:block;height:100%;border-radius:inherit;background:var(--ncd-bar)}
+.ncd-hdc-row.follow .ncd-hdc-fill{background:repeating-linear-gradient(125deg,#ffffff30 0 3px,transparent 3px 8px),var(--ncd-bar)}
+.ncd-hdc-axis{margin-top:.4rem}
+.ncd-hdc-axis div{grid-column:2;display:flex;justify-content:space-between;font-size:.78em;color:var(--muted,#52666a)}
+@media(max-width:680px){
+ .ncd-hdc-row{grid-template-columns:minmax(0,1fr) auto;gap:.35rem .7rem}
+ .ncd-hdc-track{grid-column:1/-1;grid-row:2}
+ .ncd-hdc-value{text-align:right}
+ .ncd-hdc-axis{display:block}
+}

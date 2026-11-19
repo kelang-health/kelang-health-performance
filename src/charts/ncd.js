@@ -36,3 +36,28 @@ export function ncdView(context){
  values.push(['<strong>รวมหน่วยที่เลือก</strong>',...m.diseases.map(d=>'<strong>'+fmt(d.total,digits)+'</strong>'),m.diseases.some(d=>d.total===null)?'—':fmt(sum(m.diseases.map(d=>d.total)),digits)]);
  return controls+diseaseSummary(all.diseases,context.rate,context.selectedDisease)+(context.rate?'<p class="notice">อัตรา = จำนวนตามข้อมูลโรค ÷ ประชากรพื้นที่ปีเดียวกัน × 100,000 ใช้เฉพาะหน่วยที่มีพื้นที่รับผิดชอบ คำนวณจากข้อมูลโรคที่ได้รับเทียบประชากรพื้นที่ทั้งหมดที่เลือก หากไม่มีข้อมูลโรคหรือฐานประชากร จะแสดง —; รายการที่ขาดไม่ถือเป็นศูนย์ และยังไม่ยืนยันว่ารายงานครบทุกหน่วย; หน่วยไม่มีพื้นที่แสดง N/A</p>':'')+'<div class="ncd-chart-grid">'+panel('เปรียบเทียบผู้ป่วยเดิมและผู้ป่วยรายใหม่ (เรียงจำนวนรวมมากไปน้อย)',comparison,'หน่วย: '+unit)+panel('สัดส่วนจำแนกตามประเภทโรค',donut(m.diseases),'สัดส่วนคำนวณจากจำนวนรายตามข้อมูลโรค')+'</div>'+panel('แจกแจงผู้ป่วยโรคเรื้อรังรายหน่วยบริการ',table(['หน่วยบริการ',...m.diseases.map(d=>d.disease),'รวมทุกโรค'+(context.rate?' (ต่อแสน)':'')],values),'รายเก่าใช้ค่าสูงสุดในปี + รายใหม่รวมตามช่วงที่เลือก; ผลรวมข้ามโรคอาจนับคนเดียวหลายโรค ไม่ใช่จำนวนบุคคลไม่ซ้ำ ข้อมูลขาดแสดง — และค่าศูนย์จริงแสดง 0; คลิกชื่อหน่วยเพื่อกรองกราฟ');
 }
+
+const hdcGroups=[
+ {id:'S_HT_SCREEN_RISK',label:'คัดกรองความดัน',tone:'pressure'},
+ {id:'S_DM_SCREEN_RISK',label:'คัดกรองเบาหวาน',tone:'diabetes'},
+ {id:'S_HT_SCREEN_FOLLOW',label:'ติดตามความดัน',tone:'pressure follow'},
+ {id:'S_DM_SCREEN_FOLLOW',label:'ติดตามเบาหวาน',tone:'diabetes follow'},
+];
+
+export function ncdHdcComparison(results){
+ const maximum=Math.max(100,Math.ceil(Math.max(...hdcGroups.map(group=>results.get(group.id)?.value??0))/25)*25);
+ const rows=hdcGroups.map(({id,label,tone})=>{
+  const result=results.get(id),value=result?.value;
+  const available=Number.isFinite(value);
+  const missing=id==='S_DM_SCREEN_FOLLOW'?'ยังไม่มีข้อมูล HDC รายหน่วย':'ไม่มีข้อมูลที่แสดงได้';
+  const coverage=result?.partial?' <small>ข้อมูล '+result.complete+'/'+result.expected+' หน่วย</small>':'';
+  return `<li class="ncd-hdc-row ${tone}">
+   <span class="ncd-hdc-label">${e(label)}${coverage}</span>
+   <span class="ncd-hdc-track" aria-hidden="true">${available?`<span class="ncd-hdc-fill" style="width:${Math.max(0,value)/maximum*100}%"></span>`:''}</span>
+   <span class="ncd-hdc-value">${available?fmt(value,1)+'%':'— <small>'+missing+'</small>'}</span>
+  </li>`;
+ }).join('');
+ const ticks=[0,.25,.5,.75,1].map(f=>`<span>${fmt(maximum*f,1)}%</span>`).join('');
+ return `<ul class="ncd-hdc-bars" aria-label="เปรียบเทียบผลคัดกรองและติดตามจาก HDC">${rows}</ul>
+  <div class="ncd-hdc-axis" aria-hidden="true"><div>${ticks}</div></div>`;
+}
